@@ -20,7 +20,8 @@ namespace pbpb {
         public static string AppTitle = "PBPB v1.2";
         public const int PartFullHDPreset = 5;
         
-        public static string RewardsFolder = AppDomain.CurrentDomain.BaseDirectory + @"rewards\";
+        //public static string RewardsFolder = AppDomain.CurrentDomain.BaseDirectory + @"rewards\";
+        public static string RewardsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\rewards\";
         public static string RewardNewName => GetRewardName();
 
         static bool AppIsExp;
@@ -121,7 +122,7 @@ namespace pbpb {
             if (t == "h") PubgWindow.Hide();
             else if (t == "s") PubgWindow.Show();
             else if (t == "clearlog") { Log.Clear(); txLog.Clear(); }
-            else if (t == "scr") SGraph.Scr(full_scr_filename, PubgWindow.Width, PubgWindow.Height);
+            else if (t == "scr") SGraph.Scr(full_scr_filename, PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY);
             else if (t == "fromf") test1(true);
             else if (t == "froms") test1(false);
             else if (t == "run") { PubgWindow.CloseSE(); PubgWindow.StartExecute(); }

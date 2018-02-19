@@ -93,7 +93,7 @@ namespace pbpb
 
                         Log.Add( "Save reward " + filename );
 
-                        SGraph.Scr( filename, PubgWindow.Width, PubgWindow.Height, 0, 0, true);
+                        SGraph.Scr( filename, PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY, true);
                     }
 
                     Pcs[PubgControls.btnExit].ClickLeftMouse();

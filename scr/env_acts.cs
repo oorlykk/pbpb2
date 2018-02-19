@@ -88,9 +88,9 @@ namespace pbpb {
             if (fromfile)
                  scr = new Bitmap(full_scr_filename);
             else
-                 scr = SGraph.Scr("", PubgWindow.Width, PubgWindow.Height);
+                 scr = SGraph.Scr("", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY);
 
-            PubgControl pc = Pcs[PubgControls.labWater];
+            PubgControl pc = Pcs[PubgControls.btnStart];
             pc.ControlImageFromImage(scr);          
             int dist = pc.CalcDistance(true);
 
