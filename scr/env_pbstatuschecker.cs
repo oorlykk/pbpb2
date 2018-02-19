@@ -44,8 +44,7 @@ namespace pbpb
 
                         string filename = RewardsFolder + @"_llg\" + RewardNewName + ".jpg";
                         //SGraph.Scr( filename, PubgWindow.Width, PubgWindow.Height, 0, 0, true );
-                        SKeybd.LBClickEx2( 480, 308, true, 50, 1500, 50 );
-                        SKeybd.LBClickEx2( 480, 308, true );
+                        PubgInput.ClickCenter();
                         Thread.Sleep(15000);
 
                         if (RND.Next(2) == 0) PubgInput.MoveMouse( -700, 0 );

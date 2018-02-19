@@ -123,5 +123,12 @@ namespace pbpb
             KeyDownOrUp( Keys.S, false );
 
         }
+
+        public static void ClickCenter()
+        {
+            SKeybd.LBClickEx2( PubgWindow.PosX + 480, PubgWindow.PosY + 308, true, 50, 1500, 50 );
+            SKeybd.LBClickEx2( PubgWindow.PosX + 480, PubgWindow.PosY + 308, true );
+        }
+
     }
 }

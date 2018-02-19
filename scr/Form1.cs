@@ -17,7 +17,7 @@ namespace pbpb {
     {
         static string uniq = "dGhleg==";
 
-        public static string AppTitle = "PBPB v1.1";
+        public static string AppTitle = "PBPB v1.2";
         public const int PartFullHDPreset = 5;
         
         public static string RewardsFolder = AppDomain.CurrentDomain.BaseDirectory + @"rewards\";
@@ -55,6 +55,7 @@ namespace pbpb {
             Log.LogEvent += new ResolveEventHandler(PubgLogEvent);          
             Init_HotKeysMon();
 
+            nePosX.Value = Screen.PrimaryScreen.Bounds.Width + 1;
         }
 
         void PubgInputEvent( PubgInputEventArgs e ) {
@@ -192,6 +193,11 @@ namespace pbpb {
 
             //if (e.KeyCode == Keys.F7 && ( e.Alt || e.Control || e.Shift ))
             //    MessageBox.Show( Encoding.UTF8.GetString( Convert.FromBase64String( uniq ) ) );
+        }
+
+        private void nePosX_ValueChanged( object sender, EventArgs e )
+        {
+            PubgWindow.PosX = (int)nePosX.Value; PubgWindow.PosY = (int)nePosY.Value;
         }
 
         private void Form1_FormClosing( object sender, FormClosingEventArgs e ) {

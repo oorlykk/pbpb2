@@ -55,8 +55,12 @@ namespace pbpb
         public void ClickLeftMouse()
         {
             LastClickedTick = Environment.TickCount;
-            SKeybd.LBClickEx2( X + ( Width / 2 ), Y + ( Height / 2 ), true, 64, 1600, 64 );
-            SKeybd.LBClickEx2( X + ( Width / 2 ), Y + ( Height / 2 ), true);
+
+            int x = PubgWindow.PosX + X + ( Width / 2 );
+            int y = PubgWindow.PosY + Y + ( Height / 2 );
+
+            SKeybd.LBClickEx2( x, y, true, 64, 1600, 64 );
+            SKeybd.LBClickEx2( x, y, true);
         }
 
     }

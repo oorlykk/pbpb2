@@ -19,6 +19,9 @@ namespace pbpb
 
         public static int Height => (1080 / 10) * m_partfullhd;
 
+        public static int PosX = 0;
+        public static int PosY = 0;
+
         public static void KillExecute() =>
             Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im TslGame.exe", "", User32.SW_HIDE);
 
@@ -153,8 +156,8 @@ namespace pbpb
 
                 RECT r = new RECT();
                 User32.GetWindowRect( Handle, ref r );
-                return !( r.Left == 0 && r.Top == 0 && r.Right == Width && r.Bottom == Height );
-
+                //return !( r.Left == 0 && r.Top == 0 && r.Right == Width && r.Bottom == Height );
+                return !(r.Top == 0 && r.Bottom == Height );
             }
         }
 
@@ -176,7 +179,7 @@ namespace pbpb
             int flags = User32.SWP_NOZORDER | User32.SWP_SHOWWINDOW | User32.SWP_NOCOPYBITS |
                         User32.SWP_FRAMECHANGED;
 
-            User32.SetWindowPos(Handle, (IntPtr) 0, 0, 0, Width, Height, flags);
+            User32.SetWindowPos(Handle, (IntPtr) 0, PosX, PosY, Width, Height, flags);
 
         } 
 

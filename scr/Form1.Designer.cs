@@ -32,8 +32,6 @@
             this.btnStartStopBot = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.chbSaveReward = new System.Windows.Forms.CheckBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.tray = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiStartBot = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,9 +64,15 @@
             this.btnttt = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
+            this.nePosX = new System.Windows.Forms.NumericUpDown();
+            this.nePosY = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.neMaxIdle)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nePosX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nePosY)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStartStopBot
@@ -103,30 +107,6 @@
             this.chbSaveReward.TabIndex = 14;
             this.chbSaveReward.Text = "Save Rewards";
             this.chbSaveReward.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(396, 5);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(39, 25);
-            this.button8.TabIndex = 15;
-            this.button8.Tag = "h";
-            this.button8.Text = "H";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Visible = false;
-            this.button8.Click += new System.EventHandler(this.btnTag_Click);
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(353, 5);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(39, 25);
-            this.button9.TabIndex = 16;
-            this.button9.Tag = "s";
-            this.button9.Text = "S";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Visible = false;
-            this.button9.Click += new System.EventHandler(this.btnTag_Click);
             // 
             // tray
             // 
@@ -432,20 +412,76 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.btnTag_Click);
             // 
+            // nePosX
+            // 
+            this.nePosX.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nePosX.Location = new System.Drawing.Point(240, 9);
+            this.nePosX.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.nePosX.Name = "nePosX";
+            this.nePosX.Size = new System.Drawing.Size(74, 22);
+            this.nePosX.TabIndex = 24;
+            this.nePosX.ValueChanged += new System.EventHandler(this.nePosX_ValueChanged);
+            // 
+            // nePosY
+            // 
+            this.nePosY.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nePosY.Location = new System.Drawing.Point(365, 9);
+            this.nePosY.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.nePosY.Name = "nePosY";
+            this.nePosY.Size = new System.Drawing.Size(74, 22);
+            this.nePosY.TabIndex = 25;
+            this.nePosY.ValueChanged += new System.EventHandler(this.nePosX_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(213, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(21, 17);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "X:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(338, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(21, 17);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "Y:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 234);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nePosY);
+            this.Controls.Add(this.nePosX);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.txLog);
             this.Controls.Add(this.btnStartStopBot);
-            this.Controls.Add(this.button9);
             this.Controls.Add(this.neMaxIdle);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button8);
             this.Controls.Add(this.chbAutoStartOnIdle);
             this.Controls.Add(this.chbSaveReward);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -459,6 +495,8 @@
             this.trayms.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.neMaxIdle)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nePosX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nePosY)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -474,8 +512,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.CheckBox chbSaveReward;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.NotifyIcon tray;
         private System.Windows.Forms.ContextMenuStrip trayms;
         private System.Windows.Forms.ToolStripMenuItem tsmiStartBot;
@@ -503,6 +539,10 @@
         private System.Windows.Forms.ToolStripMenuItem showWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.NumericUpDown nePosX;
+        private System.Windows.Forms.NumericUpDown nePosY;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

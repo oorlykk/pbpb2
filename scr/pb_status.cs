@@ -41,7 +41,7 @@ namespace pbpb {
 
             PubgStatuses result = PubgStatuses.Unknown;
 
-            Bitmap scr = SGraph.Scr( "", PubgWindow.Width, PubgWindow.Height );
+            Bitmap scr = SGraph.Scr( "", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY );
 
             foreach (var key in Pcs) {
 
