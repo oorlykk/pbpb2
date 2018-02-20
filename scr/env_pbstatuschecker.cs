@@ -16,7 +16,7 @@ namespace pbpb
 
             while (!BotStopper.WaitOne(3000, false)) {             
 
-                if (chbPassiveMode.Checked && STime.GetUserIdleTime() < 5000) {
+                if (Gui.PassiveMode && STime.GetUserIdleTime() < 5000) {
                     Log.Add( "No idle time for actions. Wait..." );
                     //PubgStatus.ResetLastGood();
                     continue;
@@ -175,7 +175,7 @@ namespace pbpb
                     }
                 }
 
-                PubgWindow.Hide();
+                if (Gui.HiddenMode) PubgWindow.Hide();
 
                 PubgWindow.RestoreFocus();
 

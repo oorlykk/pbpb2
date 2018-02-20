@@ -196,8 +196,7 @@ namespace pbpb {
             //    MessageBox.Show( Encoding.UTF8.GetString( Convert.FromBase64String( uniq ) ) );
         }
 
-        private void nePosX_ValueChanged( object sender, EventArgs e )
-        {
+        private void nePosX_ValueChanged( object sender, EventArgs e ) {
             PubgWindow.PosX = (int)nePosX.Value; PubgWindow.PosY = (int)nePosY.Value;
         }
 

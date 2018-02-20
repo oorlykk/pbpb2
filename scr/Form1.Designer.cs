@@ -68,7 +68,8 @@
             this.nePosY = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.chbPassiveMode = new System.Windows.Forms.CheckBox();
+            this.chb_PassiveMode = new System.Windows.Forms.CheckBox();
+            this.chb_HiddenMode = new System.Windows.Forms.CheckBox();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.neMaxIdle)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -318,7 +319,7 @@
             this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.btnttt);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 253);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 283);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(251, 67);
             this.flowLayoutPanel1.TabIndex = 21;
@@ -467,24 +468,39 @@
             this.label2.TabIndex = 27;
             this.label2.Text = "Y:";
             // 
-            // chbPassiveMode
+            // chb_PassiveMode
             // 
-            this.chbPassiveMode.AutoSize = true;
-            this.chbPassiveMode.Checked = true;
-            this.chbPassiveMode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbPassiveMode.Location = new System.Drawing.Point(12, 229);
-            this.chbPassiveMode.Name = "chbPassiveMode";
-            this.chbPassiveMode.Size = new System.Drawing.Size(118, 21);
-            this.chbPassiveMode.TabIndex = 28;
-            this.chbPassiveMode.Text = "Passive mode";
-            this.chbPassiveMode.UseVisualStyleBackColor = true;
+            this.chb_PassiveMode.AutoSize = true;
+            this.chb_PassiveMode.Checked = true;
+            this.chb_PassiveMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chb_PassiveMode.Location = new System.Drawing.Point(12, 229);
+            this.chb_PassiveMode.Name = "chb_PassiveMode";
+            this.chb_PassiveMode.Size = new System.Drawing.Size(118, 21);
+            this.chb_PassiveMode.TabIndex = 28;
+            this.chb_PassiveMode.Text = "Passive mode";
+            this.chb_PassiveMode.UseVisualStyleBackColor = true;
+            this.chb_PassiveMode.CheckedChanged += new System.EventHandler(this.ReadGui);
+            // 
+            // chb_HiddenMode
+            // 
+            this.chb_HiddenMode.AutoSize = true;
+            this.chb_HiddenMode.Checked = true;
+            this.chb_HiddenMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chb_HiddenMode.Location = new System.Drawing.Point(12, 256);
+            this.chb_HiddenMode.Name = "chb_HiddenMode";
+            this.chb_HiddenMode.Size = new System.Drawing.Size(114, 21);
+            this.chb_HiddenMode.TabIndex = 29;
+            this.chb_HiddenMode.Text = "Hidden mode";
+            this.chb_HiddenMode.UseVisualStyleBackColor = true;
+            this.chb_HiddenMode.CheckedChanged += new System.EventHandler(this.ReadGui);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 253);
-            this.Controls.Add(this.chbPassiveMode);
+            this.ClientSize = new System.Drawing.Size(447, 365);
+            this.Controls.Add(this.chb_HiddenMode);
+            this.Controls.Add(this.chb_PassiveMode);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nePosY);
@@ -557,7 +573,8 @@
         private System.Windows.Forms.NumericUpDown nePosY;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox chbPassiveMode;
+        private System.Windows.Forms.CheckBox chb_PassiveMode;
+        private System.Windows.Forms.CheckBox chb_HiddenMode;
     }
 }
 
