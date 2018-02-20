@@ -16,7 +16,7 @@ namespace pbpb
 
             while (!BotStopper.WaitOne(3000, false)) {             
 
-                if (chbAggressive.Checked && STime.GetUserIdleTime() < 5000) {
+                if (chbPassiveMode.Checked && STime.GetUserIdleTime() < 5000) {
                     Log.Add( "No idle time for actions. Wait..." );
                     //PubgStatus.ResetLastGood();
                     continue;

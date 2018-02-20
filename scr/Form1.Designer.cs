@@ -68,7 +68,7 @@
             this.nePosY = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.chbAggressive = new System.Windows.Forms.CheckBox();
+            this.chbPassiveMode = new System.Windows.Forms.CheckBox();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.neMaxIdle)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
@@ -467,22 +467,24 @@
             this.label2.TabIndex = 27;
             this.label2.Text = "Y:";
             // 
-            // chbAggressive
+            // chbPassiveMode
             // 
-            this.chbAggressive.AutoSize = true;
-            this.chbAggressive.Location = new System.Drawing.Point(12, 229);
-            this.chbAggressive.Name = "chbAggressive";
-            this.chbAggressive.Size = new System.Drawing.Size(139, 21);
-            this.chbAggressive.TabIndex = 28;
-            this.chbAggressive.Text = "Aggressive mode";
-            this.chbAggressive.UseVisualStyleBackColor = true;
+            this.chbPassiveMode.AutoSize = true;
+            this.chbPassiveMode.Checked = true;
+            this.chbPassiveMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbPassiveMode.Location = new System.Drawing.Point(12, 229);
+            this.chbPassiveMode.Name = "chbPassiveMode";
+            this.chbPassiveMode.Size = new System.Drawing.Size(118, 21);
+            this.chbPassiveMode.TabIndex = 28;
+            this.chbPassiveMode.Text = "Passive mode";
+            this.chbPassiveMode.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 253);
-            this.Controls.Add(this.chbAggressive);
+            this.Controls.Add(this.chbPassiveMode);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nePosY);
@@ -555,7 +557,7 @@
         private System.Windows.Forms.NumericUpDown nePosY;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox chbAggressive;
+        private System.Windows.Forms.CheckBox chbPassiveMode;
     }
 }
 
