@@ -75,6 +75,7 @@ namespace pbpb {
         }
 
         Assembly PubgLogEvent( object sender, ResolveEventArgs e ) {
+            if (panel1.Visible) panel1.Hide();
             txLog.AppendText(e.Name);
             return null;
         }
@@ -97,8 +98,7 @@ namespace pbpb {
             PubgStatusChecker = Task.Run( () => PubgRestarterProc() );
             PubgRestarter = Task.Run( () => PubgStatusProc() );
 
-            btnStartStopBot.Text = "off";  
-            panel1.Hide();
+            btnStartStopBot.Text = "off";         
             tray.Icon = Resources.main;
         }
 

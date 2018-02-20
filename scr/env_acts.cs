@@ -90,11 +90,11 @@ namespace pbpb {
             else
                  scr = SGraph.Scr("", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY);
 
-            PubgControl pc = Pcs[PubgControls.labAlive];
+            PubgControl pc = Pcs[PubgControls.labReleaseParachute];
             pc.ControlImageFromImage(scr);          
             int dist = pc.CalcDistance(true);
 
-            txLog.AppendLine( String.Format("calc: {0} , cmp: {1}{2}=> dist: {3}", 
+            Log.Add( String.Format("calc: {0} , cmp: {1}{2}=> dist: {3}", 
                 pc.ControlImageHash, pc.ComparableHash, Environment.NewLine, dist) );
 
             scr.Save( filename_now );

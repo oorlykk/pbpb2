@@ -28,17 +28,29 @@ namespace pbpb {
                                                     (ulong) PubgControls.labAlive,
                                                     915, 19, 938, 30 ) );
 
+            //Pcs.Add( PubgControls.labJoined, new PubgControl( PubgControls.labJoined.ToString(),
+            //                                        (ulong) PubgControls.labJoined,
+            //                                        905, 15, 942, 35 ) );
+
             Pcs.Add( PubgControls.labJoined, new PubgControl( PubgControls.labJoined.ToString(),
                                                     (ulong) PubgControls.labJoined,
-                                                    905, 15, 942, 35 ) );
+                                                    911, 19, 938, 30 ) );
 
-            Pcs.Add( PubgControls.labEject, new PubgControl( PubgControls.labEject.ToString(),
+            //Pcs.Add( PubgControls.labEject, new PubgControl( PubgControls.labEject.ToString(),
+            //                                        (ulong) PubgControls.labEject,
+            //                                        554, 304, 580, 321 ) );
+
+             Pcs.Add( PubgControls.labEject, new PubgControl( PubgControls.labEject.ToString(),
                                                     (ulong) PubgControls.labEject,
-                                                    554, 304, 580, 321 ) );
-        
+                                                    557, 311, 576, 316 ) );
+            
+            //Pcs.Add( PubgControls.labReleaseParachute, new PubgControl( PubgControls.labReleaseParachute.ToString(),
+            //                                        (ulong) PubgControls.labReleaseParachute,
+            //                                        594, 308, 636, 317 ) );
+
             Pcs.Add( PubgControls.labReleaseParachute, new PubgControl( PubgControls.labReleaseParachute.ToString(),
                                                     (ulong) PubgControls.labReleaseParachute,
-                                                    594, 308, 636, 317 ) );
+                                                    595, 311, 635, 316 ) );
 
             Pcs.Add( PubgControls.btnMatchCanContinue, new PubgControl( PubgControls.btnMatchCanContinue.ToString(),
                                                     (ulong) PubgControls.btnMatchCanContinue,
