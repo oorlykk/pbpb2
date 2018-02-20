@@ -36,7 +36,7 @@ namespace pbpb
         private static void KeyDownOrUp(Keys key, bool release)
         {
 
-            SKeybd.MouseMove(-55, 0);
+            //SKeybd.MouseMove(-55, 0);
 
             ReleaseKey(LastKey);
 
@@ -51,7 +51,7 @@ namespace pbpb
         private static void KeyPress(Keys key)
         {            
 
-            MoveMouse(-25, 0);
+            //MoveMouse(-25, 0);
 
             ReleaseKey(LastKey);
 

@@ -129,9 +129,19 @@ namespace pbpb
 
         private static int StyleNone => styleNone;
 
-        public static bool IsFocused => (IntPtr)User32.GetForegroundWindow() == Handle;       
 
-        public static void SetFocus() => User32.SetForegroundWindow( Handle );
+        public static bool IsFocused => (IntPtr)User32.GetForegroundWindow() == Handle;
+
+        private static IntPtr PredFocus;
+
+        public static void SetFocus() {
+
+            PredFocus = (IntPtr)User32.GetForegroundWindow();
+            User32.SetForegroundWindow( Handle );
+        }
+
+        public static void RestoreFocus() => User32.SetForegroundWindow( PredFocus );
+        
 
         private static int OrigStyle;
         private static int OrigWidth; 
@@ -156,8 +166,7 @@ namespace pbpb
 
                 RECT r = new RECT();
                 User32.GetWindowRect( Handle, ref r );
-                //return !( r.Left == 0 && r.Top == 0 && r.Right == Width && r.Bottom == Height );
-                return !(r.Top == 0 && r.Bottom == Height );
+                return !( r.Left == PosX && r.Top == PosY && r.Right == PosX + Width && r.Bottom == PosY + Height );
             }
         }
 

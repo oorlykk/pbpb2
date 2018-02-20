@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Threading;
 using SnLib;
+using Win32;
 
 namespace pbpb
 {
@@ -13,12 +14,20 @@ namespace pbpb
 
         void PubgStatusProc() {
 
-            while (!BotStopper.WaitOne(2500, false)) {             
+            while (!BotStopper.WaitOne(3000, false)) {             
+
+                if (chbAggressive.Checked && STime.GetUserIdleTime() < 5000) {
+                    Log.Add( "No idle time for actions. Wait..." );
+                    //PubgStatus.ResetLastGood();
+                    continue;
+                }
 
                 if (!PubgWindow.Exists) {
                     Log.Add( "No way :( Wait..." );
                     continue;
                 }
+
+                PubgWindow.Show();
 
                 if (PubgWindow.NeedSetupWindow) {
                     PubgWindow.SetupWindow();
@@ -42,14 +51,15 @@ namespace pbpb
 
                     if (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD_FOR_INPUT) {
 
-                        string filename = RewardsFolder + @"_llg\" + RewardNewName + ".jpg";
+                        //string filename = RewardsFolder + @"_llg\" + RewardNewName + ".jpg";
                         //SGraph.Scr( filename, PubgWindow.Width, PubgWindow.Height, 0, 0, true );
                         PubgInput.ClickCenter();
-                        Thread.Sleep(15000);
+                        Thread.Sleep( 1500 );
 
-                        if (RND.Next(2) == 0) PubgInput.MoveMouse( -700, 0 );
-                        else PubgInput.MoveMouse( 0, -700 );  
+                        if (RND.Next( 2 ) == 0) PubgInput.MoveMouse( -700, 0 );
+                        else PubgInput.MoveMouse( 0, -700 );
                         Log.Add( "+Add input (lastgood is long)" );
+                        
                     }
                 }
 
@@ -112,7 +122,7 @@ namespace pbpb
                     Log.Append( " di: " + Pcs[PubgControls.labEject].LastDistance.ToString() );
 
                     PubgInput.EjectClickedTime = Environment.TickCount;
-                    if (RND.Next( 2 ) == 0) {
+                    if (RND.Next( 1 ) == 0) {
                         Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300));
                         Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300));
                         Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300));
@@ -152,7 +162,7 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.labAlive].LastDistance.ToString() );
 
-                    PubgInput.MoveMouse(-150, -150);
+                    //PubgInput.MoveMouse(-150, -150);
 
                     int cd = (1000 * 60 * 2) + 45000;
                     if ( (Environment.TickCount - PubgInput.EjectClickedTime > cd ||
@@ -164,6 +174,10 @@ namespace pbpb
                         PubgInput.Forward();
                     }
                 }
+
+                PubgWindow.Hide();
+
+                PubgWindow.RestoreFocus();
 
             }
         }
