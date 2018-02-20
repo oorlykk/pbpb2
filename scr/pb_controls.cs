@@ -14,7 +14,7 @@ namespace pbpb
 
         btnStart = 18410924907680276608,
         btnExit = 18410913813996339328,
-        labAlive = 109291456823296,
+        labAlive = 2821267018762805729,
         labJoined = 69540876582912,
         labEject = 105924403798016,
         labReleaseParachute = 31057834917632,

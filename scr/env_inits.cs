@@ -26,7 +26,7 @@ namespace pbpb {
 
             Pcs.Add( PubgControls.labAlive, new PubgControl( PubgControls.labAlive.ToString(),
                                                     (ulong) PubgControls.labAlive,
-                                                    912, 15, 942, 35 ) );
+                                                    915, 19, 938, 30 ) );
 
             Pcs.Add( PubgControls.labJoined, new PubgControl( PubgControls.labJoined.ToString(),
                                                     (ulong) PubgControls.labJoined,
