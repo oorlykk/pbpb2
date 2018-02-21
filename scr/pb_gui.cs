@@ -43,30 +43,30 @@ namespace pbpb
 
             byte[] data = SStruct.RawSerialize( this );
 
-            Microsoft.Win32.RegistryKey exampleRegistryKey = Microsoft.Win32.Registry.CurrentUser.CreateSubKey( "PBPB" );
+            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey( "PBPB" );
 
-            exampleRegistryKey.SetValue( "settings", data );
+            key.SetValue( Form1.AppTitle, data );
 
-            exampleRegistryKey.Close();
+            key.Close();
         }
 
         private static _Settings Load()
         {
-
+            
             try {
 
-                Microsoft.Win32.RegistryKey exampleRegistryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey( "PBPB" );
+                Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey( "PBPB" );
 
-                byte[] data = (byte[]) exampleRegistryKey.GetValue( "settings" );
+                byte[] data = (byte[]) key.GetValue( Form1.AppTitle );
 
-                exampleRegistryKey.Close();
+                key.Close();
 
                 return SStruct.ReadStruct<_Settings>(data);
                           
             }
             catch {
 
-                return new _Settings(true);
+                return new _Settings(false);
             }
 
         }
