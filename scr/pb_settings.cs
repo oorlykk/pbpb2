@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
@@ -50,7 +48,7 @@ namespace pbpb
 
                 key.Close();
 
-                MemoryStream ms = new MemoryStream();
+                MemoryStream ms = new MemoryStream();f
 
                 ms.Write( data, 0, data.Length );
 
@@ -76,8 +74,6 @@ namespace pbpb
 
     partial class Form1
     {
-
-        public Object Mirror = typeof(Settings);
 
         public void ReadGui( object sender = null, EventArgs e = null) {
 
