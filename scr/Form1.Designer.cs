@@ -107,6 +107,7 @@
             this.chb_SaveReward.TabIndex = 14;
             this.chb_SaveReward.Text = "Save Rewards";
             this.chb_SaveReward.UseVisualStyleBackColor = true;
+            this.chb_SaveReward.Click += new System.EventHandler(this.ReadGui);
             // 
             // tray
             // 
@@ -279,6 +280,7 @@
             this.chb_AutoStartOnIdle.TabIndex = 17;
             this.chb_AutoStartOnIdle.Text = "Autolauch if Idle (minuts):";
             this.chb_AutoStartOnIdle.UseVisualStyleBackColor = true;
+            this.chb_AutoStartOnIdle.Click += new System.EventHandler(this.ReadGui);
             // 
             // ne_MaxIdle
             // 
@@ -297,6 +299,7 @@
             0,
             0});
             this.ne_MaxIdle.Click += new System.EventHandler(this.ReadGui);
+            this.ne_MaxIdle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ReadGui);
             // 
             // txLog
             // 
@@ -474,6 +477,7 @@
             this.chb_PassiveMode.TabIndex = 28;
             this.chb_PassiveMode.Text = "Passive mode";
             this.chb_PassiveMode.UseVisualStyleBackColor = true;
+            this.chb_PassiveMode.Click += new System.EventHandler(this.ReadGui);
             // 
             // chb_HiddenMode
             // 
@@ -484,6 +488,7 @@
             this.chb_HiddenMode.TabIndex = 29;
             this.chb_HiddenMode.Text = "Hidden mode";
             this.chb_HiddenMode.UseVisualStyleBackColor = true;
+            this.chb_HiddenMode.Click += new System.EventHandler(this.ReadGui);
             // 
             // Form1
             // 
