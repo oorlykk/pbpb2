@@ -10,46 +10,38 @@ using SnLib;
 namespace pbpb
 {
 
-    public struct _Settings {
+    public class Settings {
 
-        public bool HiddenMode;
-        public bool PassiveMode;
-        public bool SaveReward;
-        public bool IdleAutolaunch;
-        public int IdleAutolaunchTimeout;
-        public int PubgWindowAbsoluteX;
-        public int PubgWindowAbsoluteY;
+        public static bool HiddenMode;
+        public static bool PassiveMode;
+        public static bool SaveReward = true;
+        public static bool IdleAutolaunch = true;
+        public static int IdleAutolaunchTimeout = 5;
+        public static int PubgWindowAbsoluteX;
+        public static int PubgWindowAbsoluteY;
 
-        public _Settings( bool tryloadfromregedit )
-        {
-            if (!tryloadfromregedit) {
+        public static void Save()  {
 
-                HiddenMode = false;
-                PassiveMode = false;
-                SaveReward = true;
-                IdleAutolaunch = true;
-                IdleAutolaunchTimeout = 5;
-                PubgWindowAbsoluteX = Screen.PrimaryScreen.Bounds.Width + 1;
-                PubgWindowAbsoluteY = 0;
-            }
+            IFormatter fo = new BinaryFormatter();
 
-            else this = Load();
-        }
+            MemoryStream ms = new MemoryStream();
 
-        public void Save()  {
+            object o = SSerialize.StaticClassSave(typeof(Settings));
 
-            byte[] data = SStruct.RawSerialize( this );
+            fo.Serialize(ms, o);
 
             var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey( "PBPB" );
 
-            key.SetValue( Form1.AppTitle, data );
+            key.SetValue( Form1.AppTitle, ms.ToArray() );
 
             key.Close();
+
+            ms.Close();
+
         }
 
-        private static _Settings Load()
-        {
-            
+        public static bool Load()
+        {          
             try {
 
                 var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey( "PBPB" );
@@ -58,12 +50,25 @@ namespace pbpb
 
                 key.Close();
 
-                return SStruct.ReadStruct<_Settings>(data);
-                          
-            }
-            catch {
+                MemoryStream ms = new MemoryStream();
 
-                return new _Settings(false);
+                ms.Write( data, 0, data.Length );
+
+                ms.Position = 0;
+
+                IFormatter fo = new BinaryFormatter();
+
+                object[,] o = fo.Deserialize( ms ) as object[,];
+
+                ms.Close();
+
+                SSerialize.StaticClassSaveLoad( typeof( Settings ), o );
+
+                return true;
+
+            } catch {
+
+                return false;
             }
 
         }
@@ -72,8 +77,7 @@ namespace pbpb
     partial class Form1
     {
 
-        public static _Settings Settings = new _Settings(true);
-        public static _Settings SettingsMirror = Settings;
+        public Object Mirror = typeof(Settings);
 
         public void ReadGui( object sender = null, EventArgs e = null) {
 

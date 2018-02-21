@@ -19,8 +19,8 @@ namespace pbpb
 
         public static int Height => (1080 / 10) * m_partfullhd;
 
-        public static int PosX => Form1.Settings.PubgWindowAbsoluteX;
-        public static int PosY => Form1.Settings.PubgWindowAbsoluteY;
+        public static int PosX => Settings.PubgWindowAbsoluteX;
+        public static int PosY => Settings.PubgWindowAbsoluteY;
 
         public static void KillExecute() =>
             Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im TslGame.exe", "", User32.SW_HIDE);

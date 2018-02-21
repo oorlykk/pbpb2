@@ -62,13 +62,15 @@ namespace pbpb {
 
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
 
+            Settings.Load();
+
             WriteGui();
             
         }
 
         private void OnApplicationExit( object sender, EventArgs  e ) {
 
-            if (!Settings.Equals(SettingsMirror)) Settings.Save();
+            Settings.Save();
         }
 
 
@@ -198,9 +200,7 @@ namespace pbpb {
         }
 
         private void btnttt_Click( object sender, EventArgs e ) {
-
-            MessageBox.Show( Settings.Equals(SettingsMirror).ToString() );
-            //PubgWindow.SetupWindow();
+            //
         }
 
         private void Form1_FormClosing( object sender, FormClosingEventArgs e ) {
