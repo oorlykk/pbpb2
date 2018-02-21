@@ -17,7 +17,7 @@ namespace pbpb {
     {
         static string uniq = "dGhleg==";
 
-        public static string AppTitle = "PBPB v1.2";
+        public static string AppTitle = "PBPB v1.3";
         public const int PartFullHDPreset = 5;
         
         //public static string RewardsFolder = AppDomain.CurrentDomain.BaseDirectory + @"rewards\";

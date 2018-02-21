@@ -9,32 +9,20 @@ using SnLib;
 
 namespace pbpb
 {
-    [Serializable]
+
     public struct _Settings {
 
         public bool HiddenMode;
-
         public bool PassiveMode;
-
         public bool SaveReward;
-
         public bool IdleAutolaunch;
-
         public int IdleAutolaunchTimeout;
-
         public int PubgWindowAbsoluteX;
-
         public int PubgWindowAbsoluteY;
 
         public _Settings( bool tryloadfromregedit )
         {
-            if (tryloadfromregedit) {
-
-                this = Load();
-
-            }
-
-            else {
+            if (!tryloadfromregedit) {
 
                 HiddenMode = false;
                 PassiveMode = false;
@@ -44,13 +32,15 @@ namespace pbpb
                 PubgWindowAbsoluteX = Screen.PrimaryScreen.Bounds.Width + 1;
                 PubgWindowAbsoluteY = 0;
             }
+
+            else this = Load();
         }
 
         public void Save()  {
 
             byte[] data = SStruct.RawSerialize( this );
 
-            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey( "PBPB" );
+            var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey( "PBPB" );
 
             key.SetValue( Form1.AppTitle, data );
 
@@ -62,7 +52,7 @@ namespace pbpb
             
             try {
 
-                Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey( "PBPB" );
+                var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey( "PBPB" );
 
                 byte[] data = (byte[]) key.GetValue( Form1.AppTitle );
 
