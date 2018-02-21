@@ -31,7 +31,7 @@ namespace pbpb
             else {
 
                 HiddenMode = false;
-                PassiveMode = true;
+                PassiveMode = false;
                 SaveReward = true;
                 IdleAutolaunch = true;
                 IdleAutolaunchTimeout = 5;
@@ -75,10 +75,10 @@ namespace pbpb
     partial class Form1
     {
 
-        public _Settings Settings;
-        public _Settings SettingsBacup;
+        public static _Settings Settings = new _Settings(true);
+        public static _Settings SettingsMirror = Settings;
 
-        void ReadGui( object sender = null, EventArgs e = null) {
+        public void ReadGui( object sender = null, EventArgs e = null) {
 
             Settings.HiddenMode                    =      chb_HiddenMode.Checked;
             Settings.PassiveMode                   =      chb_PassiveMode.Checked;
@@ -87,7 +87,7 @@ namespace pbpb
             Settings.IdleAutolaunchTimeout         =      (int)ne_MaxIdle.Value;
         }
 
-        void WriteGui( object sender = null, EventArgs e = null ) {
+        public void WriteGui( object sender = null, EventArgs e = null ) {
 
             chb_HiddenMode.Checked          =      Settings.HiddenMode;
             chb_PassiveMode.Checked         =      Settings.PassiveMode;
