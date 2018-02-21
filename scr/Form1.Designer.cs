@@ -55,7 +55,7 @@
             this.chb_AutoStartOnIdle = new System.Windows.Forms.CheckBox();
             this.ne_MaxIdle = new System.Windows.Forms.NumericUpDown();
             this.txLog = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel_test = new System.Windows.Forms.FlowLayoutPanel();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -64,17 +64,17 @@
             this.btnttt = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
-            this.nePosX = new System.Windows.Forms.NumericUpDown();
-            this.nePosY = new System.Windows.Forms.NumericUpDown();
+            this.ne_PosX = new System.Windows.Forms.NumericUpDown();
+            this.ne_PosY = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.chb_PassiveMode = new System.Windows.Forms.CheckBox();
             this.chb_HiddenMode = new System.Windows.Forms.CheckBox();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nePosX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nePosY)).BeginInit();
+            this.panel_test.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ne_PosX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ne_PosY)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStartStopBot
@@ -89,7 +89,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(349, 170);
+            this.button5.Location = new System.Drawing.Point(394, 171);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(86, 25);
             this.button5.TabIndex = 10;
@@ -308,21 +308,21 @@
             this.txLog.Multiline = true;
             this.txLog.Name = "txLog";
             this.txLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txLog.Size = new System.Drawing.Size(427, 128);
+            this.txLog.Size = new System.Drawing.Size(472, 128);
             this.txLog.TabIndex = 8;
             // 
-            // flowLayoutPanel1
+            // panel_test
             // 
-            this.flowLayoutPanel1.Controls.Add(this.button7);
-            this.flowLayoutPanel1.Controls.Add(this.button6);
-            this.flowLayoutPanel1.Controls.Add(this.button3);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Controls.Add(this.btnttt);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 283);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(251, 67);
-            this.flowLayoutPanel1.TabIndex = 21;
+            this.panel_test.Controls.Add(this.button7);
+            this.panel_test.Controls.Add(this.button6);
+            this.panel_test.Controls.Add(this.button3);
+            this.panel_test.Controls.Add(this.button2);
+            this.panel_test.Controls.Add(this.button1);
+            this.panel_test.Controls.Add(this.btnttt);
+            this.panel_test.Location = new System.Drawing.Point(12, 256);
+            this.panel_test.Name = "panel_test";
+            this.panel_test.Size = new System.Drawing.Size(468, 67);
+            this.panel_test.TabIndex = 21;
             // 
             // button7
             // 
@@ -363,7 +363,7 @@
             // button2
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.Location = new System.Drawing.Point(3, 34);
+            this.button2.Location = new System.Drawing.Point(228, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(70, 25);
             this.button2.TabIndex = 7;
@@ -375,7 +375,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(79, 34);
+            this.button1.Location = new System.Drawing.Point(304, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(86, 25);
             this.button1.TabIndex = 0;
@@ -386,7 +386,7 @@
             // 
             // btnttt
             // 
-            this.btnttt.Location = new System.Drawing.Point(171, 34);
+            this.btnttt.Location = new System.Drawing.Point(396, 3);
             this.btnttt.Name = "btnttt";
             this.btnttt.Size = new System.Drawing.Size(63, 25);
             this.btnttt.TabIndex = 19;
@@ -398,14 +398,14 @@
             // 
             this.panel1.BackgroundImage = global::pbpb.Properties.Resources.banner;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1.Location = new System.Drawing.Point(12, 35);
+            this.panel1.Location = new System.Drawing.Point(12, 36);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(427, 129);
+            this.panel1.Size = new System.Drawing.Size(469, 129);
             this.panel1.TabIndex = 22;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(349, 198);
+            this.button4.Location = new System.Drawing.Point(394, 202);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(86, 25);
             this.button4.TabIndex = 23;
@@ -414,46 +414,58 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.btnTag_Click);
             // 
-            // nePosX
+            // ne_PosX
             // 
-            this.nePosX.Increment = new decimal(new int[] {
+            this.ne_PosX.Increment = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.nePosX.Location = new System.Drawing.Point(240, 9);
-            this.nePosX.Maximum = new decimal(new int[] {
+            this.ne_PosX.Location = new System.Drawing.Point(299, 8);
+            this.ne_PosX.Maximum = new decimal(new int[] {
             99999,
             0,
             0,
             0});
-            this.nePosX.Name = "nePosX";
-            this.nePosX.Size = new System.Drawing.Size(74, 22);
-            this.nePosX.TabIndex = 24;
-            this.nePosX.ValueChanged += new System.EventHandler(this.nePosX_ValueChanged);
+            this.ne_PosX.Name = "ne_PosX";
+            this.ne_PosX.Size = new System.Drawing.Size(74, 22);
+            this.ne_PosX.TabIndex = 24;
+            this.ne_PosX.Value = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.ne_PosX.Click += new System.EventHandler(this.ReadGui);
+            this.ne_PosX.Move += new System.EventHandler(this.ReadGui);
             // 
-            // nePosY
+            // ne_PosY
             // 
-            this.nePosY.Increment = new decimal(new int[] {
+            this.ne_PosY.Increment = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.nePosY.Location = new System.Drawing.Point(365, 9);
-            this.nePosY.Maximum = new decimal(new int[] {
+            this.ne_PosY.Location = new System.Drawing.Point(406, 8);
+            this.ne_PosY.Maximum = new decimal(new int[] {
             99999,
             0,
             0,
             0});
-            this.nePosY.Name = "nePosY";
-            this.nePosY.Size = new System.Drawing.Size(74, 22);
-            this.nePosY.TabIndex = 25;
-            this.nePosY.ValueChanged += new System.EventHandler(this.nePosX_ValueChanged);
+            this.ne_PosY.Name = "ne_PosY";
+            this.ne_PosY.Size = new System.Drawing.Size(74, 22);
+            this.ne_PosY.TabIndex = 25;
+            this.ne_PosY.Value = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.ne_PosY.Click += new System.EventHandler(this.ReadGui);
+            this.ne_PosY.Move += new System.EventHandler(this.ReadGui);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(213, 11);
+            this.label1.Location = new System.Drawing.Point(272, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(21, 17);
             this.label1.TabIndex = 26;
@@ -462,7 +474,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(338, 11);
+            this.label2.Location = new System.Drawing.Point(379, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 17);
             this.label2.TabIndex = 27;
@@ -482,7 +494,7 @@
             // chb_HiddenMode
             // 
             this.chb_HiddenMode.AutoSize = true;
-            this.chb_HiddenMode.Location = new System.Drawing.Point(12, 256);
+            this.chb_HiddenMode.Location = new System.Drawing.Point(167, 229);
             this.chb_HiddenMode.Name = "chb_HiddenMode";
             this.chb_HiddenMode.Size = new System.Drawing.Size(114, 21);
             this.chb_HiddenMode.TabIndex = 29;
@@ -494,16 +506,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 365);
+            this.ClientSize = new System.Drawing.Size(493, 328);
             this.Controls.Add(this.chb_HiddenMode);
             this.Controls.Add(this.chb_PassiveMode);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.nePosY);
-            this.Controls.Add(this.nePosX);
+            this.Controls.Add(this.ne_PosY);
+            this.Controls.Add(this.ne_PosX);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.panel_test);
             this.Controls.Add(this.txLog);
             this.Controls.Add(this.btnStartStopBot);
             this.Controls.Add(this.ne_MaxIdle);
@@ -519,9 +531,9 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.trayms.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nePosX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nePosY)).EndInit();
+            this.panel_test.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ne_PosX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ne_PosY)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -554,7 +566,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.Button btnttt;
         private System.Windows.Forms.TextBox txLog;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel panel_test;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem pUBGToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchToolStripMenuItem;
@@ -564,8 +576,8 @@
         private System.Windows.Forms.ToolStripMenuItem showWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.NumericUpDown nePosX;
-        private System.Windows.Forms.NumericUpDown nePosY;
+        private System.Windows.Forms.NumericUpDown ne_PosX;
+        private System.Windows.Forms.NumericUpDown ne_PosY;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chb_PassiveMode;

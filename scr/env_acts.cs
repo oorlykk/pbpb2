@@ -80,8 +80,6 @@ namespace pbpb {
         // ?
         void test1(bool fromfile) {
 
-            if (Environment.MachineName != "NORM") return;
-
             Bitmap scr;
 
             if (fromfile)

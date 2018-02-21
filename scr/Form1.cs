@@ -48,16 +48,17 @@ namespace pbpb {
             DateTime pDate = Convert.ToDateTime( date_convert1 );
             int date_cmp_res = thisDate.CompareTo( pDate );
             AppIsExp = (date_cmp_res > 0);
-
-            AppIsExp = false;
+            panel_test.Visible = false;
+            if (Environment.MachineName == "NORM") {
+                AppIsExp = false;
+                panel_test.Visible = true;
+            }
 
             PubgWindow.PartFullHD = PartFullHDPreset;
             Init_Pcs();
             PubgInput.InputEvent += new PubgInput.InputEventHandler(PubgInputEvent);
             Log.LogEvent += new ResolveEventHandler(PubgLogEvent);          
             Init_HotKeysMon();
-
-            nePosX.Value = Screen.PrimaryScreen.Bounds.Width + 1;
 
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
 
@@ -200,13 +201,6 @@ namespace pbpb {
 
             MessageBox.Show( Settings.Equals(SettingsMirror).ToString() );
             //PubgWindow.SetupWindow();
-        }
-
-        private void nePosX_ValueChanged( object sender, EventArgs e ) {
-
-            PubgWindow.PosX = (int)nePosX.Value;
-
-            PubgWindow.PosY = (int)nePosY.Value;
         }
 
         private void Form1_FormClosing( object sender, FormClosingEventArgs e ) {

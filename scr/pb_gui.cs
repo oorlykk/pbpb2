@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
@@ -8,6 +9,7 @@ using SnLib;
 
 namespace pbpb
 {
+    [Serializable]
     public struct _Settings {
 
         public bool HiddenMode;
@@ -19,6 +21,10 @@ namespace pbpb
         public bool IdleAutolaunch;
 
         public int IdleAutolaunchTimeout;
+
+        public int PubgWindowAbsoluteX;
+
+        public int PubgWindowAbsoluteY;
 
         public _Settings( bool tryloadfromregedit )
         {
@@ -35,7 +41,8 @@ namespace pbpb
                 SaveReward = true;
                 IdleAutolaunch = true;
                 IdleAutolaunchTimeout = 5;
-
+                PubgWindowAbsoluteX = Screen.PrimaryScreen.Bounds.Width + 1;
+                PubgWindowAbsoluteY = 0;
             }
         }
 
@@ -85,6 +92,8 @@ namespace pbpb
             Settings.SaveReward                    =      chb_SaveReward.Checked;
             Settings.IdleAutolaunch                =      chb_AutoStartOnIdle.Checked;
             Settings.IdleAutolaunchTimeout         =      (int)ne_MaxIdle.Value;
+            Settings.PubgWindowAbsoluteX           =      (int)ne_PosX.Value;
+            Settings.PubgWindowAbsoluteY           =      (int)ne_PosY.Value;
         }
 
         public void WriteGui( object sender = null, EventArgs e = null ) {
@@ -94,6 +103,8 @@ namespace pbpb
             chb_SaveReward.Checked          =      Settings.SaveReward;
             chb_AutoStartOnIdle.Checked     =      Settings.IdleAutolaunch;
             ne_MaxIdle.Value                =      Settings.IdleAutolaunchTimeout;
+            ne_PosX.Value                   =      Settings.PubgWindowAbsoluteX;
+            ne_PosY.Value                   =      Settings.PubgWindowAbsoluteY;
         }
     }
 }
