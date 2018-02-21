@@ -59,16 +59,18 @@ namespace pbpb {
 
             nePosX.Value = Screen.PrimaryScreen.Bounds.Width + 1;
 
+            Application.ApplicationExit += new EventHandler(OnApplicationExit);
+
             Settings = _Settings.Load();
             WriteGui();
-
-            Application.ApplicationExit += new EventHandler(OnApplicationExit);
+            
         }
 
-        private void OnApplicationExit( object sender, EventArgs e ) {
+        private void OnApplicationExit( object sender, EventArgs  e ) {
 
-            try { ReadGui(); Settings.Save(); } catch { }
+            ReadGui(); Settings.Save();
         }
+
 
         void PubgInputEvent( PubgInputEventArgs e ) {
 
@@ -138,7 +140,7 @@ namespace pbpb {
             else if (t == "froms") test1(false);
             else if (t == "run") { PubgWindow.CloseSE(); PubgWindow.StartExecute(); }
             else if (t == "kill") { PubgWindow.CloseMsg(); PubgWindow.KillExecute(); PubgWindow.CloseSE(); }
-            else if (t == "exit") Environment.Exit(0);
+            else if (t == "exit") Application.Exit();
             else if (t == "show") tray_Click(tray, null);
             else if (t == "autolauchifidle") chb_AutoStartOnIdle.Checked = !chb_AutoStartOnIdle.Checked;
             else if (t == "cfg") {
@@ -205,7 +207,9 @@ namespace pbpb {
         }
 
         private void Form1_FormClosing( object sender, FormClosingEventArgs e ) {
-            e.Cancel = true; tray_Click(tray, null); StopBotClick();                 
+            if (e.CloseReason == CloseReason.UserClosing) {
+                e.Cancel = true; tray_Click( tray, null ); StopBotClick();
+            }
         }
     }
 }

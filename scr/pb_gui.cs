@@ -68,7 +68,7 @@ namespace pbpb
     partial class Form1
     {
 
-        public _Settings Settings = new _Settings();
+        public _Settings Settings;
         
         void ReadGui( object sender = null, EventArgs e = null) {
 
