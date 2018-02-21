@@ -76,7 +76,8 @@ namespace pbpb
     {
 
         public _Settings Settings;
-        
+        public _Settings SettingsBacup;
+
         void ReadGui( object sender = null, EventArgs e = null) {
 
             Settings.HiddenMode                    =      chb_HiddenMode.Checked;
