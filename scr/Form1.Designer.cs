@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.btnStartStopBot = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.chbSaveReward = new System.Windows.Forms.CheckBox();
+            this.chb_SaveReward = new System.Windows.Forms.CheckBox();
             this.tray = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiStartBot = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,8 +52,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tmrIdleCheck = new System.Windows.Forms.Timer(this.components);
-            this.chbAutoStartOnIdle = new System.Windows.Forms.CheckBox();
-            this.neMaxIdle = new System.Windows.Forms.NumericUpDown();
+            this.chb_AutoStartOnIdle = new System.Windows.Forms.CheckBox();
+            this.ne_MaxIdle = new System.Windows.Forms.NumericUpDown();
             this.txLog = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button7 = new System.Windows.Forms.Button();
@@ -71,7 +71,7 @@
             this.chb_PassiveMode = new System.Windows.Forms.CheckBox();
             this.chb_HiddenMode = new System.Windows.Forms.CheckBox();
             this.trayms.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.neMaxIdle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nePosX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nePosY)).BeginInit();
@@ -98,17 +98,15 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.btnTag_Click);
             // 
-            // chbSaveReward
+            // chb_SaveReward
             // 
-            this.chbSaveReward.AutoSize = true;
-            this.chbSaveReward.Checked = true;
-            this.chbSaveReward.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbSaveReward.Location = new System.Drawing.Point(12, 171);
-            this.chbSaveReward.Name = "chbSaveReward";
-            this.chbSaveReward.Size = new System.Drawing.Size(121, 21);
-            this.chbSaveReward.TabIndex = 14;
-            this.chbSaveReward.Text = "Save Rewards";
-            this.chbSaveReward.UseVisualStyleBackColor = true;
+            this.chb_SaveReward.AutoSize = true;
+            this.chb_SaveReward.Location = new System.Drawing.Point(12, 171);
+            this.chb_SaveReward.Name = "chb_SaveReward";
+            this.chb_SaveReward.Size = new System.Drawing.Size(121, 21);
+            this.chb_SaveReward.TabIndex = 14;
+            this.chb_SaveReward.Text = "Save Rewards";
+            this.chb_SaveReward.UseVisualStyleBackColor = true;
             // 
             // tray
             // 
@@ -272,34 +270,33 @@
             this.tmrIdleCheck.Interval = 9999;
             this.tmrIdleCheck.Tick += new System.EventHandler(this.tmrIdleCheck_Tick);
             // 
-            // chbAutoStartOnIdle
+            // chb_AutoStartOnIdle
             // 
-            this.chbAutoStartOnIdle.AutoSize = true;
-            this.chbAutoStartOnIdle.Checked = true;
-            this.chbAutoStartOnIdle.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbAutoStartOnIdle.Location = new System.Drawing.Point(12, 199);
-            this.chbAutoStartOnIdle.Name = "chbAutoStartOnIdle";
-            this.chbAutoStartOnIdle.Size = new System.Drawing.Size(189, 21);
-            this.chbAutoStartOnIdle.TabIndex = 17;
-            this.chbAutoStartOnIdle.Text = "Autolauch if Idle (minuts):";
-            this.chbAutoStartOnIdle.UseVisualStyleBackColor = true;
+            this.chb_AutoStartOnIdle.AutoSize = true;
+            this.chb_AutoStartOnIdle.Location = new System.Drawing.Point(12, 199);
+            this.chb_AutoStartOnIdle.Name = "chb_AutoStartOnIdle";
+            this.chb_AutoStartOnIdle.Size = new System.Drawing.Size(189, 21);
+            this.chb_AutoStartOnIdle.TabIndex = 17;
+            this.chb_AutoStartOnIdle.Text = "Autolauch if Idle (minuts):";
+            this.chb_AutoStartOnIdle.UseVisualStyleBackColor = true;
             // 
-            // neMaxIdle
+            // ne_MaxIdle
             // 
-            this.neMaxIdle.Increment = new decimal(new int[] {
+            this.ne_MaxIdle.Increment = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.neMaxIdle.Location = new System.Drawing.Point(207, 198);
-            this.neMaxIdle.Name = "neMaxIdle";
-            this.neMaxIdle.Size = new System.Drawing.Size(74, 22);
-            this.neMaxIdle.TabIndex = 18;
-            this.neMaxIdle.Value = new decimal(new int[] {
-            5,
+            this.ne_MaxIdle.Location = new System.Drawing.Point(207, 198);
+            this.ne_MaxIdle.Name = "ne_MaxIdle";
+            this.ne_MaxIdle.Size = new System.Drawing.Size(74, 22);
+            this.ne_MaxIdle.TabIndex = 18;
+            this.ne_MaxIdle.Value = new decimal(new int[] {
+            99,
             0,
             0,
             0});
+            this.ne_MaxIdle.Click += new System.EventHandler(this.ReadGui);
             // 
             // txLog
             // 
@@ -471,28 +468,22 @@
             // chb_PassiveMode
             // 
             this.chb_PassiveMode.AutoSize = true;
-            this.chb_PassiveMode.Checked = true;
-            this.chb_PassiveMode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chb_PassiveMode.Location = new System.Drawing.Point(12, 229);
             this.chb_PassiveMode.Name = "chb_PassiveMode";
             this.chb_PassiveMode.Size = new System.Drawing.Size(118, 21);
             this.chb_PassiveMode.TabIndex = 28;
             this.chb_PassiveMode.Text = "Passive mode";
             this.chb_PassiveMode.UseVisualStyleBackColor = true;
-            this.chb_PassiveMode.CheckedChanged += new System.EventHandler(this.ReadGui);
             // 
             // chb_HiddenMode
             // 
             this.chb_HiddenMode.AutoSize = true;
-            this.chb_HiddenMode.Checked = true;
-            this.chb_HiddenMode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chb_HiddenMode.Location = new System.Drawing.Point(12, 256);
             this.chb_HiddenMode.Name = "chb_HiddenMode";
             this.chb_HiddenMode.Size = new System.Drawing.Size(114, 21);
             this.chb_HiddenMode.TabIndex = 29;
             this.chb_HiddenMode.Text = "Hidden mode";
             this.chb_HiddenMode.UseVisualStyleBackColor = true;
-            this.chb_HiddenMode.CheckedChanged += new System.EventHandler(this.ReadGui);
             // 
             // Form1
             // 
@@ -510,10 +501,10 @@
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.txLog);
             this.Controls.Add(this.btnStartStopBot);
-            this.Controls.Add(this.neMaxIdle);
+            this.Controls.Add(this.ne_MaxIdle);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.chbAutoStartOnIdle);
-            this.Controls.Add(this.chbSaveReward);
+            this.Controls.Add(this.chb_AutoStartOnIdle);
+            this.Controls.Add(this.chb_SaveReward);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -521,9 +512,8 @@
             this.Text = "PBPB //by SN";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.trayms.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.neMaxIdle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nePosX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nePosY)).EndInit();
@@ -541,7 +531,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.CheckBox chbSaveReward;
+        private System.Windows.Forms.CheckBox chb_SaveReward;
         private System.Windows.Forms.NotifyIcon tray;
         private System.Windows.Forms.ContextMenuStrip trayms;
         private System.Windows.Forms.ToolStripMenuItem tsmiStartBot;
@@ -553,8 +543,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.Timer tmrIdleCheck;
-        private System.Windows.Forms.CheckBox chbAutoStartOnIdle;
-        private System.Windows.Forms.NumericUpDown neMaxIdle;
+        private System.Windows.Forms.CheckBox chb_AutoStartOnIdle;
+        private System.Windows.Forms.NumericUpDown ne_MaxIdle;
         private System.Windows.Forms.ToolStripMenuItem tsmiAutolauchifidle;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.Button btnttt;

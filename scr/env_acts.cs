@@ -77,7 +77,6 @@ namespace pbpb {
             } );
         }
 
-
         // ?
         void test1(bool fromfile) {
 

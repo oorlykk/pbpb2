@@ -28,21 +28,21 @@ namespace pbpb {
                                                     (ulong) PubgControls.labAlive,
                                                     915, 19, 938, 30 ) );
 
-            //Pcs.Add( PubgControls.labJoined, new PubgControl( PubgControls.labJoined.ToString(),
-            //                                        (ulong) PubgControls.labJoined,
-            //                                        905, 15, 942, 35 ) );
-
             Pcs.Add( PubgControls.labJoined, new PubgControl( PubgControls.labJoined.ToString(),
                                                     (ulong) PubgControls.labJoined,
-                                                    911, 19, 938, 30 ) );
+                                                    905, 15, 942, 35 ) );
+
+            //Pcs.Add( PubgControls.labJoined, new PubgControl( PubgControls.labJoined.ToString(),
+            //                                        (ulong) PubgControls.labJoined,
+            //                                        911, 19, 938, 30 ) );
+
+            Pcs.Add( PubgControls.labEject, new PubgControl( PubgControls.labEject.ToString(),
+                                                    (ulong) PubgControls.labEject,
+                                                    554, 304, 580, 321 ) );
 
             //Pcs.Add( PubgControls.labEject, new PubgControl( PubgControls.labEject.ToString(),
             //                                        (ulong) PubgControls.labEject,
-            //                                        554, 304, 580, 321 ) );
-
-             Pcs.Add( PubgControls.labEject, new PubgControl( PubgControls.labEject.ToString(),
-                                                    (ulong) PubgControls.labEject,
-                                                    557, 311, 576, 316 ) );
+            //                                        557, 311, 576, 316 ) );
             
             //Pcs.Add( PubgControls.labReleaseParachute, new PubgControl( PubgControls.labReleaseParachute.ToString(),
             //                                        (ulong) PubgControls.labReleaseParachute,

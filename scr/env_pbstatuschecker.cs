@@ -16,14 +16,14 @@ namespace pbpb
 
             while (!BotStopper.WaitOne(3000, false)) {             
 
-                if (Gui.PassiveMode && STime.GetUserIdleTime() < 5000) {
-                    Log.Add( "No idle time for actions. Wait..." );
-                    //PubgStatus.ResetLastGood();
+                if (Settings.PassiveMode && STime.GetUserIdleTime() < 5000) {
+
+                    Log.Add( "(PS) No idle time for actions. Wait..." );
                     continue;
                 }
 
                 if (!PubgWindow.Exists) {
-                    Log.Add( "No way :( Wait..." );
+                    Log.Add( "(PS) No way :( Wait..." );
                     continue;
                 }
 
@@ -51,15 +51,14 @@ namespace pbpb
 
                     if (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD_FOR_INPUT) {
 
-                        //string filename = RewardsFolder + @"_llg\" + RewardNewName + ".jpg";
-                        //SGraph.Scr( filename, PubgWindow.Width, PubgWindow.Height, 0, 0, true );
                         PubgInput.ClickCenter();
+
                         Thread.Sleep( 1500 );
 
                         if (RND.Next( 2 ) == 0) PubgInput.MoveMouse( -700, 0 );
-                        else PubgInput.MoveMouse( 0, -700 );
-                        Log.Add( "+Add input (lastgood is long)" );
-                        
+                                           else PubgInput.MoveMouse( 0, -700 );
+
+                        Log.Add( "+Add input (lastgood is long)" );                        
                     }
                 }
 
@@ -75,6 +74,7 @@ namespace pbpb
                 else if (PubgStatuses.Lobby.HasFlags( ps )) {
 
                     PubgInput.EjectClickedTime = int.MaxValue;
+
                     PubgInput.ParachuteClickedTime = int.MaxValue;
 
                     Log.Append( " di: " + Pcs[PubgControls.btnStart].LastDistance.ToString() );
@@ -92,7 +92,7 @@ namespace pbpb
 
                     Thread.Sleep( 7500 );
 
-                    if (chbSaveReward.Checked) {
+                    if (Settings.SaveReward) {
                         
                         if (!Directory.Exists(RewardsFolder))
                             try {
@@ -175,7 +175,7 @@ namespace pbpb
                     }
                 }
 
-                if (Gui.HiddenMode) PubgWindow.Hide();
+                if (Settings.HiddenMode) PubgWindow.Hide();
 
                 PubgWindow.RestoreFocus();
 

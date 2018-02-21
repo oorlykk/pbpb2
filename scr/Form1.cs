@@ -35,6 +35,7 @@ namespace pbpb {
 
         public Form1()
         {
+
             if (CheckAppIsDup()) Environment.Exit( 0 );
 
             InitializeComponent();
@@ -57,6 +58,16 @@ namespace pbpb {
             Init_HotKeysMon();
 
             nePosX.Value = Screen.PrimaryScreen.Bounds.Width + 1;
+
+            Settings = _Settings.Load();
+            WriteGui();
+
+            Application.ApplicationExit += new EventHandler(OnApplicationExit);
+        }
+
+        private void OnApplicationExit( object sender, EventArgs e ) {
+
+            try { ReadGui(); Settings.Save(); } catch { }
         }
 
         void PubgInputEvent( PubgInputEventArgs e ) {
@@ -129,7 +140,7 @@ namespace pbpb {
             else if (t == "kill") { PubgWindow.CloseMsg(); PubgWindow.KillExecute(); PubgWindow.CloseSE(); }
             else if (t == "exit") Environment.Exit(0);
             else if (t == "show") tray_Click(tray, null);
-            else if (t == "autolauchifidle") chbAutoStartOnIdle.Checked = !chbAutoStartOnIdle.Checked;
+            else if (t == "autolauchifidle") chb_AutoStartOnIdle.Checked = !chb_AutoStartOnIdle.Checked;
             else if (t == "cfg") {
                 string local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 local += @"\TslGame\Saved\Config\WindowsNoEditor\GameUserSettings.ini";
@@ -164,7 +175,7 @@ namespace pbpb {
 
             tsmiStartBot.Visible = stopped; tsmiStopBot.Visible = !stopped;
 
-            tsmiAutolauchifidle.Checked = chbAutoStartOnIdle.Checked;
+            tsmiAutolauchifidle.Checked = Settings.IdleAutolaunch;
         }
 
         private void OpenRewardsFolderClick( object sender = null, EventArgs e = null) {
@@ -174,9 +185,9 @@ namespace pbpb {
 
         private void tmrIdleCheck_Tick( object sender, EventArgs e )
         {
-            if (!chbAutoStartOnIdle.Checked || !BotStopper.WaitOne(0, false)) return;
+            if (!Settings.IdleAutolaunch || !BotStopper.WaitOne(0, false)) return;
           
-            if (STime.GetUserIdleTime() > (int)neMaxIdle.Value * 1000 * 60) {
+            if (STime.GetUserIdleTime() > Settings.IdleAutolaunchTimeout * 1000 * 60) {
 
                 Log.Add("Auto Launch Bot! (user idle)");
 
@@ -184,16 +195,9 @@ namespace pbpb {
             }
         }
 
-        private void btnttt_Click( object sender, EventArgs e )
-        {
-            PubgWindow.SetupWindow();
-        }
+        private void btnttt_Click( object sender, EventArgs e ) {
 
-        private void Form1_KeyDown( object sender, KeyEventArgs e )
-        {
-
-            //if (e.KeyCode == Keys.F7 && ( e.Alt || e.Control || e.Shift ))
-            //    MessageBox.Show( Encoding.UTF8.GetString( Convert.FromBase64String( uniq ) ) );
+            //PubgWindow.SetupWindow();
         }
 
         private void nePosX_ValueChanged( object sender, EventArgs e ) {

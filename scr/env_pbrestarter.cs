@@ -19,14 +19,18 @@ namespace pbpb {
 
             do {            
 
+                if (Settings.PassiveMode && STime.GetUserIdleTime() < 5000) {
+
+                    Log.Add( "(PR) No idle time for actions. Wait..." );
+
+                    goto EXIT;
+                }
+
                 if (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD) {
 
                     PubgStatus.ResetLastGood();
 
                     Log.Add( String.Format( "(PR) KillExecute! (lastgood is so long)") );
-
-                    string filename = RewardsFolder + @"llg\" + RewardNewName + ".jpg";
-                    //SGraph.Scr( filename, PubgWindow.Width, PubgWindow.Height, 0, 0, true);
 
                     PubgWindow.KillExecute();
 
