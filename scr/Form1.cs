@@ -68,7 +68,7 @@ namespace pbpb {
 
         private void OnApplicationExit( object sender, EventArgs  e ) {
 
-            ReadGui(); Settings.Save();
+            Settings.Save();
         }
 
 
@@ -203,12 +203,21 @@ namespace pbpb {
         }
 
         private void nePosX_ValueChanged( object sender, EventArgs e ) {
-            PubgWindow.PosX = (int)nePosX.Value; PubgWindow.PosY = (int)nePosY.Value;
+
+            PubgWindow.PosX = (int)nePosX.Value;
+
+            PubgWindow.PosY = (int)nePosY.Value;
         }
 
         private void Form1_FormClosing( object sender, FormClosingEventArgs e ) {
+
             if (e.CloseReason == CloseReason.UserClosing) {
-                e.Cancel = true; tray_Click( tray, null ); StopBotClick();
+
+                e.Cancel = true;
+
+                tray_Click( tray, null );
+
+                StopBotClick();
             }
         }
     }
