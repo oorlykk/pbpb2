@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
@@ -7,35 +8,50 @@ using SnLib;
 
 namespace pbpb
 {
-    [Serializable]
-    public class _Settings {
+    public struct _Settings {
 
-        public bool HiddenMode = true;
-        public bool PassiveMode = true;
-        public bool SaveReward = true;
-        public bool IdleAutolaunch = true;
-        public int IdleAutolaunchTimeout = 5;
+        public bool HiddenMode;
 
-        public void Save()
+        public bool PassiveMode;
+
+        public bool SaveReward;
+
+        public bool IdleAutolaunch;
+
+        public int IdleAutolaunchTimeout;
+
+        public _Settings( bool tryloadfromregedit )
         {
-            using (MemoryStream stream = new MemoryStream()) {
+            if (tryloadfromregedit) {
 
-                IFormatter formatter = new BinaryFormatter(); 
+                this = Load();
 
-                formatter.Serialize(stream, this);  
+            }
 
-                Microsoft.Win32.RegistryKey exampleRegistryKey = Microsoft.Win32.Registry.CurrentUser.CreateSubKey( "PBPB" );
+            else {
 
-                exampleRegistryKey.SetValue( "settings", stream.ToArray() );
-
-                exampleRegistryKey.Close();
+                HiddenMode = false;
+                PassiveMode = true;
+                SaveReward = true;
+                IdleAutolaunch = true;
+                IdleAutolaunchTimeout = 5;
 
             }
         }
 
-        public static _Settings Load()
+        public void Save()  {
+
+            byte[] data = SStruct.RawSerialize( this );
+
+            Microsoft.Win32.RegistryKey exampleRegistryKey = Microsoft.Win32.Registry.CurrentUser.CreateSubKey( "PBPB" );
+
+            exampleRegistryKey.SetValue( "settings", data );
+
+            exampleRegistryKey.Close();
+        }
+
+        private static _Settings Load()
         {
-            MemoryStream stream = new MemoryStream();
 
             try {
 
@@ -43,25 +59,16 @@ namespace pbpb
 
                 byte[] data = (byte[]) exampleRegistryKey.GetValue( "settings" );
 
-                exampleRegistryKey.Close();              
+                exampleRegistryKey.Close();
 
-                stream.Write( data, 0, data.Length );
-
-                stream.Position = 0;
-
-                IFormatter formatter = new BinaryFormatter();
-
-                return (_Settings) formatter.Deserialize( stream );
-
+                return SStruct.ReadStruct<_Settings>(data);
+                          
             }
             catch {
 
-                return new _Settings();
+                return new _Settings(true);
             }
-            finally {
 
-                stream.Close();
-            }
         }
     }
 

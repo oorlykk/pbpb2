@@ -61,7 +61,7 @@ namespace pbpb {
 
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
 
-            Settings = _Settings.Load();
+            Settings = new _Settings(true);
             WriteGui();
             
         }
