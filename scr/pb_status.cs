@@ -37,7 +37,7 @@ namespace pbpb {
 
         public static void ResetLastGood() => m_LastGoodTick = Environment.TickCount; 
 
-        public static PubgStatuses Now( Dictionary<PubgControls, PubgControl> Pcs ) {
+        public static PubgStatuses Now( PCS Pcs ) {
 
             PubgStatuses result = PubgStatuses.Unknown;
 

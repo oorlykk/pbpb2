@@ -8,14 +8,14 @@ using snlib = SnLib;
 using Win32;
 using IH = ImageHasher;
 
-namespace pbpb {
+namespace pbpb {  
 
     partial class Form1
     {
+       
+        public static PCS Pcs = new PCS();
 
         void Init_Pcs() {
-
-            Pcs = new Dictionary<PubgControls, PubgControl>();
 
             Pcs.Add( PubgControls.btnStart, new PubgControl( PubgControls.btnStart.ToString(),
                                                     (ulong) PubgControls.btnStart,

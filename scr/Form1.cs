@@ -30,7 +30,7 @@ namespace pbpb {
         static string full_scr_filename = SPath.Desctop + "scr.bmp";
         public static Random RND = new Random();      
         private static ManualResetEvent BotStopper = new ManualResetEvent(true);
-        public static Dictionary<PubgControls, PubgControl> Pcs;     
+             
         public static Task PubgStatusChecker, PubgRestarter = null;
 
         public Form1()
