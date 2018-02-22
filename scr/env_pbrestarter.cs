@@ -26,8 +26,12 @@ namespace pbpb {
                     goto EXIT;
                 }
 
-                if (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD) {
-
+                        
+                if (
+                    (!Setti.PassiveMode && Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD) ||
+                    (Setti.PassiveMode && Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD * 3)
+                   ) {
+                   
                     PubgStatus.ResetLastGood();
 
                     Log.Add( String.Format( "(PR) KillExecute! (lastgood is so long)") );
