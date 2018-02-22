@@ -10,8 +10,9 @@ using IH = ImageHasher;
 
 namespace pbpb {
 
-    public partial class Form1
+    partial class Form1
     {
+
         void Init_Pcs() {
 
             Pcs = new Dictionary<PubgControls, PubgControl>();

@@ -39,7 +39,10 @@ namespace pbpb
         }
 
         public static bool Load()
-        {          
+        {   
+            
+            bool result = false;
+
             try {
 
                 var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey( "PBPB" );
@@ -48,7 +51,7 @@ namespace pbpb
 
                 key.Close();
 
-                MemoryStream ms = new MemoryStream();f
+                MemoryStream ms = new MemoryStream();
 
                 ms.Write( data, 0, data.Length );
 
@@ -62,12 +65,11 @@ namespace pbpb
 
                 SSerialize.StaticClassSaveLoad( typeof( Settings ), o );
 
-                return true;
+                result = true;
 
-            } catch {
+            } catch { }
 
-                return false;
-            }
+            return result;
 
         }
     }

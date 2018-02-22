@@ -132,7 +132,7 @@ namespace pbpb
 
         public static bool IsFocused => (IntPtr)User32.GetForegroundWindow() == Handle;
 
-        private static IntPtr PredFocus;
+        public static IntPtr PredFocus;
 
         public static void SetFocus() {
 

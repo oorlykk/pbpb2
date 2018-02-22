@@ -10,7 +10,7 @@ using Win32;
 
 namespace pbpb {
 
-    public partial class Form1
+    partial class Form1
     {     
         
         public const int WM_ACTIVATEAPP = User32.WM_USER + 0x0001;

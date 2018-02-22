@@ -62,9 +62,7 @@ namespace pbpb {
 
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
 
-            Settings.Load();
-
-            WriteGui();
+            Settings.Load(); WriteGui();
             
         }
 

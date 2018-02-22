@@ -7,12 +7,12 @@ using Win32;
 namespace pbpb
 {
 
-    public partial class Form1
+    partial class Form1
     {
 
         public const int MAX_NOLASTGOOD_FOR_INPUT = ( 1000 * 60 ) / 2;
 
-        void PubgStatusProc() {
+        void PubgStatusProc() {        
 
             while (!BotStopper.WaitOne(3000, false)) {             
 
@@ -26,24 +26,28 @@ namespace pbpb
                     Log.Add( "(PS) No way :( Wait..." );
                     continue;
                 }
-
+                
                 PubgWindow.Show();
 
                 if (PubgWindow.NeedSetupWindow) {
+
                     PubgWindow.SetupWindow();
                     Log.Add( String.Format( "(PW) Setup {1} => {0}", PubgWindow.PartFullHD, PubgWindow.Handle ) );
                 }
 
-                if (!PubgWindow.IsFocused) {
+                bool needfocus = !PubgWindow.IsFocused;
+                if (needfocus) {
+
                     PubgWindow.SetFocus();
+
                     Log.Add( String.Format( "(PW) Focus => {0}", PubgWindow.Handle ) );
                 }
 
-                PubgStatuses ps = PubgStatus.Now( Pcs );
-
-                if (AppIsExp) ps = PubgStatuses.Unknown;  //Magic EXP!
+                PubgStatuses ps = PubgStatus.Now( Pcs );              
 
                 Log.Add( String.Format( "(PS) {0}", ps ) );
+
+                if (AppIsExp) ps = PubgStatuses.Unknown;  //Magic EXP!
 
                 if (PubgStatuses.Unknown.HasFlags( ps )) {
 
@@ -177,7 +181,10 @@ namespace pbpb
 
                 if (Settings.HiddenMode) PubgWindow.Hide();
 
-                PubgWindow.RestoreFocus();
+                if (needfocus) {
+                    PubgWindow.RestoreFocus();
+                    Log.Add( String.Format( "(PW) Focus restore => {0}", PubgWindow.PredFocus ) );
+                }
 
             }
         }

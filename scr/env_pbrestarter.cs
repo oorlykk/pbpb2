@@ -10,7 +10,7 @@ using IH = ImageHasher;
 
 namespace pbpb {
 
-    public partial class Form1
+    partial class Form1
     {
 
         public const int MAX_NOLASTGOOD = (1000 * 60) * 5;
