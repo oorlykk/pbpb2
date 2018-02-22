@@ -9,7 +9,9 @@ namespace pbpb
 {
 
     public sealed class Setti {
-
+        //
+        public static bool IsChanged;
+        //
         public static bool HiddenMode = false;
         public static bool PassiveMode = false;
         public static bool SaveReward = true;
@@ -19,6 +21,8 @@ namespace pbpb
         public static int PubgWindowAbsoluteY = 0;
 
         public static void Save()  {
+
+            IsChanged = false;
 
             IFormatter fo = new BinaryFormatter();
 
@@ -78,7 +82,9 @@ namespace pbpb
     {
 
         public void ReadGui( object sender = null, EventArgs e = null) {
-
+            //
+            Setti.IsChanged = true;
+            //
             Setti.HiddenMode                    =      chb_HiddenMode.Checked;
             Setti.PassiveMode                   =      chb_PassiveMode.Checked;
             Setti.SaveReward                    =      chb_SaveReward.Checked;

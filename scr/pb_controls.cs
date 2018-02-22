@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
-using System.Windows.Forms;
 using SnLib;
-using Win32;
-using IH = ImageHasher;
 
 namespace pbpb
 {
-    public class PCS : Dictionary<PubgControls, PubgControl> {};
+    public sealed class PCS : Dictionary<PubgControls, PubgControl> {};
 
     public enum PubgControls : ulong {
 
@@ -18,10 +13,7 @@ namespace pbpb
         btnExit = 18410913813996339328,
         labAlive = 2821267018762805729,
         labJoined = 69540876582912,
-        //labJoined = 14114528523191117031,
         labEject = 105924403798016,
-        //labEject = 13238258234994063104,
-        //labReleaseParachute = 31057834917632,
         labReleaseParachute = 13671979250605947648,
         btnMatchCanContinue =  18410856832886014080,
         labWater = 882281628581721955,
@@ -90,7 +82,7 @@ namespace pbpb
 
             if (rehash) CalcHash();
 
-            LastDistance = IH.ImageHasher.ComputeHammingDistance(ComparableHash, ControlImageHash);
+            LastDistance = ImageHasher.ImageHasher.ComputeHammingDistance(ComparableHash, ControlImageHash);
 
             return LastDistance;
 
@@ -98,7 +90,7 @@ namespace pbpb
 
         public ulong CalcHash() {
 
-            m_ControlImageHash = IH.ImageHasher.ComputeAverageHash( ControlImage );
+            m_ControlImageHash = ImageHasher.ImageHasher.ComputeAverageHash( ControlImage );
             return m_ControlImageHash;
             
         }

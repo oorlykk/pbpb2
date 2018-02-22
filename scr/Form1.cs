@@ -40,7 +40,7 @@ namespace pbpb {
 
             InitializeComponent();
             Text = AppTitle;
-            Icon = Resources.main;
+            Icon = Resources.gray;
             tray.Icon = Resources.gray;
           
             DateTime thisDate = DateTime.Today;
@@ -68,7 +68,7 @@ namespace pbpb {
 
         private void OnApplicationExit( object sender, EventArgs  e ) {
 
-            Setti.Save();
+            if (Setti.IsChanged) Setti.Save();
         }
 
 
@@ -113,6 +113,7 @@ namespace pbpb {
 
             btnStartStopBot.Text = "off";         
             tray.Icon = Resources.main;
+            Icon = tray.Icon;
         }
 
         private void StopBotClick( object sender = null, EventArgs e = null ) {
@@ -121,6 +122,7 @@ namespace pbpb {
 
             btnStartStopBot.Text = "on";  
             tray.Icon = Resources.gray;
+            Icon = tray.Icon;
         }
 
         private void btnTag_Click( object sender, EventArgs e ) {

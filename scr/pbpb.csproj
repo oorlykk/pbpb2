@@ -179,5 +179,8 @@
   <ItemGroup>
     <None Include="Resources\main.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\banner.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
