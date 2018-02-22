@@ -62,13 +62,13 @@ namespace pbpb {
 
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
 
-            Settings.Load(); WriteGui();
+            Setti.Load(); WriteGui();
             
         }
 
         private void OnApplicationExit( object sender, EventArgs  e ) {
 
-            Settings.Save();
+            Setti.Save();
         }
 
 
@@ -142,7 +142,10 @@ namespace pbpb {
             else if (t == "kill") { PubgWindow.CloseMsg(); PubgWindow.KillExecute(); PubgWindow.CloseSE(); }
             else if (t == "exit") Application.Exit();
             else if (t == "show") tray_Click(tray, null);
-            else if (t == "autolauchifidle") chb_AutoStartOnIdle.Checked = !chb_AutoStartOnIdle.Checked;
+            else if (t == "autolauchifidle") {
+                chb_AutoStartOnIdle.Checked = !chb_AutoStartOnIdle.Checked;
+                ReadGui();
+            }
             else if (t == "cfg") {
                 string local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 local += @"\TslGame\Saved\Config\WindowsNoEditor\GameUserSettings.ini";
@@ -177,7 +180,7 @@ namespace pbpb {
 
             tsmiStartBot.Visible = stopped; tsmiStopBot.Visible = !stopped;
 
-            tsmiAutolauchifidle.Checked = Settings.IdleAutolaunch;
+            tsmiAutolauchifidle.Checked = Setti.IdleAutolaunch;
         }
 
         private void OpenRewardsFolderClick( object sender = null, EventArgs e = null) {
@@ -187,9 +190,9 @@ namespace pbpb {
 
         private void tmrIdleCheck_Tick( object sender, EventArgs e )
         {
-            if (!Settings.IdleAutolaunch || !BotStopper.WaitOne(0, false)) return;
+            if (!Setti.IdleAutolaunch || !BotStopper.WaitOne(0, false)) return;
           
-            if (STime.GetUserIdleTime() > Settings.IdleAutolaunchTimeout * 1000 * 60) {
+            if (STime.GetUserIdleTime() > Setti.IdleAutolaunchTimeout * 1000 * 60) {
 
                 Log.Add("Auto Launch Bot! (user idle)");
 

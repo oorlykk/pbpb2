@@ -16,7 +16,7 @@ namespace pbpb
 
             while (!BotStopper.WaitOne(3000, false)) {             
 
-                if (Settings.PassiveMode && STime.GetUserIdleTime() < 5000) {
+                if (Setti.PassiveMode && STime.GetUserIdleTime() < 5000) {
 
                     Log.Add( "(PS) No idle time for actions. Wait..." );
                     continue;
@@ -96,7 +96,7 @@ namespace pbpb
 
                     Thread.Sleep( 7500 );
 
-                    if (Settings.SaveReward) {
+                    if (Setti.SaveReward) {
                         
                         if (!Directory.Exists(RewardsFolder))
                             try {
@@ -179,7 +179,7 @@ namespace pbpb
                     }
                 }
 
-                if (Settings.HiddenMode) PubgWindow.Hide();
+                if (Setti.HiddenMode) PubgWindow.Hide();
 
                 if (needfocus) {
                     PubgWindow.RestoreFocus();

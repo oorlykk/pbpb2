@@ -19,7 +19,7 @@ namespace pbpb {
 
             do {            
 
-                if (Settings.PassiveMode && STime.GetUserIdleTime() < 5000) {
+                if (Setti.PassiveMode && STime.GetUserIdleTime() < 5000) {
 
                     Log.Add( "(PR) No idle time for actions. Wait..." );
 

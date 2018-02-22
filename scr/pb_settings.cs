@@ -8,7 +8,7 @@ using SnLib;
 namespace pbpb
 {
 
-    public class Settings {
+    public sealed class Setti {
 
         public static bool HiddenMode = false;
         public static bool PassiveMode = false;
@@ -24,7 +24,7 @@ namespace pbpb
 
             MemoryStream ms = new MemoryStream();
 
-            object o = SSerialize.StaticClassSave(typeof(Settings));
+            object o = SSerialize.StaticClassSave(typeof(Setti));
 
             fo.Serialize(ms, o);
 
@@ -63,7 +63,7 @@ namespace pbpb
 
                 ms.Close();
 
-                SSerialize.StaticClassSaveLoad( typeof( Settings ), o );
+                SSerialize.StaticClassSaveLoad( typeof( Setti ), o );
 
                 result = true;
 
@@ -79,24 +79,24 @@ namespace pbpb
 
         public void ReadGui( object sender = null, EventArgs e = null) {
 
-            Settings.HiddenMode                    =      chb_HiddenMode.Checked;
-            Settings.PassiveMode                   =      chb_PassiveMode.Checked;
-            Settings.SaveReward                    =      chb_SaveReward.Checked;
-            Settings.IdleAutolaunch                =      chb_AutoStartOnIdle.Checked;
-            Settings.IdleAutolaunchTimeout         =      (int)ne_MaxIdle.Value;
-            Settings.PubgWindowAbsoluteX           =      (int)ne_PosX.Value;
-            Settings.PubgWindowAbsoluteY           =      (int)ne_PosY.Value;
+            Setti.HiddenMode                    =      chb_HiddenMode.Checked;
+            Setti.PassiveMode                   =      chb_PassiveMode.Checked;
+            Setti.SaveReward                    =      chb_SaveReward.Checked;
+            Setti.IdleAutolaunch                =      chb_AutoStartOnIdle.Checked;
+            Setti.IdleAutolaunchTimeout         =      (int)ne_MaxIdle.Value;
+            Setti.PubgWindowAbsoluteX           =      (int)ne_PosX.Value;
+            Setti.PubgWindowAbsoluteY           =      (int)ne_PosY.Value;
         }
 
         public void WriteGui( object sender = null, EventArgs e = null ) {
 
-            chb_HiddenMode.Checked          =      Settings.HiddenMode;
-            chb_PassiveMode.Checked         =      Settings.PassiveMode;
-            chb_SaveReward.Checked          =      Settings.SaveReward;
-            chb_AutoStartOnIdle.Checked     =      Settings.IdleAutolaunch;
-            ne_MaxIdle.Value                =      Settings.IdleAutolaunchTimeout;
-            ne_PosX.Value                   =      Settings.PubgWindowAbsoluteX;
-            ne_PosY.Value                   =      Settings.PubgWindowAbsoluteY;
+            chb_HiddenMode.Checked          =      Setti.HiddenMode;
+            chb_PassiveMode.Checked         =      Setti.PassiveMode;
+            chb_SaveReward.Checked          =      Setti.SaveReward;
+            chb_AutoStartOnIdle.Checked     =      Setti.IdleAutolaunch;
+            ne_MaxIdle.Value                =      Setti.IdleAutolaunchTimeout;
+            ne_PosX.Value                   =      Setti.PubgWindowAbsoluteX;
+            ne_PosY.Value                   =      Setti.PubgWindowAbsoluteY;
         }
     }
 }
