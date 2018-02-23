@@ -113,6 +113,8 @@ namespace pbpb
                         SGraph.Scr( filename, PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY, true);
                     }
 
+                    PubgInput = new _PubgInput();
+
                     Pcs[PubgControls.btnExit].ClickLeftMouse();
 
                     Log.Add( "click ExitToLobby" );
@@ -122,6 +124,8 @@ namespace pbpb
                     Pcs[PubgControls.btnConfirmExit].ClickLeftMouse();
 
                     Log.Add( "click ExitToLobby confirm" );
+
+                    PubgInput = new _PubgInput2();
                 }
 
                 else if (PubgStatuses.Eject.HasFlags( ps )) {

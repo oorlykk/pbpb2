@@ -13,6 +13,7 @@ namespace pbpb
 
     public class _PubgInput2 : _PubgInput
     {
+
         public override void KeyDownOrUp( Keys key, bool release )
         {
 
@@ -124,8 +125,9 @@ namespace pbpb
             x += PubgWindow.PosX;
             y += PubgWindow.PosY;
 
-            SKeybd.LBClickEx(x, y, false, 100, 1600, 100);
-            SKeybd.LBClickEx(x, y, false, 1, 50, 1);
+            SKeybd.LBClickEx(x, y, true, 100, 1600, 100);
+            Thread.Sleep(50);
+            SKeybd.LBClickEx(x+1, y+1, true, 1, 50, 1);
         }
 
         public virtual void ReleaseKey(Keys key) {
