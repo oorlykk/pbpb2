@@ -35,7 +35,7 @@ namespace pbpb
                     Log.Add( String.Format( "(PW) Setup {1} => {0}", PubgWindow.PartFullHD, PubgWindow.Handle ) );
                 }
 
-                bool needfocus = !PubgWindow.IsFocused;
+                bool needfocus = false;//!PubgWindow.IsFocused;
                 if (needfocus) {
 
                     PubgWindow.SetFocus();
@@ -59,8 +59,8 @@ namespace pbpb
 
                         Thread.Sleep( 1500 );
 
-                        if (RND.Next( 2 ) == 0) PubgInput.MoveMouse( -700, 0 );
-                                           else PubgInput.MoveMouse( 0, -700 );
+                        if (RND.Next( 2 ) == 0) PubgInput.MoveMouse( 100, 100 );
+                                           else PubgInput.MoveMouse( -200, -200 );
 
                         Log.Add( "+Add input (lastgood is long)" );                        
                     }
@@ -169,7 +169,7 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.labAlive].LastDistance.ToString() );
 
-                    //PubgInput.MoveMouse(-150, -150);
+                    PubgInput.MoveMouse(55, 55);
 
                     int cd = (1000 * 60 * 2) + 45000;
                     if ( (Environment.TickCount - PubgInput.EjectClickedTime > cd ||
@@ -181,13 +181,13 @@ namespace pbpb
                         PubgInput.Forward();
                     }
                 }
-
-                if (Setti.HiddenMode) PubgWindow.Hide();
-
+       
                 if (needfocus) {
                     PubgWindow.RestoreFocus();
                     Log.Add( String.Format( "(PW) Focus restore => {0}", PubgWindow.PredFocus ) );
                 }
+
+                if (Setti.HiddenMode) PubgWindow.Hide();
 
             }
         }

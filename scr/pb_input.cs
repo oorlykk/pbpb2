@@ -9,32 +9,83 @@ using System.Windows.Forms;
 using System.Threading;
 
 namespace pbpb
-{
-    public class PubgInputEventArgs
+{      
+
+    public class _PubgInput2 : _PubgInput
     {
-        public PubgInputEventArgs( Keys key, bool release, bool ispress )
+        public override void KeyDownOrUp( Keys key, bool release )
         {
-            Key = key;
-            IsUp = release;
-            IsPress = ispress;
+
+            ReleaseKey(LastKey);
+
+            if (!release) User32.SendMessage( PubgWindow.Handle, User32.WM_KEYDOWN, (int)key, 0 );
+            else          User32.SendMessage( PubgWindow.Handle, User32.WM_KEYUP, (int)key, 0 );
+
+            LastKey = key;
+
+            RaiseInputEvent(key, release, false);
         }
-        public Keys Key { get; private set; }
-        public bool IsUp { get; private set; }
-        public bool IsPress { get; private set; }
+
+        public override void KeyPress(Keys key)
+        {            
+            
+            ReleaseKey(LastKey);
+
+            User32.SendMessage( PubgWindow.Handle, User32.WM_KEYDOWN, (int)key, 0 );
+            User32.SendMessage( PubgWindow.Handle, User32.WM_KEYUP, (int)key, 0 );
+
+            LastKey = key;
+
+            RaiseInputEvent(key, false, true);
+        }
+
+        public override void ClickLeftMouse(int x = 0, int y = 0) {
+            
+            if (x == 0 && y == 0) {
+
+                POINT pos = new POINT();
+                User32.GetCursorPos(out pos);
+                x = pos.x;
+                y = pos.y;
+            }
+
+            int lp = (int)(((ushort)x) | (uint)(y << 16));
+            int wp = User32.MK_LBUTTON;
+
+            User32.SendMessage( PubgWindow.Handle, User32.WM_LBUTTONDOWN, wp, lp );
+            User32.SendMessage( PubgWindow.Handle, User32.WM_LBUTTONUP, wp, lp );
+
+            Thread.Sleep(64);
+
+            User32.SendMessage( PubgWindow.Handle, User32.WM_LBUTTONDOWN, wp, lp );
+            User32.SendMessage( PubgWindow.Handle, User32.WM_LBUTTONUP, wp, lp );
+        }
+
+        public override void ReleaseKey(Keys key) {
+
+            User32.SendMessage( PubgWindow.Handle, User32.WM_KEYUP, (int)key, 0 ); 
+        }
+
+        public override void MoveMouse(int x, int y) {
+
+            //int lp = (int)(((ushort)x) | (uint)(y << 16));
+            //int wp = 0;
+            //User32.SendMessage( PubgWindow.Handle, User32.WM_MOUSEMOVE, wp, lp );
+        }
     }
 
-    public static class PubgInput
+    public class _PubgInput
     {
         public delegate void InputEventHandler( PubgInputEventArgs e );
 
-        public static event InputEventHandler InputEvent;
+        public event InputEventHandler InputEvent;
 
-        private static void RaiseInputEvent(Keys key, bool release, bool ispress) =>
+        public void RaiseInputEvent(Keys key, bool release, bool ispress) =>
             InputEvent?.Invoke( new PubgInputEventArgs( key, release, ispress ) );
 
         public static Keys LastKey { get; set; }
 
-        private static void KeyDownOrUp(Keys key, bool release)
+        public virtual void KeyDownOrUp(Keys key, bool release)
         {
 
             //SKeybd.MouseMove(-55, 0);
@@ -49,9 +100,9 @@ namespace pbpb
             RaiseInputEvent(key, release, false);
         }
 
-        private static void KeyPress(Keys key)
+        public virtual void KeyPress(Keys key)
         {            
-
+            
             //MoveMouse(-25, 0);
 
             ReleaseKey(LastKey);
@@ -63,75 +114,97 @@ namespace pbpb
             RaiseInputEvent(key, false, true);
         }
 
-        public static void MoveMouse(int x, int y) {
+        public virtual void MoveMouse(int x, int y) {
 
             SKeybd.MouseMove( x, y );
         }
 
-        public static void LBClickMouse(int x, int y) {
+        public virtual void ClickLeftMouse(int x, int y) {
+            
+            x += PubgWindow.PosX;
+            y += PubgWindow.PosY;
 
-            SKeybd.LBClickEx(x, y, true, 100, 1600, 100);
-            SKeybd.LBClickEx(x, y, true, 1, 50, 1);
+            SKeybd.LBClickEx(x, y, false, 100, 1600, 100);
+            SKeybd.LBClickEx(x, y, false, 1, 50, 1);
         }
 
-        private static void ReleaseKey(Keys key) {
+        public virtual void ReleaseKey(Keys key) {
 
             SKeybd.KeyUp(key);
         }
 
-        public static int EjectClickedTime {get; set;} = int.MaxValue;
-        public static void Eject() {
+        public int EjectClickedTime {get; set;} = int.MaxValue;
+        public void Eject() {
 
             EjectClickedTime = Environment.TickCount;
 
             KeyPress(Keys.F);
         }
 
-        public static int ParachuteClickedTime {get; set;} = int.MaxValue;
-        public static void Parachute() {
+        public int ParachuteClickedTime {get; set;} = int.MaxValue;
+        public void Parachute() {
 
             ParachuteClickedTime = Environment.TickCount;
 
             KeyPress(Keys.F);
         }
 
-        public static int DownClickedTime {get; set;} = int.MaxValue;
-        public static void Down() {
+        public int DownClickedTime {get; set;} = int.MaxValue;
+        public void Down() {
 
             DownClickedTime = Environment.TickCount;
 
             KeyPress(Keys.Z);
         }
 
-        public static void Sit() {
+        public void Sit() {
 
             KeyPress(Keys.C);
         }
 
-        public static void Jump() {
+        public void Jump() {
 
             KeyPress(Keys.Space);
         }
 
-        public static void Forward() {
+        public void Forward() {
 
             KeyDownOrUp( Keys.W, false );
         }
 
-        public static void ReleaseValueKeys() {
+        public void ReleaseValueKeys() {
 
             KeyDownOrUp(Keys.W, true); KeyDownOrUp(Keys.S, true);
             KeyDownOrUp(Keys.Z, true); KeyDownOrUp(Keys.C, true);
             KeyDownOrUp(Keys.F, true);
         }
 
-        public static void Back() {
+        public void Back() {
 
             KeyDownOrUp( Keys.S, false );
 
         }
 
-        public static void ClickCenter() => LBClickMouse(PubgWindow.PosX + 480, PubgWindow.PosY + 308);
+        public void ClickCenter() => ClickLeftMouse(480, 308);
 
     }
+
+    public class PubgInputEventArgs
+    {
+        public PubgInputEventArgs( Keys key, bool release, bool ispress )
+        {
+            Key = key;
+            IsUp = release;
+            IsPress = ispress;
+        }
+        public Keys Key { get; private set; }
+        public bool IsUp { get; private set; }
+        public bool IsPress { get; private set; }
+    }
+
+    partial class Form1 : Form {
+
+        public static _PubgInput PubgInput = new _PubgInput2();
+    }
+
 }

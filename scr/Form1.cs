@@ -17,7 +17,7 @@ namespace pbpb {
     {
         static string uniq = "dGhleg==";
 
-        public static string AppTitle = "PBPB v1.3";
+        public static string AppTitle = "PBPB v1.4";
         public const int PartFullHDPreset = 5;
         
         //public static string RewardsFolder = AppDomain.CurrentDomain.BaseDirectory + @"rewards\";
@@ -56,7 +56,7 @@ namespace pbpb {
 
             PubgWindow.PartFullHD = PartFullHDPreset;
             Init_Pcs();
-            PubgInput.InputEvent += new PubgInput.InputEventHandler(PubgInputEvent);
+            PubgInput.InputEvent += new _PubgInput.InputEventHandler(PubgInputEvent);
             Log.LogEvent += new ResolveEventHandler(PubgLogEvent);          
             Init_HotKeysMon();
 

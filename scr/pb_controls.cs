@@ -51,12 +51,9 @@ namespace pbpb
 
         public void ClickLeftMouse()
         {
+
             LastClickedTick = Environment.TickCount;
-
-            int x = PubgWindow.PosX + X + ( Width / 2 );
-            int y = PubgWindow.PosY + Y + ( Height / 2 );
-
-            PubgInput.LBClickMouse(x, y);
+            Form1.PubgInput.ClickLeftMouse(X + ( Width / 2 ), Y + ( Height / 2 ));
         }
 
     }
