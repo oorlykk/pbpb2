@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Win32;
 using SnLib;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace pbpb
 {
@@ -64,7 +65,13 @@ namespace pbpb
 
         public static void MoveMouse(int x, int y) {
 
-            SKeybd.MouseMove(x, y);
+            SKeybd.MouseMove( x, y );
+        }
+
+        public static void LBClickMouse(int x, int y) {
+
+            SKeybd.LBClickEx(x, y, true, 100, 1600, 100);
+            SKeybd.LBClickEx(x, y, true, 1, 50, 1);
         }
 
         private static void ReleaseKey(Keys key) {
@@ -124,11 +131,7 @@ namespace pbpb
 
         }
 
-        public static void ClickCenter()
-        {
-            SKeybd.LBClickEx2( PubgWindow.PosX + 480, PubgWindow.PosY + 308, true, 50, 1500, 50 );
-            SKeybd.LBClickEx2( PubgWindow.PosX + 480, PubgWindow.PosY + 308, true );
-        }
+        public static void ClickCenter() => LBClickMouse(PubgWindow.PosX + 480, PubgWindow.PosY + 308);
 
     }
 }

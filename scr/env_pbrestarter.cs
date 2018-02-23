@@ -1,14 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Reflection;
 using System.Threading;
-using System.Windows.Forms;
 using SnLib;
-using Win32;
-using IH = ImageHasher;
 
-namespace pbpb {
+namespace pbpb
+{
 
     partial class Form1
     {
@@ -28,13 +23,14 @@ namespace pbpb {
 
                         
                 if (
-                    (!Setti.PassiveMode && Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD) ||
-                    (Setti.PassiveMode && Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD * 3)
+                    ((!Setti.PassiveMode) && (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD)) 
+                    ||
+                    ((Setti.PassiveMode) && (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD * 3))
                    ) {
                    
-                    PubgStatus.ResetLastGood();
-
                     Log.Add( String.Format( "(PR) KillExecute! (lastgood is so long)") );
+
+                    PubgStatus.ResetLastGood();               
 
                     PubgWindow.KillExecute();
 

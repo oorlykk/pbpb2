@@ -174,9 +174,6 @@
     <None Include="Resources\gray.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\banner.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\main.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -100,8 +100,11 @@ namespace pbpb
                         
                         if (!Directory.Exists(RewardsFolder))
                             try {
+
                                 Directory.CreateDirectory(RewardsFolder);
-                            } catch (Exception e) { e.ToString(); }
+                            } catch {      
+
+                            }
 
                         string filename = RewardsFolder + RewardNewName + ".jpg";
 

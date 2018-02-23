@@ -56,8 +56,7 @@ namespace pbpb
             int x = PubgWindow.PosX + X + ( Width / 2 );
             int y = PubgWindow.PosY + Y + ( Height / 2 );
 
-            SKeybd.LBClickEx2( x, y, true, 64, 1600, 64 );
-            SKeybd.LBClickEx2( x, y, true);
+            PubgInput.LBClickMouse(x, y);
         }
 
     }
