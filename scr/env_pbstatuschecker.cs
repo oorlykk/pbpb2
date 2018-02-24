@@ -198,8 +198,6 @@ namespace pbpb
                 
                 EXIT:
 
-                PubgWindow.RestoreFocus();
-
                 if (Setti.HiddenMode) PubgWindow.Hide();
 
             }

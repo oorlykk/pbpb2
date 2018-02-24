@@ -90,19 +90,23 @@ namespace pbpb
         public Keys LastKey { get; set; }    
 
         private void SetFocus() => PubgWindow.SetFocus();         
-        
+        private void RestoreFocus() => PubgWindow.RestoreFocus();  
 
         public virtual void KeyDownOrUp(Keys key, bool release)
-        {
-
-            //SKeybd.MouseMove(-55, 0);
+        {       
 
             ReleaseKey(LastKey);
 
-            SetFocus();
+            SetFocus(); Thread.Sleep(100);
+
+            MoveMouse(-55, 0); Thread.Sleep(100);       
 
             if (!release) SKeybd.KeyDown(key);
             else          SKeybd.KeyUp(key);
+
+            Thread.Sleep(300);
+
+            RestoreFocus();
 
             LastKey = key;
 
@@ -110,15 +114,19 @@ namespace pbpb
         }
 
         public virtual void KeyPress(Keys key)
-        {            
-            
-            //MoveMouse(-25, 0);
+        {                             
 
             ReleaseKey(LastKey);
 
-            SetFocus();
+            SetFocus(); Thread.Sleep(100);
+
+            MoveMouse(-25, 0); Thread.Sleep(100);
 
             SKeybd.KeyPress(key);
+
+            Thread.Sleep(300);
+
+            RestoreFocus();
 
             LastKey = key;
 
@@ -127,9 +135,11 @@ namespace pbpb
 
         public virtual void MoveMouse(int x, int y) {
 
-            SetFocus();
+            SetFocus(); Thread.Sleep(100);
 
             SKeybd.MouseMove( x, y );
+
+            RestoreFocus();
         }
 
         public virtual void ClickLeftMouse(int x, int y) {
@@ -137,11 +147,12 @@ namespace pbpb
             x += PubgWindow.PosX;
             y += PubgWindow.PosY;
 
-            SetFocus();
+            SetFocus(); Thread.Sleep(100);
 
-            SKeybd.LBClickEx(x, y, true, 100, 1600, 100);
-            Thread.Sleep(50);
-            SKeybd.LBClickEx(x+1, y+1, true, 1, 50, 1);
+            SKeybd.LBClickEx(x, y, true, 64, 1600, 64);
+            SKeybd.LBClickEx(x+1, y+1, true);
+
+            RestoreFocus();
         }
 
         public virtual void ReleaseKey(Keys key) {
