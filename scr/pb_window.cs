@@ -32,12 +32,16 @@ namespace pbpb
         public static int KillExecutedTime = int.MaxValue;
         public static void KillExecute() {
 
-            KillExecutedTime = Environment.TickCount;
+            PubgRound.End(true, "KillGame");
+
             Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im TslGame.exe", "", User32.SW_HIDE);
         }
 
-        public static void StartExecute() =>
-            Shell32.ShellExecute(IntPtr.Zero, "open", "steam://rungameid/578080", "-low", "", User32.SW_SHOWNORMAL);
+        public static void StartExecute() {
+
+            PubgRound.End();
+            Shell32.ShellExecute( IntPtr.Zero, "open", "steam://rungameid/578080", "-low", "", User32.SW_SHOWNORMAL );
+        }
 
         public static IntPtr Handle => FindWindow("PLAYERUNKNOWN'S BATTLEGROUNDS ");
         public static bool Exists => !Handle.Equals(IntPtr.Zero);

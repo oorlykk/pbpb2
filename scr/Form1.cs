@@ -212,6 +212,15 @@ namespace pbpb {
             else InitInput_message(); 
         }
 
+        private void label1_Click( object sender, EventArgs e ) {
+
+            if (((Label)sender).Tag.ToString() == "X")
+                ne_PosX.Value = Screen.PrimaryScreen.Bounds.Width + 1;
+            else ne_PosX.Value = 0;
+
+            ReadGui();
+        }
+
         private void Form1_FormClosing( object sender, FormClosingEventArgs e ) {
 
             if (e.CloseReason == CloseReason.UserClosing) {

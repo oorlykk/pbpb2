@@ -12,7 +12,15 @@ namespace pbpb
 
         void PubgRestarterProc() {
 
-            do {            
+            do {        
+                
+                if (PubgWindow.BEVisible) {
+
+                    PubgWindow.HideBE();
+
+                    Log.Add( String.Format( "(PR) Hide BEye => {0}", PubgWindow.BEHandle ) );
+                }
+
 
                 if (Setti.PassiveMode && STime.GetUserIdleTime() < 5000) {
 
@@ -46,6 +54,7 @@ namespace pbpb
                     goto EXIT;
                 }
 
+
                 if (PubgWindow.SEExists || PubgWindow.CrashExists || PubgWindow.SURExists) {
                     
                     string s = String.Format( 
@@ -67,12 +76,6 @@ namespace pbpb
                     goto EXIT;
                 }
 
-                if (PubgWindow.BEVisible) {
-
-                    PubgWindow.HideBE();
-
-                    Log.Add( String.Format( "(PR) Hide BEye => {0}", PubgWindow.BEHandle ) );
-                }
 
                 if (!PubgWindow.Exists) {
 

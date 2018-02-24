@@ -16,6 +16,8 @@ namespace pbpb
 
         public static int EndedTime;
 
+        public static string EndReason = "none";
+
         //public static string RewardsFolder = AppDomain.CurrentDomain.BaseDirectory + @"rewards\";
         public static string RewardsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\rewards\";
 
@@ -69,15 +71,20 @@ namespace pbpb
             Log.Add("New Round Set.");
         }
 
-        public static void End(bool savereward = false) {
-
+        public static void End(bool savereward = false, string endreason = "") {
+            
             EndedTime = Environment.TickCount;
             IsLive = false;
-
+         
             if (savereward) SaveReward();
 
-            Log.Add("Round End.");
+            if (endreason != "") {
+
+                EndReason = endreason;
+                Log.Add( String.Format("Round End ({0})", endreason) );
+            }
         }
+
     }
 
     partial class Form1 {

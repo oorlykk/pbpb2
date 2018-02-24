@@ -92,7 +92,7 @@ namespace pbpb
 
                     Thread.Sleep( 7000 );
 
-                    PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward );
+                    PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "dead" );
 
                     if ((PubgInput.GetType() == typeof(_PubgInput2)) && (!IsPositiveTimeForInput)) {
 

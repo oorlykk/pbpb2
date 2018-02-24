@@ -472,7 +472,9 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(21, 17);
             this.label1.TabIndex = 26;
+            this.label1.Tag = "X";
             this.label1.Text = "X:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -481,7 +483,9 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 17);
             this.label2.TabIndex = 27;
+            this.label2.Tag = "Y";
             this.label2.Text = "Y:";
+            this.label2.Click += new System.EventHandler(this.label1_Click);
             // 
             // chb_PassiveMode
             // 
