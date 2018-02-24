@@ -73,6 +73,7 @@ namespace pbpb
             //int wp = 0;
             //User32.SendMessage( PubgWindow.Handle, User32.WM_MOUSEMOVE, wp, lp );
         }
+
     }
 
     public class _PubgInput
@@ -206,7 +207,19 @@ namespace pbpb
 
     partial class Form1 : Form {
 
-        public static _PubgInput PubgInput = new _PubgInput2();
+        public static _PubgInput PubgInput;
+
+        public void InitInput0() {
+
+            PubgInput = new _PubgInput();
+            PubgInput.InputEvent += new _PubgInput.InputEventHandler(PubgInputEvent);
+        }
+
+        public void InitInput2() {
+
+            PubgInput = new _PubgInput2();
+            PubgInput.InputEvent += new _PubgInput.InputEventHandler(PubgInputEvent);
+        }
     }
 
 }

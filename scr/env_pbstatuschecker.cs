@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Threading;
+using System.Windows.Forms;
 using SnLib;
 using Win32;
 
@@ -12,12 +13,14 @@ namespace pbpb
 
         public const int MAX_NOLASTGOOD_FOR_INPUT = ( 1000 * 60 ) / 2;
 
+        bool IsPositiveTimeForInput => (!Setti.PassiveMode) || (Setti.PassiveMode && STime.GetUserIdleTime() > 5000);
+        
         void PubgStatusProc() {        
 
-            while (!BotStopper.WaitOne(3000, false)) {             
+            while (!BotStopper.WaitOne(3000, false)) {
 
-                if (Setti.PassiveMode && STime.GetUserIdleTime() < 5000) {
-
+                if ((PubgInput.GetType() == typeof(_PubgInput)) && ( IsPositiveTimeForInput )) {
+                    Log.Add( (PubgInput.GetType() == typeof(_PubgInput)).ToString() );
                     Log.Add( "(PS) No idle time for actions. Wait..." );
                     continue;
                 }
@@ -94,6 +97,12 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.btnExit].LastDistance.ToString() );
 
+                    if ((PubgInput.GetType() == typeof(_PubgInput2)) && (!IsPositiveTimeForInput)) {
+
+                        Log.Add("Can't exit (PassiveMode: no idle time)");
+                        goto EXIT;
+                    }
+
                     Thread.Sleep( 7500 );
 
                     if (Setti.SaveReward) {
@@ -113,19 +122,37 @@ namespace pbpb
                         SGraph.Scr( filename, PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY, true);
                     }
 
-                    PubgInput = new _PubgInput();
+                    bool inputswitched = false;
 
-                    Pcs[PubgControls.btnExit].ClickLeftMouse();
+                    if ( PubgInput.GetType() == typeof(_PubgInput2) ) {
 
-                    Log.Add( "click ExitToLobby" );
+                        PubgInput.KeyPress(Keys.Escape);
 
-                    Thread.Sleep( 1500 );
+                        inputswitched = true;
+
+                        InitInput0();
+
+                        Log.Add( "<Input switched to <event>" );
+
+                    } else {
+
+                        Pcs[PubgControls.btnExit].ClickLeftMouse();
+
+                        Log.Add( "click ExitToLobby" );
+                    }                                
+              
+                    Thread.Sleep( 2000 );
 
                     Pcs[PubgControls.btnConfirmExit].ClickLeftMouse();
 
                     Log.Add( "click ExitToLobby confirm" );
 
-                    PubgInput = new _PubgInput2();
+                    if (inputswitched) {
+
+                        InitInput2();
+                        Log.Add( "<Input switched back <message>" );
+                    }
+
                 }
 
                 else if (PubgStatuses.Eject.HasFlags( ps )) {
@@ -185,7 +212,8 @@ namespace pbpb
                         PubgInput.Forward();
                     }
                 }
-       
+                
+                EXIT:
                 if (needfocus) {
                     PubgWindow.RestoreFocus();
                     Log.Add( String.Format( "(PW) Focus restore => {0}", PubgWindow.PredFocus ) );

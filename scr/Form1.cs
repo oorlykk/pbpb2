@@ -56,7 +56,7 @@ namespace pbpb {
 
             PubgWindow.PartFullHD = PartFullHDPreset;
             Init_Pcs();
-            PubgInput.InputEvent += new _PubgInput.InputEventHandler(PubgInputEvent);
+            InitInput2();
             Log.LogEvent += new ResolveEventHandler(PubgLogEvent);          
             Init_HotKeysMon();
 
@@ -205,6 +205,7 @@ namespace pbpb {
         private void btnttt_Click( object sender, EventArgs e ) {
             //
         }
+
 
         private void Form1_FormClosing( object sender, FormClosingEventArgs e ) {
 

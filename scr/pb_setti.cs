@@ -19,6 +19,7 @@ namespace pbpb
         public static int IdleAutolaunchTimeout = 5;
         public static int PubgWindowAbsoluteX = Screen.PrimaryScreen.Bounds.Width + 1;
         public static int PubgWindowAbsoluteY = 0;
+        public static bool CanRestartSteam = true;
 
         public static void Save()  {
 
@@ -89,6 +90,7 @@ namespace pbpb
             Setti.PassiveMode                   =      chb_PassiveMode.Checked;
             Setti.SaveReward                    =      chb_SaveReward.Checked;
             Setti.IdleAutolaunch                =      chb_AutoStartOnIdle.Checked;
+            Setti.CanRestartSteam                =     chb_CanKillSteam.Checked;
             Setti.IdleAutolaunchTimeout         =      (int)ne_MaxIdle.Value;
             Setti.PubgWindowAbsoluteX           =      (int)ne_PosX.Value;
             Setti.PubgWindowAbsoluteY           =      (int)ne_PosY.Value;
@@ -100,6 +102,7 @@ namespace pbpb
             chb_PassiveMode.Checked         =      Setti.PassiveMode;
             chb_SaveReward.Checked          =      Setti.SaveReward;
             chb_AutoStartOnIdle.Checked     =      Setti.IdleAutolaunch;
+            chb_CanKillSteam.Checked        =      Setti.CanRestartSteam;
             ne_MaxIdle.Value                =      Setti.IdleAutolaunchTimeout;
             ne_PosX.Value                   =      Setti.PubgWindowAbsoluteX;
             ne_PosY.Value                   =      Setti.PubgWindowAbsoluteY;

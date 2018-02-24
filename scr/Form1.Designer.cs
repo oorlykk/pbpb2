@@ -70,6 +70,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.chb_PassiveMode = new System.Windows.Forms.CheckBox();
             this.chb_HiddenMode = new System.Windows.Forms.CheckBox();
+            this.chb_CanKillSteam = new System.Windows.Forms.CheckBox();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
             this.panel_test.SuspendLayout();
@@ -503,11 +504,23 @@
             this.chb_HiddenMode.UseVisualStyleBackColor = true;
             this.chb_HiddenMode.Click += new System.EventHandler(this.ReadGui);
             // 
+            // chb_CanKillSteam
+            // 
+            this.chb_CanKillSteam.AutoSize = true;
+            this.chb_CanKillSteam.Location = new System.Drawing.Point(322, 229);
+            this.chb_CanKillSteam.Name = "chb_CanKillSteam";
+            this.chb_CanKillSteam.Size = new System.Drawing.Size(149, 21);
+            this.chb_CanKillSteam.TabIndex = 30;
+            this.chb_CanKillSteam.Text = "Allow restart steam";
+            this.chb_CanKillSteam.UseVisualStyleBackColor = true;
+            this.chb_CanKillSteam.Click += new System.EventHandler(this.ReadGui);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 328);
+            this.ClientSize = new System.Drawing.Size(493, 293);
+            this.Controls.Add(this.chb_CanKillSteam);
             this.Controls.Add(this.chb_HiddenMode);
             this.Controls.Add(this.chb_PassiveMode);
             this.Controls.Add(this.label2);
@@ -583,6 +596,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chb_PassiveMode;
         private System.Windows.Forms.CheckBox chb_HiddenMode;
+        private System.Windows.Forms.CheckBox chb_CanKillSteam;
     }
 }
 

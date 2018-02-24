@@ -32,7 +32,16 @@ namespace pbpb
 
                     PubgStatus.ResetLastGood();               
 
-                    PubgWindow.KillExecute();
+                    PubgWindow.KillExecute();            
+
+                    if (Setti.CanRestartSteam) {
+
+                        Log.Add( String.Format( "(PR) KillExecuteSteam! (lastgood is so long)") );
+
+                        Thread.Sleep(1000);
+
+                        PubgWindow.KillExecuteSteam();
+                    }
 
                     goto EXIT;
                 }
