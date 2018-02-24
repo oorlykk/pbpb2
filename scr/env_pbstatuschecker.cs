@@ -47,8 +47,6 @@ namespace pbpb
 
                 if (AppIsExp) ps = PubgStatuses.Unknown;  //Magic EXP!
 
-                bool WaterAssisted = false;
-
                 if (PubgStatuses.Unknown.HasFlags( ps )) {
 
                     Log.Append( " di: " + PubgStatus.LastDistance.ToString() );
@@ -195,7 +193,7 @@ namespace pbpb
                         PubgInput.EjectClickedTime = int.MaxValue;
                         PubgInput.ParachuteClickedTime = int.MaxValue;
                         PubgInput.Down(); Thread.Sleep(100);
-                        PubgInput.Forward();
+                        PubgInput.Back();
                     }
                 }
                 

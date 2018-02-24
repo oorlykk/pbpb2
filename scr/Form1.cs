@@ -17,7 +17,7 @@ namespace pbpb {
     {
         static string uniq = "dGhleg==";
 
-        public static string AppTitle = "PBPB v1.4";
+        public static string AppTitle = "PBPB v1.5";
         public const int PartFullHDPreset = 5;    
 
         static bool AppIsExp;

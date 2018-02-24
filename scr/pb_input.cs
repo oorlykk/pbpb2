@@ -70,8 +70,6 @@ namespace pbpb
 
         public override void MoveMouse( int x, int y ) {
 
-
-            Log.Add("MoveMouse null proc");
             //int lp = (int) ( ( (ushort) x ) | (uint) ( y << 16 ) );
             //int wp = 0;
             //User32.SendMessage( Handle, User32.WM_MOUSEMOVE, wp, lp );
@@ -79,8 +77,7 @@ namespace pbpb
 
         public override void AssistInWater()
         {
-
-            //if (!Form1.IsPositiveTimeForInput) return; !!! FOCUS !!!
+            if (!Form1.IsPositiveTimeForInput) return;
 
             ReleaseKey( Keys.W ); ReleaseKey( Keys.S ); ReleaseKey( Keys.A ); ReleaseKey( Keys.D );
             ReleaseKey( Keys.Z ); ReleaseKey( Keys.C ); ReleaseKey( Keys.F );
