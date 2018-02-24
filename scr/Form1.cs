@@ -18,11 +18,7 @@ namespace pbpb {
         static string uniq = "dGhleg==";
 
         public static string AppTitle = "PBPB v1.4";
-        public const int PartFullHDPreset = 5;
-        
-        //public static string RewardsFolder = AppDomain.CurrentDomain.BaseDirectory + @"rewards\";
-        public static string RewardsFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures) + @"\rewards\";
-        public static string RewardNewName => GetRewardName();
+        public const int PartFullHDPreset = 5;    
 
         static bool AppIsExp;
         static string DTstr => DateTime.Now.ToString().Replace(":", " ");
@@ -55,9 +51,13 @@ namespace pbpb {
             }
 
             PubgWindow.PartFullHD = PartFullHDPreset;
+
+            Log.LogEvent += new ResolveEventHandler(PubgLogEvent);
+
             Init_Pcs();
-            InitInput2();
-            Log.LogEvent += new ResolveEventHandler(PubgLogEvent);          
+
+            InitInput_message();
+                      
             Init_HotKeysMon();
 
             Application.ApplicationExit += new EventHandler(OnApplicationExit);
@@ -98,7 +98,7 @@ namespace pbpb {
         }
 
         private void StartBotClick( object sender = null, EventArgs e = null) {
-         
+            
             if (btnStartStopBot.Text == "off") {
                 Log.Add("< Act failed > (already started)");
                 return;
@@ -187,7 +187,7 @@ namespace pbpb {
 
         private void OpenRewardsFolderClick( object sender = null, EventArgs e = null) {
             
-            Shell32.ShellExecute(IntPtr.Zero, "open", RewardsFolder, "", "", User32.SW_SHOWNORMAL);
+            Shell32.ShellExecute(IntPtr.Zero, "open", PubgRound.RewardsFolder, "", "", User32.SW_SHOWNORMAL);
         }
 
         private void tmrIdleCheck_Tick( object sender, EventArgs e )
@@ -206,6 +206,11 @@ namespace pbpb {
             //
         }
 
+        private void cbox_PubgInput_SelectedIndexChanged( object sender, EventArgs e )
+        {
+            if ( ((ComboBox)sender).SelectedIndex == 0 ) InitInput_event();
+            else InitInput_message(); 
+        }
 
         private void Form1_FormClosing( object sender, FormClosingEventArgs e ) {
 

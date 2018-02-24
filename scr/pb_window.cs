@@ -133,26 +133,42 @@ namespace pbpb
                 return result;
             }
         }
-        public static bool SUExists => !SUHandle.Equals(IntPtr.Zero);
+        public static bool SUExists => !SUHandle.Equals(IntPtr.Zero);     
 
-        //
-        private static int styleNone = GenStyleNone();
-
-        private static int StyleNone => styleNone;
-
-
+        
         public static bool IsFocused => (IntPtr)User32.GetForegroundWindow() == Handle;
 
         public static IntPtr PredFocus;
 
+        public static bool FocusSettted;
+
         public static void SetFocus() {
 
+            if (IsFocused) return;          
+
             PredFocus = (IntPtr)User32.GetForegroundWindow();
+
             User32.SetForegroundWindow( Handle );
+
+            FocusSettted = true;
+
+            Log.Add( String.Format( "(PW) Set Focus  {0}", Handle ) );
         }
 
-        public static void RestoreFocus() => User32.SetForegroundWindow( PredFocus );
-        
+        public static void RestoreFocus() {
+
+            if (!FocusSettted) return;
+
+            User32.SetForegroundWindow( PredFocus );
+
+            FocusSettted = false;
+
+            Log.Add( String.Format( "(PW) Focus restore => {0}", PredFocus ) );
+        }
+
+
+        private static int styleNone = GenStyleNone();
+        private static int StyleNone => styleNone;
 
         private static int OrigStyle;
         private static int OrigWidth; 

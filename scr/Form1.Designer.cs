@@ -71,6 +71,7 @@
             this.chb_PassiveMode = new System.Windows.Forms.CheckBox();
             this.chb_HiddenMode = new System.Windows.Forms.CheckBox();
             this.chb_CanKillSteam = new System.Windows.Forms.CheckBox();
+            this.cbox_PubgInput = new System.Windows.Forms.ComboBox();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
             this.panel_test.SuspendLayout();
@@ -515,11 +516,24 @@
             this.chb_CanKillSteam.UseVisualStyleBackColor = true;
             this.chb_CanKillSteam.Click += new System.EventHandler(this.ReadGui);
             // 
+            // cbox_PubgInput
+            // 
+            this.cbox_PubgInput.FormattingEnabled = true;
+            this.cbox_PubgInput.Items.AddRange(new object[] {
+            "event",
+            "message"});
+            this.cbox_PubgInput.Location = new System.Drawing.Point(80, 6);
+            this.cbox_PubgInput.Name = "cbox_PubgInput";
+            this.cbox_PubgInput.Size = new System.Drawing.Size(121, 24);
+            this.cbox_PubgInput.TabIndex = 31;
+            this.cbox_PubgInput.SelectedIndexChanged += new System.EventHandler(this.cbox_PubgInput_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 293);
+            this.Controls.Add(this.cbox_PubgInput);
             this.Controls.Add(this.chb_CanKillSteam);
             this.Controls.Add(this.chb_HiddenMode);
             this.Controls.Add(this.chb_PassiveMode);
@@ -597,6 +611,7 @@
         private System.Windows.Forms.CheckBox chb_PassiveMode;
         private System.Windows.Forms.CheckBox chb_HiddenMode;
         private System.Windows.Forms.CheckBox chb_CanKillSteam;
+        private System.Windows.Forms.ComboBox cbox_PubgInput;
     }
 }
 

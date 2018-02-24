@@ -95,7 +95,7 @@ namespace pbpb
                 EXIT:; 
                 //nope
 
-            } while (!BotStopper.WaitOne(30000, false));
+            } while (!BotStopper.WaitOne(90000, false));
         }
     }
 }

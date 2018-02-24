@@ -19,14 +19,15 @@ namespace pbpb
 
             while (!BotStopper.WaitOne(3000, false)) {
 
-                if ((PubgInput.GetType() == typeof(_PubgInput)) && ( IsPositiveTimeForInput )) {
-                    Log.Add( (PubgInput.GetType() == typeof(_PubgInput)).ToString() );
-                    Log.Add( "(PS) No idle time for actions. Wait..." );
+                if (!PubgWindow.Exists) {
+
+                    Log.Add( "(PS) No way :( Wait..." );
                     continue;
                 }
 
-                if (!PubgWindow.Exists) {
-                    Log.Add( "(PS) No way :( Wait..." );
+                if ((PubgInput.GetType() == typeof(_PubgInput)) && ( !IsPositiveTimeForInput )) {
+
+                    Log.Add( "(PS) No idle time for actions. Wait..." );
                     continue;
                 }
                 
@@ -36,14 +37,6 @@ namespace pbpb
 
                     PubgWindow.SetupWindow();
                     Log.Add( String.Format( "(PW) Setup {1} => {0}", PubgWindow.PartFullHD, PubgWindow.Handle ) );
-                }
-
-                bool needfocus = false;//!PubgWindow.IsFocused;
-                if (needfocus) {
-
-                    PubgWindow.SetFocus();
-
-                    Log.Add( String.Format( "(PW) Focus => {0}", PubgWindow.Handle ) );
                 }
 
                 PubgStatuses ps = PubgStatus.Now( Pcs );              
@@ -97,29 +90,15 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.btnExit].LastDistance.ToString() );
 
+                    Thread.Sleep( 7000 );
+
+                    PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward );
+
                     if ((PubgInput.GetType() == typeof(_PubgInput2)) && (!IsPositiveTimeForInput)) {
 
                         Log.Add("Can't exit (PassiveMode: no idle time)");
+
                         goto EXIT;
-                    }
-
-                    Thread.Sleep( 7500 );
-
-                    if (Setti.SaveReward) {
-                        
-                        if (!Directory.Exists(RewardsFolder))
-                            try {
-
-                                Directory.CreateDirectory(RewardsFolder);
-                            } catch {      
-
-                            }
-
-                        string filename = RewardsFolder + RewardNewName + ".jpg";
-
-                        Log.Add( "Save reward " + filename );
-
-                        SGraph.Scr( filename, PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY, true);
                     }
 
                     bool inputswitched = false;
@@ -130,9 +109,9 @@ namespace pbpb
 
                         inputswitched = true;
 
-                        InitInput0();
+                        InitInput_event();
 
-                        Log.Add( "<Input switched to <event>" );
+                        Log.Add( "Input switched to <event>" );
 
                     } else {
 
@@ -141,7 +120,7 @@ namespace pbpb
                         Log.Add( "click ExitToLobby" );
                     }                                
               
-                    Thread.Sleep( 2000 );
+                    Thread.Sleep( 3000 );
 
                     Pcs[PubgControls.btnConfirmExit].ClickLeftMouse();
 
@@ -149,8 +128,8 @@ namespace pbpb
 
                     if (inputswitched) {
 
-                        InitInput2();
-                        Log.Add( "<Input switched back <message>" );
+                        InitInput_message();
+                        Log.Add( "Input switched to <message>" );
                     }
 
                 }
@@ -185,6 +164,8 @@ namespace pbpb
                 else if (PubgStatuses.Prepare.HasFlags( ps )) {
 
                     Log.Append( " di: " + Pcs[PubgControls.labJoined].LastDistance.ToString() );
+
+                    PubgRound.Set();
                 }
 
                 else if (PubgStatuses.Water.HasFlags( ps )) {
@@ -200,6 +181,8 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.labAlive].LastDistance.ToString() );
 
+                    PubgRound.Set();
+
                     PubgInput.MoveMouse(55, 55);
 
                     int cd = (1000 * 60 * 2) + 45000;
@@ -214,10 +197,8 @@ namespace pbpb
                 }
                 
                 EXIT:
-                if (needfocus) {
-                    PubgWindow.RestoreFocus();
-                    Log.Add( String.Format( "(PW) Focus restore => {0}", PubgWindow.PredFocus ) );
-                }
+
+                PubgWindow.RestoreFocus();
 
                 if (Setti.HiddenMode) PubgWindow.Hide();
 

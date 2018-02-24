@@ -35,18 +35,6 @@ namespace pbpb {
             return ( result > 0 );
         }
 
-
-        static string GetRewardName() {
-
-            long t = Environment.TickCount - Pcs[PubgControls.btnStart].LastClickedTick;
-
-            string st = STime.TickToStr(t).Replace( ":", "." );
-
-            string nt = DateTime.Now.ToString().Replace( ":", "." );
-
-            return nt + " - " + st;    
-        }
-
         
         void Init_HotKeysMon() {
 

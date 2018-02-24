@@ -14,13 +14,15 @@ namespace pbpb
     public class _PubgInput2 : _PubgInput
     {
 
+        public IntPtr Handle { get => PubgWindow.Handle; set => Handle = value; }
+
         public override void KeyDownOrUp( Keys key, bool release )
         {
 
             ReleaseKey(LastKey);
 
-            if (!release) User32.SendMessage( PubgWindow.Handle, User32.WM_KEYDOWN, (int)key, 0 );
-            else          User32.SendMessage( PubgWindow.Handle, User32.WM_KEYUP, (int)key, 0 );
+            if (!release) User32.SendMessage( Handle, User32.WM_KEYDOWN, (int)key, 0 );
+            else          User32.SendMessage( Handle, User32.WM_KEYUP, (int)key, 0 );
 
             LastKey = key;
 
@@ -32,8 +34,8 @@ namespace pbpb
             
             ReleaseKey(LastKey);
 
-            User32.SendMessage( PubgWindow.Handle, User32.WM_KEYDOWN, (int)key, 0 );
-            User32.SendMessage( PubgWindow.Handle, User32.WM_KEYUP, (int)key, 0 );
+            User32.SendMessage( Handle, User32.WM_KEYDOWN, (int)key, 0 );
+            User32.SendMessage( Handle, User32.WM_KEYUP, (int)key, 0 );
 
             LastKey = key;
 
@@ -53,25 +55,25 @@ namespace pbpb
             int lp = (int)(((ushort)x) | (uint)(y << 16));
             int wp = User32.MK_LBUTTON;
 
-            User32.SendMessage( PubgWindow.Handle, User32.WM_LBUTTONDOWN, wp, lp );
-            User32.SendMessage( PubgWindow.Handle, User32.WM_LBUTTONUP, wp, lp );
+            User32.SendMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+            User32.SendMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
 
             Thread.Sleep(64);
 
-            User32.SendMessage( PubgWindow.Handle, User32.WM_LBUTTONDOWN, wp, lp );
-            User32.SendMessage( PubgWindow.Handle, User32.WM_LBUTTONUP, wp, lp );
+            User32.SendMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+            User32.SendMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
         }
 
         public override void ReleaseKey(Keys key) {
 
-            User32.SendMessage( PubgWindow.Handle, User32.WM_KEYUP, (int)key, 0 ); 
+            User32.SendMessage( Handle, User32.WM_KEYUP, (int)key, 0 ); 
         }
 
         public override void MoveMouse(int x, int y) {
 
             //int lp = (int)(((ushort)x) | (uint)(y << 16));
             //int wp = 0;
-            //User32.SendMessage( PubgWindow.Handle, User32.WM_MOUSEMOVE, wp, lp );
+            //User32.SendMessage( Handle, User32.WM_MOUSEMOVE, wp, lp );
         }
 
     }
@@ -85,7 +87,10 @@ namespace pbpb
         public void RaiseInputEvent(Keys key, bool release, bool ispress) =>
             InputEvent?.Invoke( new PubgInputEventArgs( key, release, ispress ) );
 
-        public static Keys LastKey { get; set; }
+        public Keys LastKey { get; set; }    
+
+        private void SetFocus() => PubgWindow.SetFocus();         
+        
 
         public virtual void KeyDownOrUp(Keys key, bool release)
         {
@@ -93,6 +98,8 @@ namespace pbpb
             //SKeybd.MouseMove(-55, 0);
 
             ReleaseKey(LastKey);
+
+            SetFocus();
 
             if (!release) SKeybd.KeyDown(key);
             else          SKeybd.KeyUp(key);
@@ -109,6 +116,8 @@ namespace pbpb
 
             ReleaseKey(LastKey);
 
+            SetFocus();
+
             SKeybd.KeyPress(key);
 
             LastKey = key;
@@ -118,6 +127,8 @@ namespace pbpb
 
         public virtual void MoveMouse(int x, int y) {
 
+            SetFocus();
+
             SKeybd.MouseMove( x, y );
         }
 
@@ -125,6 +136,8 @@ namespace pbpb
             
             x += PubgWindow.PosX;
             y += PubgWindow.PosY;
+
+            SetFocus();
 
             SKeybd.LBClickEx(x, y, true, 100, 1600, 100);
             Thread.Sleep(50);
@@ -209,13 +222,13 @@ namespace pbpb
 
         public static _PubgInput PubgInput;
 
-        public void InitInput0() {
+        public void InitInput_event() {
 
             PubgInput = new _PubgInput();
             PubgInput.InputEvent += new _PubgInput.InputEventHandler(PubgInputEvent);
         }
 
-        public void InitInput2() {
+        public void InitInput_message() {
 
             PubgInput = new _PubgInput2();
             PubgInput.InputEvent += new _PubgInput.InputEventHandler(PubgInputEvent);
