@@ -72,7 +72,7 @@ namespace pbpb {
         }
 
 
-        void PubgInputEvent( PubgInputEventArgs e ) {
+        static void PubgInputEvent( PubgInputEventArgs e ) {
 
             string act;
 

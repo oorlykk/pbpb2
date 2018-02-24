@@ -55,13 +55,12 @@ namespace pbpb
             int lp = (int)(((ushort)x) | (uint)(y << 16));
             int wp = User32.MK_LBUTTON;
 
-            User32.SendMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
-            User32.SendMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+            int res = User32.PostMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+            int res2 = User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+            int res3 = User32.PostMessage( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
+            int res4 = User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
 
-            Thread.Sleep(64);
-
-            User32.SendMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
-            User32.SendMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+            Log.Add(res.ToString() + " " + res2.ToString() + " " + res3.ToString() + " " + res4.ToString());
         }
 
         public override void ReleaseKey(Keys key) {
@@ -69,11 +68,28 @@ namespace pbpb
             User32.SendMessage( Handle, User32.WM_KEYUP, (int)key, 0 ); 
         }
 
-        public override void MoveMouse(int x, int y) {
+        public override void MoveMouse( int x, int y ) {
 
-            //int lp = (int)(((ushort)x) | (uint)(y << 16));
+
+            Log.Add("MoveMouse null proc");
+            //int lp = (int) ( ( (ushort) x ) | (uint) ( y << 16 ) );
             //int wp = 0;
             //User32.SendMessage( Handle, User32.WM_MOUSEMOVE, wp, lp );
+        }
+
+        public override void AssistInWater()
+        {
+
+            //if (!Form1.IsPositiveTimeForInput) return; !!! FOCUS !!!
+
+            ReleaseKey( Keys.W ); ReleaseKey( Keys.S ); ReleaseKey( Keys.A ); ReleaseKey( Keys.D );
+            ReleaseKey( Keys.Z ); ReleaseKey( Keys.C ); ReleaseKey( Keys.F );
+          
+            _PubgInput pi = new _PubgInput();
+
+            pi.MoveMouse( 0, -1000 );
+       
+            Forward();
         }
 
     }
@@ -199,11 +215,16 @@ namespace pbpb
             KeyDownOrUp( Keys.W, false );
         }
 
-        public void ReleaseValueKeys() {
+        public virtual void AssistInWater() {
 
-            KeyDownOrUp(Keys.W, true); KeyDownOrUp(Keys.S, true);
-            KeyDownOrUp(Keys.Z, true); KeyDownOrUp(Keys.C, true);
-            KeyDownOrUp(Keys.F, true);
+            ReleaseKey(Keys.W); ReleaseKey(Keys.S); ReleaseKey(Keys.A); ReleaseKey(Keys.D);
+            ReleaseKey(Keys.Z); ReleaseKey(Keys.C); ReleaseKey(Keys.F); 
+
+            MoveMouse(0, 1000);
+
+            Thread.Sleep(300);
+
+            Forward();
         }
 
         public void Back() {
@@ -233,16 +254,20 @@ namespace pbpb
 
         public static _PubgInput PubgInput;
 
-        public void InitInput_event() {
+        public static void InitInput_event() {
 
             PubgInput = new _PubgInput();
             PubgInput.InputEvent += new _PubgInput.InputEventHandler(PubgInputEvent);
+
+            Log.Add( "Input switched to <event>" );
         }
 
-        public void InitInput_message() {
+        public static void InitInput_message() {
 
             PubgInput = new _PubgInput2();
             PubgInput.InputEvent += new _PubgInput.InputEventHandler(PubgInputEvent);
+
+            Log.Add( "Input switched to <message>" );
         }
     }
 

@@ -23,6 +23,8 @@ namespace pbpb
 
         public static bool RewardSaved;
 
+        public static bool WaterAssisted;
+
         private static string GetRewardName() {
 
             long t = Environment.TickCount - StartedTime;
@@ -75,6 +77,7 @@ namespace pbpb
             
             EndedTime = Environment.TickCount;
             IsLive = false;
+            WaterAssisted = false;
 
             if (savereward) SaveReward();                
 

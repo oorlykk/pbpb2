@@ -13,11 +13,11 @@ namespace pbpb
 
         public const int MAX_NOLASTGOOD_FOR_INPUT = ( 1000 * 60 ) / 2;
 
-        bool IsPositiveTimeForInput => (!Setti.PassiveMode) || (Setti.PassiveMode && STime.GetUserIdleTime() > 5000);
+        public static bool IsPositiveTimeForInput => (!Setti.PassiveMode) || (Setti.PassiveMode && STime.GetUserIdleTime() > 5000);
         
         void PubgStatusProc() {        
 
-            while (!BotStopper.WaitOne(3000, false)) {
+            while (!BotStopper.WaitOne(3000, false)) {          
 
                 if (!PubgWindow.Exists) {
 
@@ -46,6 +46,8 @@ namespace pbpb
                 Log.Add( String.Format( "(PS) {0}", ps ) );
 
                 if (AppIsExp) ps = PubgStatuses.Unknown;  //Magic EXP!
+
+                bool WaterAssisted = false;
 
                 if (PubgStatuses.Unknown.HasFlags( ps )) {
 
@@ -112,9 +114,7 @@ namespace pbpb
                         inputswitched = true;
 
                         InitInput_event();
-
-                        Log.Add( "Input switched to <event>" );
-
+                        
                     } else {
 
                         Pcs[PubgControls.btnExit].ClickLeftMouse();
@@ -128,11 +128,7 @@ namespace pbpb
 
                     Log.Add( "click ExitToLobby confirm" );
 
-                    if (inputswitched) {
-
-                        InitInput_message();
-                        Log.Add( "Input switched to <message>" );
-                    }
+                    if (inputswitched) InitInput_message();
 
                 }
 
@@ -172,11 +168,16 @@ namespace pbpb
 
                 else if (PubgStatuses.Water.HasFlags( ps )) {
 
-                    Log.Append( " di: " + Pcs[PubgControls.labWater].LastDistance.ToString() );  
-                    PubgInput.ReleaseValueKeys();
-                    Log.Append( "(PH) Release all value keys W,S,..>");
-                    Thread.Sleep(100);
-                    PubgInput.Forward();
+                    Log.Append( " di: " + Pcs[PubgControls.labWater].LastDistance.ToString() );
+
+                    if (!PubgRound.WaterAssisted) {
+
+                        Log.Add( "(PS) Water Assist" );
+
+                        PubgInput.AssistInWater();
+
+                        PubgRound.WaterAssisted = true;
+                    }
                 }
 
                 else if (PubgStatuses.Alive.HasFlags( ps )) {
