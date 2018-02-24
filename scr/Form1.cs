@@ -120,6 +120,8 @@ namespace pbpb {
 
             BotStopper.Set();
 
+            PubgRound.End();
+
             btnStartStopBot.Text = "on";  
             tray.Icon = Resources.gray;
             Icon = tray.Icon;

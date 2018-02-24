@@ -43,6 +43,7 @@ namespace pbpb {
                 bool IsPres( Keys key ) => ( User32.GetAsyncKeyState( (int) key ) < 0 );         
                 
                 while (IsHandleCreated) {
+
                     if (IsPres(Keys.Pause)) {
                         bool launched = !BotStopper.WaitOne( 0, false );
                         string msg = "Bot " + (launched ? "stopped" : "launched");

@@ -12,15 +12,7 @@ namespace pbpb
 
         void PubgRestarterProc() {
 
-            do {        
-                
-                if (PubgWindow.BEVisible) {
-
-                    PubgWindow.HideBE();
-
-                    Log.Add( String.Format( "(PR) Hide BEye => {0}", PubgWindow.BEHandle ) );
-                }
-
+            do {                    
 
                 if (Setti.PassiveMode && STime.GetUserIdleTime() < 5000) {
 
@@ -67,7 +59,7 @@ namespace pbpb
 
                     if (PubgWindow.SURExists) PubgWindow.CloseSUR();
 
-                    if (PubgWindow.SEExists) PubgWindow.CloseSE();
+                    PubgWindow.CloseSE();
 
                     if (PubgWindow.CrashExists) PubgWindow.KillCrash();  
                     

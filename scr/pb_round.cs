@@ -75,14 +75,15 @@ namespace pbpb
             
             EndedTime = Environment.TickCount;
             IsLive = false;
-         
-            if (savereward) SaveReward();
+
+            if (savereward) SaveReward();                
 
             if (endreason != "") {
 
                 EndReason = endreason;
                 Log.Add( String.Format("Round End ({0})", endreason) );
             }
+            
         }
 
     }

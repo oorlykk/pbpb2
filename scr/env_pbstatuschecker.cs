@@ -25,6 +25,8 @@ namespace pbpb
                     continue;
                 }
 
+                PubgWindow.HideBE();
+
                 if ((PubgInput.GetType() == typeof(_PubgInput)) && ( !IsPositiveTimeForInput )) {
 
                     Log.Add( "(PS) No idle time for actions. Wait..." );

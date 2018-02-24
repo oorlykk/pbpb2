@@ -32,8 +32,7 @@ namespace pbpb
         public static int KillExecutedTime = int.MaxValue;
         public static void KillExecute() {
 
-            PubgRound.End(true, "KillGame");
-
+            PubgRound.End();
             Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im TslGame.exe", "", User32.SW_HIDE);
         }
 
@@ -71,9 +70,17 @@ namespace pbpb
             Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im BroCrashReporter.exe", "", User32.SW_HIDE);
         }
 
-        public static IntPtr BEHandle => FindWindow("BattlEye Launcher" );
-        public static bool BEVisible => User32.IsWindowVisible(BEHandle) > 0;
-        public static void HideBE() => User32.ShowWindow(BEHandle, User32.SW_HIDE);
+        private static IntPtr BEHandle => FindWindow("BattlEye Launcher" );
+        private static bool BEVisible => User32.IsWindowVisible(BEHandle) > 0;
+        public static void HideBE() {
+
+            if (!BEVisible) return;
+
+            User32.ShowWindow(BEHandle, User32.SW_HIDE);
+
+            Log.Add( "(PW) Hide BEye" );
+                    
+        }
 
         // Steam Error
         public static IntPtr SEHandle {
@@ -90,12 +97,13 @@ namespace pbpb
         public static bool SEExists => !SEHandle.Equals(IntPtr.Zero);
         public static void CloseSE()
         {
+            if (!SEExists) return;
 
             User32.SetForegroundWindow( SEHandle );
 
-            Thread.Sleep( 50 );
+            Thread.Sleep( 100 );
 
-            snlib.SKeybd.KeyPress( Keys.Space );
+            //snlib.SKeybd.KeyPress( Keys.Space );
 
             User32.SendMessage( SEHandle, User32.WM_CLOSE, 0, 0 );
             User32.SendMessage( SEHandle, User32.WM_QUIT, 0, 0 );
