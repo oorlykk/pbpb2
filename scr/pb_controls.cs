@@ -19,6 +19,7 @@ namespace pbpb
         labWater = 882281628581721955,
         btnSoloSquad = 91,
         btnConfirmExit = 92,
+        labWrongMatchState = 9403657236297352463,
     };
 
     public class PubgControlNative {

@@ -33,21 +33,9 @@ namespace pbpb {
                                                     (ulong) PubgControls.labJoined,
                                                     905, 15, 942, 35 ) );
 
-            //Pcs.Add( PubgControls.labJoined, new PubgControl( PubgControls.labJoined.ToString(),
-            //                                        (ulong) PubgControls.labJoined,
-            //                                        911, 19, 938, 30 ) );
-
             Pcs.Add( PubgControls.labEject, new PubgControl( PubgControls.labEject.ToString(),
                                                     (ulong) PubgControls.labEject,
                                                     554, 304, 580, 321 ) );
-
-            //Pcs.Add( PubgControls.labEject, new PubgControl( PubgControls.labEject.ToString(),
-            //                                        (ulong) PubgControls.labEject,
-            //                                        557, 311, 576, 316 ) );
-            
-            //Pcs.Add( PubgControls.labReleaseParachute, new PubgControl( PubgControls.labReleaseParachute.ToString(),
-            //                                        (ulong) PubgControls.labReleaseParachute,
-            //                                        594, 308, 636, 317 ) );
 
             Pcs.Add( PubgControls.labReleaseParachute, new PubgControl( PubgControls.labReleaseParachute.ToString(),
                                                     (ulong) PubgControls.labReleaseParachute,
@@ -69,6 +57,9 @@ namespace pbpb {
                                                     (ulong) PubgControls.btnConfirmExit,
                                                     420, 290 ) );
 
+            Pcs.Add( PubgControls.labWrongMatchState, new PubgControl( PubgControls.labWrongMatchState.ToString(),
+                                                    (ulong) PubgControls.labWrongMatchState,
+                                                    311, 246, 462, 264 ) );
 
         }
     }

@@ -26,9 +26,7 @@ namespace pbpb
                     ((!Setti.PassiveMode) && (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD)) 
                     ||
                     ((Setti.PassiveMode) && (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD * 3))
-                   ) {
-                   
-                    Log.Add( String.Format( "(PR) KillExecute! (lastgood is so long)") );
+                   ) {            
 
                     PubgStatus.ResetLastGood();               
 
@@ -36,10 +34,7 @@ namespace pbpb
 
                     if (Setti.CanRestartSteam) {
 
-                        Log.Add( String.Format( "(PR) KillExecuteSteam! (lastgood is so long)") );
-
-                        Thread.Sleep(1000);
-
+                        Thread.Sleep(2000);
                         PubgWindow.KillExecuteSteam();
                     }
 
@@ -50,7 +45,7 @@ namespace pbpb
                 if (PubgWindow.SEExists || PubgWindow.CrashExists || PubgWindow.SURExists) {
                     
                     string s = String.Format( 
-                        "(PR) KillExecute! (error => crash {0}, steam {1}, update {2})", 
+                        "(PR) error found ( crash {0}, steam {1}, update {2} )", 
                         PubgWindow.CrashExists.ToYesNoString(), 
                         PubgWindow.SEExists.ToYesNoString(),
                         PubgWindow.SURExists.ToYesNoString() );
@@ -81,8 +76,6 @@ namespace pbpb
                     PubgStatus.ResetLastGood();
 
                     PubgWindow.StartExecute();
-
-                    Log.Add( "(PR) StartExecute! (no way)" );
 
                     Thread.Sleep(30000);
                 }

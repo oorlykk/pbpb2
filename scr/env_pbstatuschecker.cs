@@ -64,6 +64,13 @@ namespace pbpb
                     }
                 }
 
+                else if (PubgStatuses.WrongMatchState.HasFlags( ps )) {
+
+                    Log.Append( " di: " + Pcs[PubgControls.labWrongMatchState].LastDistance.ToString() );
+
+                    PubgWindow.KillExecute();
+                }
+
                 else if (PubgStatuses.MatchCanContinue.HasFlags( ps )) {
 
                     Log.Append( " di: " + Pcs[PubgControls.btnMatchCanContinue].LastDistance.ToString() );

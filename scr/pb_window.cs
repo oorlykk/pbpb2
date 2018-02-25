@@ -27,6 +27,7 @@ namespace pbpb
 
             KillExecutedSteamTime = Environment.TickCount; 
             Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im steam.exe", "", User32.SW_HIDE);
+            Log.Add("(PW) KillExecuteSteam");
         }
 
         public static int KillExecutedTime = int.MaxValue;
@@ -34,6 +35,7 @@ namespace pbpb
 
             PubgRound.End();
             Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im TslGame.exe", "", User32.SW_HIDE);
+            Log.Add("(PW) KillExecute");
         }
 
         public static void StartExecute() {

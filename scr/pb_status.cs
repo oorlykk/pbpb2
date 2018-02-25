@@ -20,7 +20,7 @@ namespace pbpb {
         ExitToLobby = 0x40,
         MatchCanContinue = 0x80,
         Water = 0x100,
-        //next = ?,
+        WrongMatchState = 0x200,
     }
 
     public static class PubgStatus {
@@ -56,7 +56,8 @@ namespace pbpb {
 
                 if (LastDistance < 5) {
 
-                    if (pcname.NotIn(PubgControls.btnStart, PubgControls.btnStart)) {
+                    if (pcname.NotIn(PubgControls.btnStart, PubgControls.btnMatchCanContinue,
+                                     PubgControls.labWrongMatchState)) {
 
                         m_LastGoodTick = Environment.TickCount;
                     }
@@ -87,6 +88,9 @@ namespace pbpb {
 
                     else if (pcname == PubgControls.labWater)
                         result |= PubgStatuses.Water;
+
+                    else if (pcname == PubgControls.labWrongMatchState)
+                        result |= PubgStatuses.WrongMatchState;
                 }
 
             }
