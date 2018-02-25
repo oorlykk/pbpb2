@@ -15,6 +15,8 @@ namespace pbpb
 
         public static bool IsPositiveTimeForInput => (!Setti.PassiveMode) || (Setti.PassiveMode && STime.GetUserIdleTime() > 5000);
         
+        public static bool WrongMatchStateFounded;
+
         void PubgStatusProc() {        
 
             while (!BotStopper.WaitOne(3000, false)) {          
@@ -68,16 +70,23 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.labWrongMatchState].LastDistance.ToString() );
 
-                    PubgWindow.KillExecute();
+                    WrongMatchStateFounded = true;
                 }
 
                 else if (PubgStatuses.MatchCanContinue.HasFlags( ps )) {
 
                     Log.Append( " di: " + Pcs[PubgControls.btnMatchCanContinue].LastDistance.ToString() );
 
-                    Pcs[PubgControls.btnMatchCanContinue].ClickLeftMouse();
+                    if (!WrongMatchStateFounded) {
 
-                    Log.Add( "click MatchCanContinue" );
+                        Pcs[PubgControls.btnMatchCanContinue].ClickLeftMouse();
+                        Log.Add( "(PS) click MatchCanContinue" );
+                    } else {
+
+                        WrongMatchStateFounded = false;
+                        Pcs[PubgControls.btnMatchCanContinue_cancel].ClickLeftMouse();
+                        Log.Add( "(PS) click MatchCanContinue Cancel" );
+                    }
                 }
 
                 else if (PubgStatuses.Lobby.HasFlags( ps )) {

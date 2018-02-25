@@ -17,9 +17,10 @@ namespace pbpb
         labReleaseParachute = 13671979250605947648,
         btnMatchCanContinue =  18410856832886014080,
         labWater = 882281628581721955,
+        labWrongMatchState = 9403657236297352463,
         btnSoloSquad = 91,
         btnConfirmExit = 92,
-        labWrongMatchState = 9403657236297352463,
+        btnMatchCanContinue_cancel = 93,
     };
 
     public class PubgControlNative {

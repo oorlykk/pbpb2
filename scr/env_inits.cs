@@ -49,6 +49,10 @@ namespace pbpb {
                                                     (ulong) PubgControls.labWater,
                                                     587, 507, 613, 526 ) );          
 
+            Pcs.Add( PubgControls.labWrongMatchState, new PubgControl( PubgControls.labWrongMatchState.ToString(),
+                                                    (ulong) PubgControls.labWrongMatchState,
+                                                    311, 246, 462, 264 ) );
+
             Pcs.Add( PubgControls.btnSoloSquad, new PubgControl( PubgControls.btnSoloSquad.ToString(),
                                                     (ulong) PubgControls.btnSoloSquad,
                                                     68, 395 ) );
@@ -57,9 +61,9 @@ namespace pbpb {
                                                     (ulong) PubgControls.btnConfirmExit,
                                                     420, 290 ) );
 
-            Pcs.Add( PubgControls.labWrongMatchState, new PubgControl( PubgControls.labWrongMatchState.ToString(),
-                                                    (ulong) PubgControls.labWrongMatchState,
-                                                    311, 246, 462, 264 ) );
+           Pcs.Add( PubgControls.btnMatchCanContinue_cancel, new PubgControl( PubgControls.btnMatchCanContinue_cancel.ToString(),
+                                                    (ulong) PubgControls.btnMatchCanContinue_cancel,
+                                                    510, 310 ) );
 
         }
     }
