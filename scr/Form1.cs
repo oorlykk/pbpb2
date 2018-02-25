@@ -13,6 +13,7 @@ using SnLib;
 using Win32;
 
 namespace pbpb {
+
     public partial class Form1 : Form
     {
         static string uniq = "dGhleg==";
@@ -29,11 +30,13 @@ namespace pbpb {
              
         public static Task PubgStatusChecker, PubgRestarter = null;
 
+        //public static IntPtr DrawScrToHandle => (new Form1()).panel1.Handle;
         public static IntPtr DrawScrToHandle => panel1.Handle;
+                
+                
 
         public Form1()
         {
-
             if (CheckAppIsDup()) Environment.Exit( 0 );
 
             InitializeComponent();
@@ -238,4 +241,14 @@ namespace pbpb {
             }
         }
     }
+
+    public class PanelDoubleBuffered : Panel
+    {
+        public PanelDoubleBuffered()
+            : base()
+        {
+            this.DoubleBuffered = true;
+        }
+    }
+
 }

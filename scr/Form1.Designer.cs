@@ -62,7 +62,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnttt = new System.Windows.Forms.Button();
-            panel1 = new System.Windows.Forms.Panel();
+            panel1 = new pbpb.PanelDoubleBuffered();
             this.button4 = new System.Windows.Forms.Button();
             this.ne_PosX = new System.Windows.Forms.NumericUpDown();
             this.ne_PosY = new System.Windows.Forms.NumericUpDown();
@@ -568,6 +568,7 @@
             this.Controls.Add(this.button5);
             this.Controls.Add(this.chb_AutoStartOnIdle);
             this.Controls.Add(this.chb_SaveReward);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -613,7 +614,6 @@
         private System.Windows.Forms.Button btnttt;
         private System.Windows.Forms.TextBox txLog;
         private System.Windows.Forms.FlowLayoutPanel panel_test;
-        public static System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem pUBGToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem terminateToolStripMenuItem;
@@ -631,6 +631,7 @@
         private System.Windows.Forms.CheckBox chb_CanKillSteam;
         private System.Windows.Forms.ComboBox cbox_PubgInput;
         private System.Windows.Forms.CheckBox chb_view;
+        public static PanelDoubleBuffered panel1;
     }
 }
 
