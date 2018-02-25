@@ -90,7 +90,8 @@ namespace pbpb {
         }
 
         Assembly PubgLogEvent( object sender, ResolveEventArgs e ) {
-            if (panel1.Visible && !Setti.DrawScr) panel1.Hide();
+
+            panel1.Visible = Setti.DrawScr;
             txLog.AppendText(e.Name);
             return null;
         }

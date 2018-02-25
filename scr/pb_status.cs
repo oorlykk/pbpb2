@@ -42,8 +42,10 @@ namespace pbpb {
             PubgStatuses result = PubgStatuses.Unknown;
 
             Bitmap scr = SGraph.Scr( "", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY );
+        
+            if (Setti.DrawScr) Form1.panel1.BackgroundImage = new Bitmap(scr);
+            //SGraph.DrawImage(scr, Form1.DrawScrToHandle, true);
 
-            if (Setti.DrawScr) SGraph.DrawImage(scr, Form1.DrawScrToHandle);
 
             foreach (var key in Pcs) {
 
