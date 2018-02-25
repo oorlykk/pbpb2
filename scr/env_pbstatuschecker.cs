@@ -96,7 +96,7 @@ namespace pbpb
 
                     PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "dead" );
 
-                    if ((PubgInput.GetType() == typeof(_PubgInput2)) && (!IsPositiveTimeForInput)) {
+                    if ((PubgInput.GetType() == typeof(_PubgInputMessage)) && (!IsPositiveTimeForInput)) {
 
                         Log.Add("Can't exit (PassiveMode: no idle time)");
 
@@ -105,7 +105,7 @@ namespace pbpb
 
                     bool inputswitched = false;
 
-                    if ( PubgInput.GetType() == typeof(_PubgInput2) ) {
+                    if ( PubgInput.GetType() == typeof(_PubgInputMessage) ) {
 
                         PubgInput.KeyPress(Keys.Escape);
 

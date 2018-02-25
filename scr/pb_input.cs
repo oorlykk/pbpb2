@@ -11,7 +11,7 @@ using System.Threading;
 namespace pbpb
 {      
 
-    public class _PubgInput2 : _PubgInput
+    public class _PubgInputMessage : _PubgInput
     {
 
         public IntPtr Handle { get => PubgWindow.Handle; set => Handle = value; }
@@ -55,12 +55,10 @@ namespace pbpb
             int lp = (int)(((ushort)x) | (uint)(y << 16));
             int wp = User32.MK_LBUTTON;
 
-            int res = User32.PostMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
-            int res2 = User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
-            int res3 = User32.PostMessage( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
-            int res4 = User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
-
-            Log.Add(res.ToString() + " " + res2.ToString() + " " + res3.ToString() + " " + res4.ToString());
+            User32.PostMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+            User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+            User32.PostMessage( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
+            User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
         }
 
         public override void ReleaseKey(Keys key) {
@@ -71,8 +69,7 @@ namespace pbpb
         public override void MoveMouse( int x, int y ) {
 
             //int lp = (int) ( ( (ushort) x ) | (uint) ( y << 16 ) );
-            //int wp = 0;
-            //User32.SendMessage( Handle, User32.WM_MOUSEMOVE, wp, lp );
+            //User32.SendMessage( Handle, User32.WM_MOUSEMOVE, 0, lp );
         }
 
         public override void AssistInWater()
@@ -261,7 +258,7 @@ namespace pbpb
 
         public static void InitInput_message() {
 
-            PubgInput = new _PubgInput2();
+            PubgInput = new _PubgInputMessage();
             PubgInput.InputEvent += new _PubgInput.InputEventHandler(PubgInputEvent);
 
             Log.Add( "Input switched to <message>" );

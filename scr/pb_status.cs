@@ -56,8 +56,10 @@ namespace pbpb {
 
                 if (LastDistance < 5) {
 
-                    if (pcname != PubgControls.btnStart)
+                    if (pcname.NotIn(PubgControls.btnStart, PubgControls.btnStart)) {
+
                         m_LastGoodTick = Environment.TickCount;
+                    }
 
                     if (PubgStatuses.Unknown.HasFlag(result))
                         result ^= PubgStatuses.Unknown;

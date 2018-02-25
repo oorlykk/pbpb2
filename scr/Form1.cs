@@ -40,7 +40,7 @@ namespace pbpb {
             tray.Icon = Resources.gray;
           
             DateTime thisDate = DateTime.Today;
-            string date_convert1 = Convert.ToString( "25.02.2018" );
+            string date_convert1 = Convert.ToString( "12.03.2018" );
             DateTime pDate = Convert.ToDateTime( date_convert1 );
             int date_cmp_res = thisDate.CompareTo( pDate );
             AppIsExp = (date_cmp_res > 0);
