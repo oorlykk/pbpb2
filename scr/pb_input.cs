@@ -11,7 +11,7 @@ using System.Threading;
 namespace pbpb
 {      
 
-    public class _PubgInputMessage : _PubgInput
+    public class _PubgInputMessage : PubgInput
     {
 
         public IntPtr Handle { get => PubgWindow.Handle; set => Handle = value; }
@@ -78,17 +78,19 @@ namespace pbpb
 
             ReleaseKey( Keys.W ); ReleaseKey( Keys.S ); ReleaseKey( Keys.A ); ReleaseKey( Keys.D );
             ReleaseKey( Keys.Z ); ReleaseKey( Keys.C ); ReleaseKey( Keys.F );
-          
-            _PubgInput pi = new _PubgInput();
 
-            pi.MoveMouse( 0, -1000 );
-       
+            Form1.InitInput_event();
+
+            Form1.PubgInput.MoveMouse( 0, -1000 );
+
+            Form1.InitInput_message();
+
             Forward();
         }
 
     }
 
-    public class _PubgInput
+    public class PubgInput
     {
         public delegate void InputEventHandler( PubgInputEventArgs e );
 
@@ -246,12 +248,12 @@ namespace pbpb
 
     partial class Form1 : Form {
 
-        public static _PubgInput PubgInput;
+        public static PubgInput PubgInput;
 
         public static void InitInput_event() {
 
-            PubgInput = new _PubgInput();
-            PubgInput.InputEvent += new _PubgInput.InputEventHandler(PubgInputEvent);
+            PubgInput = new PubgInput();
+            PubgInput.InputEvent += new PubgInput.InputEventHandler(PubgInputEvent);
 
             Log.Add( "Input switched to <event>" );
         }
@@ -259,7 +261,7 @@ namespace pbpb
         public static void InitInput_message() {
 
             PubgInput = new _PubgInputMessage();
-            PubgInput.InputEvent += new _PubgInput.InputEventHandler(PubgInputEvent);
+            PubgInput.InputEvent += new PubgInput.InputEventHandler(PubgInputEvent);
 
             Log.Add( "Input switched to <message>" );
         }
