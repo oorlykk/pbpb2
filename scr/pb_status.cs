@@ -43,6 +43,8 @@ namespace pbpb {
 
             Bitmap scr = SGraph.Scr( "", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY );
 
+            if (Setti.DrawScr) SGraph.DrawImage(scr, Form1.DrawScrToHandle);
+
             foreach (var key in Pcs) {
 
                 PubgControl pc = key.Value;

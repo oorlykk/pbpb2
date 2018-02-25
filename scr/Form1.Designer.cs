@@ -62,7 +62,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnttt = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            panel1 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.ne_PosX = new System.Windows.Forms.NumericUpDown();
             this.ne_PosY = new System.Windows.Forms.NumericUpDown();
@@ -72,6 +72,7 @@
             this.chb_HiddenMode = new System.Windows.Forms.CheckBox();
             this.chb_CanKillSteam = new System.Windows.Forms.CheckBox();
             this.cbox_PubgInput = new System.Windows.Forms.ComboBox();
+            this.chb_view = new System.Windows.Forms.CheckBox();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
             this.panel_test.SuspendLayout();
@@ -399,12 +400,12 @@
             // 
             // panel1
             // 
-            this.panel1.BackgroundImage = global::pbpb.Properties.Resources.banner;
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1.Location = new System.Drawing.Point(12, 36);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(469, 129);
-            this.panel1.TabIndex = 22;
+            panel1.BackgroundImage = global::pbpb.Properties.Resources.banner;
+            panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            panel1.Location = new System.Drawing.Point(12, 36);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(469, 129);
+            panel1.TabIndex = 22;
             // 
             // button4
             // 
@@ -532,11 +533,24 @@
             this.cbox_PubgInput.TabIndex = 31;
             this.cbox_PubgInput.SelectedIndexChanged += new System.EventHandler(this.cbox_PubgInput_SelectedIndexChanged);
             // 
+            // chb_view
+            // 
+            this.chb_view.AutoSize = true;
+            this.chb_view.Location = new System.Drawing.Point(207, 10);
+            this.chb_view.Name = "chb_view";
+            this.chb_view.Size = new System.Drawing.Size(59, 21);
+            this.chb_view.TabIndex = 32;
+            this.chb_view.Tag = "view";
+            this.chb_view.Text = "View";
+            this.chb_view.UseVisualStyleBackColor = true;
+            this.chb_view.Click += new System.EventHandler(this.ReadGui);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 293);
+            this.Controls.Add(this.chb_view);
             this.Controls.Add(this.cbox_PubgInput);
             this.Controls.Add(this.chb_CanKillSteam);
             this.Controls.Add(this.chb_HiddenMode);
@@ -546,7 +560,7 @@
             this.Controls.Add(this.ne_PosY);
             this.Controls.Add(this.ne_PosX);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(panel1);
             this.Controls.Add(this.panel_test);
             this.Controls.Add(this.txLog);
             this.Controls.Add(this.btnStartStopBot);
@@ -599,7 +613,7 @@
         private System.Windows.Forms.Button btnttt;
         private System.Windows.Forms.TextBox txLog;
         private System.Windows.Forms.FlowLayoutPanel panel_test;
-        private System.Windows.Forms.Panel panel1;
+        public static System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem pUBGToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem terminateToolStripMenuItem;
@@ -616,6 +630,7 @@
         private System.Windows.Forms.CheckBox chb_HiddenMode;
         private System.Windows.Forms.CheckBox chb_CanKillSteam;
         private System.Windows.Forms.ComboBox cbox_PubgInput;
+        private System.Windows.Forms.CheckBox chb_view;
     }
 }
 

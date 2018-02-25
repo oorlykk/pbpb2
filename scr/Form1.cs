@@ -29,6 +29,8 @@ namespace pbpb {
              
         public static Task PubgStatusChecker, PubgRestarter = null;
 
+        public static IntPtr DrawScrToHandle => panel1.Handle;
+
         public Form1()
         {
 
@@ -88,7 +90,7 @@ namespace pbpb {
         }
 
         Assembly PubgLogEvent( object sender, ResolveEventArgs e ) {
-            if (panel1.Visible) panel1.Hide();
+            if (panel1.Visible && !Setti.DrawScr) panel1.Hide();
             txLog.AppendText(e.Name);
             return null;
         }
