@@ -25,6 +25,8 @@ namespace pbpb
 
         public static bool WaterAssisted;
 
+        public static bool WrongMatchStateFound = false;
+
         private static string GetRewardName() {
 
             long t = Environment.TickCount - StartedTime;

@@ -14,8 +14,6 @@ namespace pbpb
         public const int MAX_NOLASTGOOD_FOR_INPUT = ( 1000 * 60 ) / 2;
 
         public static bool IsPositiveTimeForInput => (!Setti.PassiveMode) || (Setti.PassiveMode && STime.GetUserIdleTime() > 5000);
-        
-        public static bool WrongMatchStateFounded;
 
         void PubgStatusProc() {        
 
@@ -70,26 +68,30 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.labWrongMatchState].LastDistance.ToString() );
 
-                    WrongMatchStateFounded = true;
+                    PubgRound.WrongMatchStateFound = true;
                 }
 
                 else if (PubgStatuses.MatchCanContinue.HasFlags( ps )) {
 
                     Log.Append( " di: " + Pcs[PubgControls.btnMatchCanContinue].LastDistance.ToString() );
 
-                    if (!WrongMatchStateFounded) {
+                    if (!PubgRound.WrongMatchStateFound) {
 
-                        Pcs[PubgControls.btnMatchCanContinue].ClickLeftMouse();
                         Log.Add( "(PS) click MatchCanContinue" );
+
+                        Pcs[PubgControls.btnMatchCanContinue].ClickLeftMouse();                      
                     } else {
 
-                        WrongMatchStateFounded = false;
-                        Pcs[PubgControls.btnMatchCanContinue_cancel].ClickLeftMouse();
                         Log.Add( "(PS) click MatchCanContinue Cancel" );
+
+                        PubgRound.WrongMatchStateFound = false;
+                        Pcs[PubgControls.btnMatchCanContinue_cancel].ClickLeftMouse();                 
                     }
                 }
 
                 else if (PubgStatuses.Lobby.HasFlags( ps )) {
+
+                    Log.Add( "click Start" );
 
                     PubgInput.EjectClickedTime = int.MaxValue;
 
@@ -97,9 +99,7 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.btnStart].LastDistance.ToString() );
 
-                    Pcs[PubgControls.btnStart].ClickLeftMouse();
-
-                    Log.Add( "click Start" );
+                    Pcs[PubgControls.btnStart].ClickLeftMouse();               
 
                     Thread.Sleep(5000);
 
