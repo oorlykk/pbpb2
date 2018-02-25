@@ -25,20 +25,24 @@ namespace pbpb
         public static int KillExecutedSteamTime = int.MaxValue;
         public static void KillExecuteSteam() {
 
+            Log.Add("(PW) KillExecute Steam!");
+
             KillExecutedSteamTime = Environment.TickCount; 
-            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im steam.exe", "", User32.SW_HIDE);
-            Log.Add("(PW) KillExecuteSteam");
+            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im steam.exe", "", User32.SW_HIDE);       
         }
 
         public static int KillExecutedTime = int.MaxValue;
         public static void KillExecute() {
 
+            Log.Add("(PW) KillExecute PUBG!");
+
             PubgRound.End();
-            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im TslGame.exe", "", User32.SW_HIDE);
-            Log.Add("(PW) KillExecute");
+            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im TslGame.exe", "", User32.SW_HIDE);         
         }
 
         public static void StartExecute() {
+
+            Log.Add("(PW) StartExecute PUBG!");
 
             PubgRound.End();
             Shell32.ShellExecute( IntPtr.Zero, "open", "steam://rungameid/578080", "-low", "", User32.SW_SHOWNORMAL );
