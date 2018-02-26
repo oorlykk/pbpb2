@@ -19,7 +19,7 @@ namespace pbpb {
     {
         static string uniq = "dGhlegg==";
 
-        public static string AppTitle = "PBPB v1.6";
+        public static string AppTitle = "PBPB v1.6.1";
         public static string ViewFormTitle = "PBPB View";
 
         public const int PartFullHDPreset = 5;    
@@ -36,14 +36,14 @@ namespace pbpb {
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();       
+          
+            Application.ThreadException += new ThreadExceptionEventHandler ( 
+                ( object sender, ThreadExceptionEventArgs e  ) => {
 
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler ( 
-                (object sender, UnhandledExceptionEventArgs e ) => {
+                    Log.Add("Application Exception: " + e.Exception.Message);
+                });
 
-                    Log.Add("System_Domain_Unhandled_Exception: " + e.ToString());
-                });        
-           
             if (CheckAppIsDup()) Environment.Exit( 0 );
 
             Application.ApplicationExit += new EventHandler(
@@ -187,7 +187,7 @@ namespace pbpb {
 
                 Shell32.ShellExecute(Handle, "open", local, null, null, User32.SW_SHOWNORMAL);
             }
-            else if (t == "about") {
+            else if (t == "about") {          
 
                 string owner = Encoding.UTF8.GetString( Convert.FromBase64String( uniq ) );
 

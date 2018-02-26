@@ -19,12 +19,11 @@ namespace pbpb
         {
             if (m.Msg == Form1.WM_SCRUPDATE) {
 
-                if (Visible)
-                    try {
+                if (Visible) {
 
-                        BackgroundImage = PubgStatus.RawScr;
-                    }
-                    catch { }
+                    BackgroundImage = null;
+                    BackgroundImage = PubgStatus.RawScr;
+                }
             }
 
             base.WndProc( ref m );

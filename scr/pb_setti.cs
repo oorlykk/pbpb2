@@ -78,7 +78,7 @@ namespace pbpb
             } catch {
 
                 Log.Add("Default settings. " + PubgWindowAbsoluteX.ToString());
-
+                
             }
 
             return result;

@@ -27,12 +27,11 @@ namespace pbpb {
             } 
             else if (m.Msg == WM_SCRUPDATE) {
 
-                if (Visible && Setti.DrawScr && User32.FindWindow(null, Form1.ViewFormTitle) == 0)
-                    try {
+                if (Visible && Setti.DrawScr && User32.FindWindow( null, Form1.ViewFormTitle ) == 0) {
 
-                        PanelView.BackgroundImage = PubgStatus.RawScr;
-                    }
-                    catch { }
+                    PanelView.BackgroundImage = null;
+                    PanelView.BackgroundImage = PubgStatus.RawScr;
+                }
             }
 
             base.WndProc( ref m );
