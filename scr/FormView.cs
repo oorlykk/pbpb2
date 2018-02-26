@@ -22,7 +22,8 @@ namespace pbpb
                 if (Visible) {
 
                     BackgroundImage = null;
-                    BackgroundImage = PubgStatus.RawScr;
+                    if (PubgStatus.RawScr != null)
+                        BackgroundImage = new Bitmap(PubgStatus.RawScr);
                 }
             }
 

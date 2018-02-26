@@ -98,7 +98,7 @@ namespace pbpb {
             User32.SendMessage((IntPtr)User32.FindWindow(null, Form1.AppTitle), Form1.WM_SCRUPDATE, 0, 0);
             User32.SendMessage((IntPtr)User32.FindWindow(null, Form1.ViewFormTitle), Form1.WM_SCRUPDATE, 0, 0);            
 
-            Application.DoEvents();
+            Application.DoEvents();          
 
             EXIT:
 

@@ -30,7 +30,8 @@ namespace pbpb {
                 if (Visible && Setti.DrawScr && User32.FindWindow( null, Form1.ViewFormTitle ) == 0) {
 
                     PanelView.BackgroundImage = null;
-                    PanelView.BackgroundImage = PubgStatus.RawScr;
+                    if (PubgStatus.RawScr != null)
+                        PanelView.BackgroundImage = new Bitmap(PubgStatus.RawScr);
                 }
             }
 
