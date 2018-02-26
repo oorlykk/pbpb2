@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SnLib;
@@ -46,6 +47,8 @@ namespace pbpb {
             PubgStatuses result = PubgStatuses.Unknown;
 
             RawScr = SGraph.Scr( "", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY );
+             
+            if (RawScr == null) goto EXIT;
 
             foreach (var key in Pcs) {
 
@@ -54,7 +57,7 @@ namespace pbpb {
 
                 if (pc.IsNative) continue;
 
-                pc.ControlImageFromImage( RawScr );
+                pc.ControlImageFromImage( RawScr );          
 
                 LastDistance = pc.CalcDistance( true );
 
@@ -89,6 +92,13 @@ namespace pbpb {
                 }
 
             }
+
+            IntPtr f1 = (IntPtr)User32.FindWindow(null, Form1.AppTitle);
+            IntPtr f2 = (IntPtr)User32.FindWindow(null, Form1.ViewFormTitle);
+            User32.SendMessage(f1, Form1.WM_SCRUPDATE, 0, 0);
+            User32.SendMessage(f2, Form1.WM_SCRUPDATE, 0, 0);            
+
+            EXIT:
 
             m_Status = result;
 

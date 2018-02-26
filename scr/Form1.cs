@@ -20,6 +20,8 @@ namespace pbpb {
         static string uniq = "dGhlegg==";
 
         public static string AppTitle = "PBPB v1.6";
+        public static string ViewFormTitle = "PBPB View";
+
         public const int PartFullHDPreset = 5;    
 
         static bool AppIsExp;
@@ -199,6 +201,9 @@ namespace pbpb {
                 
                 if (PanelView.BackgroundImage == null) return;
 
+                FormView f = new FormView();
+                f.Show();
+                return;
                 string filename = Path.GetTempPath() + PubgRound.GetRewardName() + ".bmp";
 
                 PanelView.BackgroundImage.Save(filename);
@@ -245,6 +250,7 @@ namespace pbpb {
 
         private void tmrIdleCheck_Tick( object sender, EventArgs e )
         {
+
             if (!Setti.IdleAutolaunch || !BotStopper.WaitOne(0, false)) return;
           
             if (STime.GetUserIdleTime() > Setti.IdleAutolaunchTimeout * 1000 * 60) {

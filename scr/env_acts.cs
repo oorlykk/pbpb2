@@ -10,9 +10,13 @@ using Win32;
 
 namespace pbpb {
 
+    
+
     partial class Form1
     {
         public const int WM_ACTIVATEAPP = User32.WM_USER + 0x0001;
+
+        public const int WM_SCRUPDATE = User32.WM_USER + 0x0002;
 
         protected override void WndProc( ref Message m )
         {
@@ -20,7 +24,17 @@ namespace pbpb {
             if (m.Msg == WM_ACTIVATEAPP) {
 
                 Show(); WindowState = FormWindowState.Normal;
-            }         
+            } 
+            else if (m.Msg == WM_SCRUPDATE) {
+
+                if (Visible && Setti.DrawScr && User32.FindWindow(null, Form1.ViewFormTitle) == 0)
+                    try {
+
+                        PanelView.BackgroundImage = PubgStatus.RawScr;
+
+                    }
+                    catch { }
+            }
 
             base.WndProc( ref m );
         }

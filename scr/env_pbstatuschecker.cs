@@ -52,15 +52,6 @@ namespace pbpb
 
                 if (AppIsExp) ps = PubgStatuses.Unknown;  //Magic EXP!
 
-                if (Setti.DrawScr) {
-
-                    Form1 f = (Form1) Form.ActiveForm;
-                    if (f != null && f.Visible && PubgStatus.RawScr != null) {
-                        
-                        f.PanelView.BackgroundImage = new Bitmap( PubgStatus.RawScr );
-                    }
-                }
-
                 if ( !ps.HasFlags(PubgStatuses.Unknown) && 
                      !ps.HasFlags(PubgStatuses.Lobby) &&
                      !ps.HasFlags(PubgStatuses.MatchCanContinue) ) {

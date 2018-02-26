@@ -272,7 +272,6 @@
             // tmrIdleCheck
             // 
             this.tmrIdleCheck.Enabled = true;
-            this.tmrIdleCheck.Interval = 9999;
             this.tmrIdleCheck.Tick += new System.EventHandler(this.tmrIdleCheck_Tick);
             // 
             // chb_AutoStartOnIdle
