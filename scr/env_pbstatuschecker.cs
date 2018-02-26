@@ -61,6 +61,13 @@ namespace pbpb
                     }
                 }
 
+                if ( !ps.HasFlags(PubgStatuses.Unknown) && 
+                     !ps.HasFlags(PubgStatuses.Lobby) &&
+                     !ps.HasFlags(PubgStatuses.MatchCanContinue) ) {
+
+                    PubgStatus.SetLastGood();
+                }
+
                 if (PubgStatuses.Unknown.HasFlags( ps )) {
 
                     Log.Append( " di: " + PubgStatus.LastDistance.ToString() );
@@ -78,29 +85,23 @@ namespace pbpb
                     }
                 }
 
-                else if (PubgStatuses.WrongMatchState.HasFlags( ps )) {
-
-                    Log.Append( " di: " + Pcs[PubgControls.labWrongMatchState].LastDistance.ToString() );
-
-                    PubgRound.WrongMatchStateFound = true;
-                    PubgInput.ClickCenter();
-                }
-
                 else if (PubgStatuses.MatchCanContinue.HasFlags( ps )) {
 
-                    Log.Append( " di: " + Pcs[PubgControls.btnMatchCanContinue].LastDistance.ToString() );
+                    Log.Append( " di: " + Pcs[PubgControls.btnMatchCanContinueContinue].LastDistance.ToString() );
 
-                    if (!PubgRound.WrongMatchStateFound) {
+                    if (PubgRound.ContinueClickCount < 2) {
 
                         Log.Add( "(PS) click MatchCanContinue" );
 
-                        Pcs[PubgControls.btnMatchCanContinue].ClickLeftMouse();                      
-                    } else {
+                        PubgRound.ContinueClickCount += 1;
+                        Pcs[PubgControls.btnMatchCanContinueContinue].ClickLeftMouse();
+                    }
+                    else {
 
-                        Log.Add( "(PS) click MatchCanContinue Cancel" );
+                        Log.Add( "(PS) click MatchCanContinueCancel ( > cont index )" );
 
-                        PubgRound.WrongMatchStateFound = false;
-                        Pcs[PubgControls.btnMatchCanContinue_cancel].ClickLeftMouse();             
+                        PubgRound.ContinueClickCount = 0;
+                        Pcs[PubgControls.btnMatchCanContinueCancel].ClickLeftMouse();
                     }
                 }
 
@@ -150,7 +151,7 @@ namespace pbpb
 
                         Log.Add( "click ExitToLobby" );
                     }                                
-              
+                    
                     Thread.Sleep( 3000 );
 
                     Pcs[PubgControls.btnConfirmExit].ClickLeftMouse();

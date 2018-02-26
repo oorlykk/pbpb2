@@ -41,17 +41,21 @@ namespace pbpb {
                                                     (ulong) PubgControls.labReleaseParachute,
                                                     595, 311, 635, 316 ) );
 
-            Pcs.Add( PubgControls.btnMatchCanContinue, new PubgControl( PubgControls.btnMatchCanContinue.ToString(),
-                                                    (ulong) PubgControls.btnMatchCanContinue,
+            Pcs.Add( PubgControls.btnMatchCanContinueContinue, new PubgControl( PubgControls.btnMatchCanContinueContinue.ToString(),
+                                                    (ulong) PubgControls.btnMatchCanContinueContinue,
                                                     426, 300, 483, 320 ) );
+
+            Pcs.Add( PubgControls.btnMatchCanContinueCancel, new PubgControl( PubgControls.btnMatchCanContinueCancel.ToString(),
+                                                     (ulong) PubgControls.btnMatchCanContinueCancel,
+                                                     485, 300, 535, 320 ) );
 
             Pcs.Add( PubgControls.labWater, new PubgControl( PubgControls.labWater.ToString(),
                                                     (ulong) PubgControls.labWater,
                                                     587, 507, 613, 526 ) );          
 
-            Pcs.Add( PubgControls.labWrongMatchState, new PubgControl( PubgControls.labWrongMatchState.ToString(),
-                                                    (ulong) PubgControls.labWrongMatchState,
-                                                    311, 246, 462, 264 ) );
+            //Pcs.Add( PubgControls.labWrongMatchState, new PubgControl( PubgControls.labWrongMatchState.ToString(),
+            //                                        (ulong) PubgControls.labWrongMatchState,
+            //                                        311, 246, 462, 264 ) );
 
             Pcs.Add( PubgControls.btnSoloSquad, new PubgControl( PubgControls.btnSoloSquad.ToString(),
                                                     (ulong) PubgControls.btnSoloSquad,
@@ -61,9 +65,7 @@ namespace pbpb {
                                                     (ulong) PubgControls.btnConfirmExit,
                                                     420, 290 ) );
 
-           Pcs.Add( PubgControls.btnMatchCanContinue_cancel, new PubgControl( PubgControls.btnMatchCanContinue_cancel.ToString(),
-                                                    (ulong) PubgControls.btnMatchCanContinue_cancel,
-                                                    510, 310 ) );
+
 
         }
     }

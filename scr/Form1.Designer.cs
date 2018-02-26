@@ -434,7 +434,6 @@
             0,
             0});
             this.ne_PosX.Click += new System.EventHandler(this.ReadGui);
-            this.ne_PosX.Move += new System.EventHandler(this.ReadGui);
             // 
             // ne_PosY
             // 
@@ -458,7 +457,6 @@
             0,
             0});
             this.ne_PosY.Click += new System.EventHandler(this.ReadGui);
-            this.ne_PosY.Move += new System.EventHandler(this.ReadGui);
             // 
             // label1
             // 

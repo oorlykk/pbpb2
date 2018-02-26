@@ -25,7 +25,7 @@ namespace pbpb
 
         public static bool WaterAssisted;
 
-        public static bool WrongMatchStateFound = false;
+        public static int ContinueClickCount;
 
         public static string GetRewardName() {
 
@@ -80,6 +80,7 @@ namespace pbpb
             EndedTime = Environment.TickCount;
             IsLive = false;
             WaterAssisted = false;
+            ContinueClickCount = 0;
 
             if (savereward) SaveReward();                
 

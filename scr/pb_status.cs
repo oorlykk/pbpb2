@@ -22,7 +22,7 @@ namespace pbpb {
         ExitToLobby = 0x40,
         MatchCanContinue = 0x80,
         Water = 0x100,
-        WrongMatchState = 0x200,
+        //WrongMatchState = 0x200,
     }
 
     public static class PubgStatus {
@@ -35,9 +35,9 @@ namespace pbpb {
 
         private static long m_LastGoodTick = Environment.TickCount;
 
-        public static long LastGoodTick { get => m_LastGoodTick; private set => m_LastGoodTick = value; }
+        public static long LastGoodTick { get => m_LastGoodTick; }
 
-        public static void ResetLastGood() => m_LastGoodTick = Environment.TickCount; 
+        public static void SetLastGood() => m_LastGoodTick = Environment.TickCount; 
 
         public static Bitmap RawScr;
 
@@ -60,12 +60,6 @@ namespace pbpb {
 
                 if (LastDistance < 5) {
 
-                    if ((pcname != PubgControls.btnStart) && (pcname != PubgControls.btnMatchCanContinue) &&
-                        (pcname != PubgControls.labWrongMatchState)) {
-
-                        m_LastGoodTick = Environment.TickCount;
-                    }
-
                     if (PubgStatuses.Unknown.HasFlag(result))
                         result ^= PubgStatuses.Unknown;
 
@@ -87,14 +81,11 @@ namespace pbpb {
                     else if (pcname == PubgControls.labAlive) 
                         result |= PubgStatuses.Alive;
 
-                    else if (pcname == PubgControls.btnMatchCanContinue) 
+                    else if (pcname == PubgControls.btnMatchCanContinueContinue) 
                         result |= PubgStatuses.MatchCanContinue;
 
                     else if (pcname == PubgControls.labWater)
                         result |= PubgStatuses.Water;
-
-                    else if (pcname == PubgControls.labWrongMatchState)
-                        result |= PubgStatuses.WrongMatchState;
                 }
 
             }

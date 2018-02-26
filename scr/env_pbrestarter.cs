@@ -28,7 +28,7 @@ namespace pbpb
                     ((Setti.PassiveMode) && (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD * 3))
                    ) {            
 
-                    PubgStatus.ResetLastGood();               
+                    PubgStatus.SetLastGood();               
 
                     PubgWindow.KillExecute();            
 
@@ -73,7 +73,7 @@ namespace pbpb
                         goto EXIT;
                     }
 
-                    PubgStatus.ResetLastGood();
+                    PubgStatus.SetLastGood();
 
                     PubgWindow.StartExecute();
 

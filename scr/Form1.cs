@@ -123,7 +123,7 @@ namespace pbpb {
             }
 
             BotStopper.Reset();
-            PubgStatus.ResetLastGood();
+            PubgStatus.SetLastGood();
             PubgInput.EjectClickedTime = int.MaxValue;
             PubgInput.ParachuteClickedTime = int.MaxValue;
             PubgStatusChecker = Task.Run( () => PubgRestarterProc() );

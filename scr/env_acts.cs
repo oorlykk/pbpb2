@@ -75,7 +75,7 @@ namespace pbpb {
             else
                  scr = SGraph.Scr("", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY);
 
-            PubgControl pc = Pcs[PubgControls.labWrongMatchState];
+            PubgControl pc = Pcs[PubgControls.btnMatchCanContinueCancel];
             pc.ControlImageFromImage(scr);          
             int dist = pc.CalcDistance(true);
 
