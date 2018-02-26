@@ -27,7 +27,7 @@ namespace pbpb
 
         public static bool WrongMatchStateFound = false;
 
-        private static string GetRewardName() {
+        public static string GetRewardName() {
 
             long t = Environment.TickCount - StartedTime;
 

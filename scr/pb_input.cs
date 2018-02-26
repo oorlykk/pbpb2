@@ -70,6 +70,7 @@ namespace pbpb
 
             //int lp = (int) ( ( (ushort) x ) | (uint) ( y << 16 ) );
             //User32.SendMessage( Handle, User32.WM_MOUSEMOVE, 0, lp );
+            ChangeViewPerson();
         }
 
         public override void AssistInWater()
@@ -211,6 +212,17 @@ namespace pbpb
             KeyDownOrUp( Keys.W, false );
         }
 
+        public void Back() {
+
+            KeyDownOrUp( Keys.S, false );
+
+        }
+
+        public void ChangeViewPerson() {
+
+            KeyPress(Keys.V);
+        }
+
         public virtual void AssistInWater() {
 
             ReleaseKey(Keys.W); ReleaseKey(Keys.S); ReleaseKey(Keys.A); ReleaseKey(Keys.D);
@@ -222,13 +234,6 @@ namespace pbpb
 
             Forward();
         }
-
-        public void Back() {
-
-            KeyDownOrUp( Keys.S, false );
-
-        }
-
         public void ClickCenter() => ClickLeftMouse(480, 308);
 
     }

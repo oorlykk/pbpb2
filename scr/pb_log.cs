@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using System.IO;
 
 namespace pbpb
 {
@@ -49,6 +50,13 @@ namespace pbpb
         public static string Text => m_Log.ToString();
 
         public static string Last => m_last;
+
+        public static void Save(string filename) {
+
+            StreamWriter file = new StreamWriter( filename );
+            file.WriteLine( m_Log.ToString() );
+            file.Close();
+        }
 
     }
 

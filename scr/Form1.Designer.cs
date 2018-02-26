@@ -62,7 +62,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnttt = new System.Windows.Forms.Button();
-            panel1 = new pbpb.PanelDoubleBuffered();
             this.button4 = new System.Windows.Forms.Button();
             this.ne_PosX = new System.Windows.Forms.NumericUpDown();
             this.ne_PosY = new System.Windows.Forms.NumericUpDown();
@@ -73,6 +72,8 @@
             this.chb_CanKillSteam = new System.Windows.Forms.CheckBox();
             this.cbox_PubgInput = new System.Windows.Forms.ComboBox();
             this.chb_view = new System.Windows.Forms.CheckBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.PanelView = new pbpb.PanelDoubleBuffered();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
             this.panel_test.SuspendLayout();
@@ -97,14 +98,14 @@
             this.button5.Size = new System.Drawing.Size(86, 25);
             this.button5.TabIndex = 10;
             this.button5.Tag = "clearlog";
-            this.button5.Text = "Clear log";
+            this.button5.Text = "Clear Log";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.btnTag_Click);
             // 
             // chb_SaveReward
             // 
             this.chb_SaveReward.AutoSize = true;
-            this.chb_SaveReward.Location = new System.Drawing.Point(12, 171);
+            this.chb_SaveReward.Location = new System.Drawing.Point(12, 197);
             this.chb_SaveReward.Name = "chb_SaveReward";
             this.chb_SaveReward.Size = new System.Drawing.Size(121, 21);
             this.chb_SaveReward.TabIndex = 14;
@@ -277,7 +278,7 @@
             // chb_AutoStartOnIdle
             // 
             this.chb_AutoStartOnIdle.AutoSize = true;
-            this.chb_AutoStartOnIdle.Location = new System.Drawing.Point(12, 199);
+            this.chb_AutoStartOnIdle.Location = new System.Drawing.Point(12, 250);
             this.chb_AutoStartOnIdle.Name = "chb_AutoStartOnIdle";
             this.chb_AutoStartOnIdle.Size = new System.Drawing.Size(189, 21);
             this.chb_AutoStartOnIdle.TabIndex = 17;
@@ -292,7 +293,7 @@
             0,
             0,
             0});
-            this.ne_MaxIdle.Location = new System.Drawing.Point(207, 198);
+            this.ne_MaxIdle.Location = new System.Drawing.Point(203, 249);
             this.ne_MaxIdle.Name = "ne_MaxIdle";
             this.ne_MaxIdle.Size = new System.Drawing.Size(74, 22);
             this.ne_MaxIdle.TabIndex = 18;
@@ -313,6 +314,8 @@
             this.txLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txLog.Size = new System.Drawing.Size(472, 128);
             this.txLog.TabIndex = 8;
+            this.txLog.Tag = "txlog";
+            this.txLog.DoubleClick += new System.EventHandler(this.btnTag_Click);
             // 
             // panel_test
             // 
@@ -322,7 +325,7 @@
             this.panel_test.Controls.Add(this.button2);
             this.panel_test.Controls.Add(this.button1);
             this.panel_test.Controls.Add(this.btnttt);
-            this.panel_test.Location = new System.Drawing.Point(12, 256);
+            this.panel_test.Location = new System.Drawing.Point(12, 290);
             this.panel_test.Name = "panel_test";
             this.panel_test.Size = new System.Drawing.Size(468, 67);
             this.panel_test.TabIndex = 21;
@@ -398,18 +401,9 @@
             this.btnttt.UseVisualStyleBackColor = true;
             this.btnttt.Click += new System.EventHandler(this.btnttt_Click);
             // 
-            // panel1
-            // 
-            panel1.BackgroundImage = global::pbpb.Properties.Resources.banner;
-            panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            panel1.Location = new System.Drawing.Point(12, 36);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(469, 129);
-            panel1.TabIndex = 22;
-            // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(394, 202);
+            this.button4.Location = new System.Drawing.Point(394, 209);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(86, 25);
             this.button4.TabIndex = 23;
@@ -491,7 +485,7 @@
             // chb_PassiveMode
             // 
             this.chb_PassiveMode.AutoSize = true;
-            this.chb_PassiveMode.Location = new System.Drawing.Point(12, 229);
+            this.chb_PassiveMode.Location = new System.Drawing.Point(12, 170);
             this.chb_PassiveMode.Name = "chb_PassiveMode";
             this.chb_PassiveMode.Size = new System.Drawing.Size(118, 21);
             this.chb_PassiveMode.TabIndex = 28;
@@ -502,18 +496,18 @@
             // chb_HiddenMode
             // 
             this.chb_HiddenMode.AutoSize = true;
-            this.chb_HiddenMode.Location = new System.Drawing.Point(167, 229);
+            this.chb_HiddenMode.Location = new System.Drawing.Point(207, 9);
             this.chb_HiddenMode.Name = "chb_HiddenMode";
-            this.chb_HiddenMode.Size = new System.Drawing.Size(114, 21);
+            this.chb_HiddenMode.Size = new System.Drawing.Size(59, 21);
             this.chb_HiddenMode.TabIndex = 29;
-            this.chb_HiddenMode.Text = "Hidden mode";
+            this.chb_HiddenMode.Text = "Hide";
             this.chb_HiddenMode.UseVisualStyleBackColor = true;
             this.chb_HiddenMode.Click += new System.EventHandler(this.ReadGui);
             // 
             // chb_CanKillSteam
             // 
             this.chb_CanKillSteam.AutoSize = true;
-            this.chb_CanKillSteam.Location = new System.Drawing.Point(322, 229);
+            this.chb_CanKillSteam.Location = new System.Drawing.Point(12, 223);
             this.chb_CanKillSteam.Name = "chb_CanKillSteam";
             this.chb_CanKillSteam.Size = new System.Drawing.Size(149, 21);
             this.chb_CanKillSteam.TabIndex = 30;
@@ -536,7 +530,7 @@
             // chb_view
             // 
             this.chb_view.AutoSize = true;
-            this.chb_view.Location = new System.Drawing.Point(207, 10);
+            this.chb_view.Location = new System.Drawing.Point(207, 170);
             this.chb_view.Name = "chb_view";
             this.chb_view.Size = new System.Drawing.Size(59, 21);
             this.chb_view.TabIndex = 32;
@@ -545,11 +539,35 @@
             this.chb_view.UseVisualStyleBackColor = true;
             this.chb_view.Click += new System.EventHandler(this.ReadGui);
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(394, 247);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(86, 25);
+            this.button8.TabIndex = 34;
+            this.button8.Tag = "exit";
+            this.button8.Text = "Exit";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.btnTag_Click);
+            // 
+            // PanelView
+            // 
+            this.PanelView.BackgroundImage = global::pbpb.Properties.Resources.banner;
+            this.PanelView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PanelView.Location = new System.Drawing.Point(12, 36);
+            this.PanelView.Name = "PanelView";
+            this.PanelView.Size = new System.Drawing.Size(472, 127);
+            this.PanelView.TabIndex = 33;
+            this.PanelView.Tag = "pview";
+            this.PanelView.DoubleClick += new System.EventHandler(this.btnTag_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 293);
+            this.ClientSize = new System.Drawing.Size(493, 285);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.PanelView);
             this.Controls.Add(this.chb_view);
             this.Controls.Add(this.cbox_PubgInput);
             this.Controls.Add(this.chb_CanKillSteam);
@@ -560,7 +578,6 @@
             this.Controls.Add(this.ne_PosY);
             this.Controls.Add(this.ne_PosX);
             this.Controls.Add(this.button4);
-            this.Controls.Add(panel1);
             this.Controls.Add(this.panel_test);
             this.Controls.Add(this.txLog);
             this.Controls.Add(this.btnStartStopBot);
@@ -631,7 +648,8 @@
         private System.Windows.Forms.CheckBox chb_CanKillSteam;
         private System.Windows.Forms.ComboBox cbox_PubgInput;
         private System.Windows.Forms.CheckBox chb_view;
-        public static PanelDoubleBuffered panel1;
+        public PanelDoubleBuffered PanelView;
+        private System.Windows.Forms.Button button8;
     }
 }
 

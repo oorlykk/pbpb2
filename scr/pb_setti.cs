@@ -12,15 +12,15 @@ namespace pbpb
         //
         public static bool IsChanged;
         //
-        public static bool HiddenMode = false;
-        public static bool PassiveMode = false;
+        public static bool HiddenMode = true;
+        public static bool PassiveMode = true;
         public static bool SaveReward = true;
         public static bool IdleAutolaunch = true;
         public static int IdleAutolaunchTimeout = 5;
-        public static int PubgWindowAbsoluteX = Screen.PrimaryScreen.Bounds.Width + 1;
         public static int PubgWindowAbsoluteY = 0;
         public static bool CanRestartSteam = true;
         public static bool DrawScr = true;
+        public static int PubgWindowAbsoluteX = Screen.PrimaryScreen.Bounds.Width + 1;
 
         public static void Save()  {
 
@@ -72,8 +72,13 @@ namespace pbpb
                 SSerialize.StaticClassSaveLoad( typeof( Setti ), o );
 
                 result = true;
+                Log.Add("Settings loaded.");
 
-            } catch { }
+            } catch {
+
+                Log.Add("Default settings loaded.");
+
+            }
 
             return result;
 

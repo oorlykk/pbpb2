@@ -11,8 +11,7 @@ using Win32;
 namespace pbpb {
 
     partial class Form1
-    {     
-        
+    {
         public const int WM_ACTIVATEAPP = User32.WM_USER + 0x0001;
 
         protected override void WndProc( ref Message m )
@@ -88,5 +87,5 @@ namespace pbpb {
             pc.ControlImage.Save( filename_now + ".bmp" );
 
         }
-    }
+   }
 }

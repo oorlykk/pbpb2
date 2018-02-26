@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -17,7 +18,7 @@ namespace pbpb
 
         void PubgStatusProc() {        
 
-            while (!BotStopper.WaitOne(3000, false)) {          
+            while (!BotStopper.WaitOne(2000, false)) {          
 
                 if (!PubgWindow.Exists) {
 
@@ -35,17 +36,30 @@ namespace pbpb
                 
                 PubgWindow.Show();
 
+                Thread.Sleep(500);
+
                 if (PubgWindow.NeedSetupWindow) {
 
                     PubgWindow.SetupWindow();
                     Log.Add( String.Format( "(PW) Setup {1} => {0}", PubgWindow.PartFullHD, PubgWindow.Handle ) );
                 }
 
+                Thread.Sleep(500);
+
                 PubgStatuses ps = PubgStatus.Now( Pcs );              
 
                 Log.Add( String.Format( "(PS) {0}", ps ) );
 
                 if (AppIsExp) ps = PubgStatuses.Unknown;  //Magic EXP!
+
+                if (Setti.DrawScr) {
+
+                    Form1 f = (Form1) Form.ActiveForm;
+                    if (f != null && f.Visible && PubgStatus.RawScr != null) {
+                        
+                        f.PanelView.BackgroundImage = new Bitmap( PubgStatus.RawScr );
+                    }
+                }
 
                 if (PubgStatuses.Unknown.HasFlags( ps )) {
 
@@ -60,7 +74,7 @@ namespace pbpb
                         if (RND.Next( 2 ) == 0) PubgInput.MoveMouse( 100, 100 );
                                            else PubgInput.MoveMouse( -200, -200 );
 
-                        Log.Add( "+Add input (lastgood is long)" );                        
+                        Log.Add( "(PS) Add input (lastgood is long)" );                        
                     }
                 }
 
@@ -69,6 +83,7 @@ namespace pbpb
                     Log.Append( " di: " + Pcs[PubgControls.labWrongMatchState].LastDistance.ToString() );
 
                     PubgRound.WrongMatchStateFound = true;
+                    PubgInput.ClickCenter();
                 }
 
                 else if (PubgStatuses.MatchCanContinue.HasFlags( ps )) {
@@ -85,7 +100,7 @@ namespace pbpb
                         Log.Add( "(PS) click MatchCanContinue Cancel" );
 
                         PubgRound.WrongMatchStateFound = false;
-                        Pcs[PubgControls.btnMatchCanContinue_cancel].ClickLeftMouse();                 
+                        Pcs[PubgControls.btnMatchCanContinue_cancel].ClickLeftMouse();             
                     }
                 }
 
@@ -200,16 +215,13 @@ namespace pbpb
 
                     PubgRound.Set();
 
-                    PubgInput.MoveMouse(55, 55);
-
                     int cd = (1000 * 60 * 2) + 45000;
                     if ( (Environment.TickCount - PubgInput.EjectClickedTime > cd ||
                           Environment.TickCount - PubgInput.ParachuteClickedTime > cd )) 
                     {
                         PubgInput.EjectClickedTime = int.MaxValue;
                         PubgInput.ParachuteClickedTime = int.MaxValue;
-                        PubgInput.Down(); Thread.Sleep(100);
-                        PubgInput.Back();
+                        PubgInput.Down();
                     }
                 }
                 

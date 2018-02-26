@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Reflection;
 using System.Resources;
 using System.Security;
@@ -16,9 +17,9 @@ namespace pbpb {
 
     public partial class Form1 : Form
     {
-        static string uniq = "dGhleg==";
+        static string uniq = "dGhlegg==";
 
-        public static string AppTitle = "PBPB v1.5";
+        public static string AppTitle = "PBPB v1.6";
         public const int PartFullHDPreset = 5;    
 
         static bool AppIsExp;
@@ -29,17 +30,26 @@ namespace pbpb {
         private static ManualResetEvent BotStopper = new ManualResetEvent(true);
              
         public static Task PubgStatusChecker, PubgRestarter = null;
-
-        //public static IntPtr DrawScrToHandle => (new Form1()).panel1.Handle;
-        public static IntPtr DrawScrToHandle => panel1.Handle;
-                
-                
+        
 
         public Form1()
         {
+            InitializeComponent();
+
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler ( 
+                (object sender, UnhandledExceptionEventArgs e ) => {
+
+                    Log.Add("System_Domain_Unhandled_Exception: " + e.ToString());
+                });        
+           
             if (CheckAppIsDup()) Environment.Exit( 0 );
 
-            InitializeComponent();
+            Application.ApplicationExit += new EventHandler(
+                ( object sender, EventArgs e ) => {
+
+                    if (Setti.IsChanged) Setti.Save();
+                });
+
             Text = AppTitle;
             Icon = Resources.gray;
             tray.Icon = Resources.gray;
@@ -53,29 +63,21 @@ namespace pbpb {
             if (Environment.MachineName == "NORM") {
                 AppIsExp = false;
                 panel_test.Visible = true;
+                Height += 50;
             }
-
-            PubgWindow.PartFullHD = PartFullHDPreset;
 
             Log.LogEvent += new ResolveEventHandler(PubgLogEvent);
 
+            PubgWindow.PartFullHD = PartFullHDPreset;         
+
             Init_Pcs();
 
-            InitInput_message();
+            cbox_PubgInput.SelectedIndex = 1;
                       
             Init_HotKeysMon();
 
-            Application.ApplicationExit += new EventHandler(OnApplicationExit);
-
-            Setti.Load(); WriteGui();
-            
+            Setti.Load(); WriteGui();      
         }
-
-        private void OnApplicationExit( object sender, EventArgs  e ) {
-
-            if (Setti.IsChanged) Setti.Save();
-        }
-
 
         static void PubgInputEvent( PubgInputEventArgs e ) {
 
@@ -94,7 +96,17 @@ namespace pbpb {
 
         Assembly PubgLogEvent( object sender, ResolveEventArgs e ) {
 
-            panel1.Visible = Setti.DrawScr;
+            if (Setti.DrawScr && !PanelView.Visible) {
+
+                txLog.Hide();
+                PanelView.Show();
+            }
+            else if (!Setti.DrawScr && PanelView.Visible) {
+
+                PanelView.Hide();
+                txLog.Show();
+            }
+
             txLog.AppendText(e.Name);
             return null;
         }
@@ -137,10 +149,17 @@ namespace pbpb {
 
             string t;
 
-            if ( sender.GetType().ToString() == "System.Windows.Forms.Button" )
-                t = ((Control)sender).Tag.ToString();
+            if (sender.GetType() == typeof( Button ))
+                t = ( (Control) sender ).Tag.ToString();
+
+            else if (sender.GetType() == typeof( PanelDoubleBuffered ))
+                t = ( (PanelDoubleBuffered) sender ).Tag.ToString();
+
+            else if (sender.GetType() == typeof( TextBox ))
+                t = ( (TextBox) sender ).Tag.ToString();
+
             else 
-                t = ((ToolStripItem)sender).Tag.ToString();
+                t = ( (ToolStripItem) sender ).Tag.ToString();
 
             if (t == "h") PubgWindow.Hide();
             else if (t == "s") PubgWindow.Show();
@@ -157,17 +176,43 @@ namespace pbpb {
                 ReadGui();
             }
             else if (t == "cfg") {
+
                 string local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
                 local += @"\TslGame\Saved\Config\WindowsNoEditor\GameUserSettings.ini";
+
                 Shell32.ShellExecute(Handle, "open", local, null, null, User32.SW_SHOWNORMAL);
             }
             else if (t == "about") {
+
                 string owner = Encoding.UTF8.GetString( Convert.FromBase64String( uniq ) );
+
                 DateTime build = DateTimeExtensions.GetLinkerTime(Assembly.GetExecutingAssembly());
+
                 string s = String.Format(" {0} {1} {2} Build time: {3} {4} {5} Owner: {6}", 
                     AppTitle, Environment.NewLine, Environment.NewLine,
                     build, Environment.NewLine, Environment.NewLine, owner);
+
                 MessageBox.Show(s);
+            }
+            else if (t == "pview") {
+                
+                if (PanelView.BackgroundImage == null) return;
+
+                string filename = Path.GetTempPath() + PubgRound.GetRewardName() + ".bmp";
+
+                PanelView.BackgroundImage.Save(filename);
+
+                Shell32.ShellExecute(Handle, "open", filename, "", "", User32.SW_SHOWNORMAL);
+            }
+
+            else if (t == "txlog") {
+                
+                string filename = Path.GetTempPath() + PubgRound.GetRewardName() + ".txt";
+
+                Log.Save( filename );
+
+                Shell32.ShellExecute( Handle, "open", filename, "", "", User32.SW_SHOWNORMAL );
             }
         }
 

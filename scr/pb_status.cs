@@ -4,7 +4,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using SnLib;
+using Win32;
 
 namespace pbpb {
 
@@ -37,15 +39,13 @@ namespace pbpb {
 
         public static void ResetLastGood() => m_LastGoodTick = Environment.TickCount; 
 
+        public static Bitmap RawScr;
+
         public static PubgStatuses Now( PCS Pcs ) {
 
             PubgStatuses result = PubgStatuses.Unknown;
 
-            Bitmap scr = SGraph.Scr( "", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY );
-        
-            if (Setti.DrawScr) Form1.panel1.BackgroundImage = new Bitmap(scr);
-            //if (Setti.DrawScr) SGraph.DrawImage(scr, Form1.DrawScrToHandle, true);
-
+            RawScr = SGraph.Scr( "", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY );
 
             foreach (var key in Pcs) {
 
@@ -54,14 +54,14 @@ namespace pbpb {
 
                 if (pc.IsNative) continue;
 
-                pc.ControlImageFromImage( scr );
+                pc.ControlImageFromImage( RawScr );
 
                 LastDistance = pc.CalcDistance( true );
 
                 if (LastDistance < 5) {
 
-                    if (pcname.NotIn(PubgControls.btnStart, PubgControls.btnMatchCanContinue,
-                                     PubgControls.labWrongMatchState)) {
+                    if ((pcname != PubgControls.btnStart) && (pcname != PubgControls.btnMatchCanContinue) &&
+                        (pcname != PubgControls.labWrongMatchState)) {
 
                         m_LastGoodTick = Environment.TickCount;
                     }
@@ -98,8 +98,6 @@ namespace pbpb {
                 }
 
             }
-
-            scr.Dispose();
 
             m_Status = result;
 
