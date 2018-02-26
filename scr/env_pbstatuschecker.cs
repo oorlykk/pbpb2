@@ -17,8 +17,15 @@ namespace pbpb
         public static bool IsPositiveTimeForInput => (!Setti.PassiveMode) || (Setti.PassiveMode && STime.GetUserIdleTime() > 5000);
 
         void PubgStatusProc() {        
+            
+            int threadwait = 2000;          
 
-            while (!BotStopper.WaitOne(2000, false)) {          
+            while (!BotStopper.WaitOne(threadwait, false)) {
+
+                if (User32.IsWindowVisible((IntPtr)User32.FindWindow(null, Form1.ViewFormTitle)) > 0) 
+                    threadwait = 100;
+                else
+                    threadwait = 2000;
 
                 if (!PubgWindow.Exists) {
 
@@ -34,17 +41,16 @@ namespace pbpb
                     continue;
                 }
                 
-                PubgWindow.Show();
+                if (User32.IsWindowVisible(PubgWindow.Handle) == 0) PubgWindow.Show();
 
-                Thread.Sleep(500);
+                if (Setti.HiddenMode)
+                    Thread.Sleep(500);
 
                 if (PubgWindow.NeedSetupWindow) {
 
                     PubgWindow.SetupWindow();
                     Log.Add( String.Format( "(PW) Setup {1} => {0}", PubgWindow.PartFullHD, PubgWindow.Handle ) );
                 }
-
-                Thread.Sleep(500);
 
                 PubgStatuses ps = PubgStatus.Now( Pcs );              
 
@@ -67,7 +73,7 @@ namespace pbpb
 
                         PubgInput.ClickCenter();
 
-                        Thread.Sleep( 1500 );
+                        Thread.Sleep( 100 );  //1500
 
                         if (RND.Next( 2 ) == 0) PubgInput.MoveMouse( 100, 100 );
                                            else PubgInput.MoveMouse( -200, -200 );

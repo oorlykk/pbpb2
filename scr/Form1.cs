@@ -109,6 +109,8 @@ namespace pbpb {
                 txLog.Show();
             }
 
+            if (txLog.Text.Length > Log.MasSize) txLog.Clear();
+
             txLog.AppendText(e.Name);
             return null;
         }
@@ -198,12 +200,9 @@ namespace pbpb {
                 MessageBox.Show(s);
             }
             else if (t == "pview") {
-                
-                if (PanelView.BackgroundImage == null) return;
 
-                FormView f = new FormView();
-                f.Show();
-                return;
+                (new FormView()).Show(); return;
+
                 string filename = Path.GetTempPath() + PubgRound.GetRewardName() + ".bmp";
 
                 PanelView.BackgroundImage.Save(filename);

@@ -16,13 +16,28 @@ namespace pbpb
 
         public IntPtr Handle { get => PubgWindow.Handle; set => Handle = value; }
 
+        public bool AsPostMessage;
+
         public override void KeyDownOrUp( Keys key, bool release )
         {
+            //if (key != LastKey) ReleaseKey(LastKey);
 
-            ReleaseKey(LastKey);
+            if (!release)
 
-            if (!release) User32.SendMessage( Handle, User32.WM_KEYDOWN, (int)key, 0 );
-            else          User32.SendMessage( Handle, User32.WM_KEYUP, (int)key, 0 );
+                if (!AsPostMessage)
+
+                    User32.SendMessage( Handle, User32.WM_KEYDOWN, (int)key, 0 );
+                else
+
+                    User32.PostMessage( Handle, User32.WM_KEYDOWN, (int)key, 0 );
+            else
+
+                if (!AsPostMessage)
+
+                    User32.SendMessage( Handle, User32.WM_KEYUP, (int)key, 0 );
+                else
+
+                    User32.PostMessage( Handle, User32.WM_KEYUP, (int)key, 0 );
 
             LastKey = key;
 
@@ -32,7 +47,7 @@ namespace pbpb
         public override void KeyPress(Keys key)
         {            
             
-            ReleaseKey(LastKey);
+            if (key != LastKey) ReleaseKey(LastKey);
 
             User32.SendMessage( Handle, User32.WM_KEYDOWN, (int)key, 0 );
             User32.SendMessage( Handle, User32.WM_KEYUP, (int)key, 0 );

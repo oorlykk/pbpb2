@@ -14,6 +14,8 @@ namespace pbpb
 {
     public static class Log {
 
+        public static int MasSize = 10000;
+
         public static void show_error( string str ) {
             MessageBox.Show(str);
         }
@@ -41,6 +43,8 @@ namespace pbpb
 
         public static void Add(string str) {
             
+            if (Text.Length > MasSize) Clear();
+
             string t = DateTime.Now.ToLongTimeString();
             string s = String.Format("[{0}] {1}", t, str);
             add_str( Environment.NewLine + s );

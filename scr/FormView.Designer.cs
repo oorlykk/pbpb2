@@ -36,8 +36,13 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(699, 410);
             this.DoubleBuffered = true;
+            this.KeyPreview = true;
             this.Name = "FormView";
             this.Text = "PBPB View";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormView_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormView_KeyPress);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormView_KeyUp);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.FormView_MouseClick);
             this.ResumeLayout(false);
 
         }

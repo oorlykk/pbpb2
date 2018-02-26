@@ -31,7 +31,6 @@ namespace pbpb {
                     try {
 
                         PanelView.BackgroundImage = PubgStatus.RawScr;
-
                     }
                     catch { }
             }
