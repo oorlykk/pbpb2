@@ -72,11 +72,12 @@ namespace pbpb
                 SSerialize.StaticClassSaveLoad( typeof( Setti ), o );
 
                 result = true;
+
                 Log.Add("Settings loaded.");
 
             } catch {
 
-                Log.Add("Default settings loaded.");
+                Log.Add("Default settings. " + PubgWindowAbsoluteX.ToString());
 
             }
 

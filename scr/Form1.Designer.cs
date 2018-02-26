@@ -517,6 +517,7 @@
             // 
             // cbox_PubgInput
             // 
+            this.cbox_PubgInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbox_PubgInput.FormattingEnabled = true;
             this.cbox_PubgInput.Items.AddRange(new object[] {
             "event",
