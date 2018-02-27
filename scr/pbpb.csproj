@@ -96,18 +96,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="env_acts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="env_inits.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="env_pbrestarter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="env_pbstatuschecker.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,11 +109,14 @@
       <DependentUpon>FormView.cs</DependentUpon>
     </Compile>
     <Compile Include="pb_controls.cs" />
+    <Compile Include="pb_inits.cs" />
     <Compile Include="pb_input.cs" />
     <Compile Include="pb_log.cs" />
+    <Compile Include="pb_restarter.cs" />
     <Compile Include="pb_round.cs" />
     <Compile Include="pb_setti.cs" />
     <Compile Include="pb_status.cs" />
+    <Compile Include="pb_statuschecker.cs" />
     <Compile Include="pb_window.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

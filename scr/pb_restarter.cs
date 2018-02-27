@@ -4,6 +4,7 @@ using SnLib;
 
 namespace pbpb
 {
+    public class ___qeqweqweq {}
 
     partial class Form1
     {

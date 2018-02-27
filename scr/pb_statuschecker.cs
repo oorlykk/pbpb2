@@ -8,6 +8,7 @@ using Win32;
 
 namespace pbpb
 {
+	public class ____qwejqjiqojwe {}
 
     partial class Form1
     {
