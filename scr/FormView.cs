@@ -21,7 +21,7 @@ namespace pbpb
 
                 if (Visible) {
 
-                    BackgroundImage = null;
+                    BackgroundImage.Dispose(); BackgroundImage = null;
                     if (PubgStatus.RawScr != null)
                         BackgroundImage = new Bitmap(PubgStatus.RawScr);
                 }
@@ -36,8 +36,7 @@ namespace pbpb
 
             Text = Form1.ViewFormTitle;
 
-            pi = new _PubgInputMessage();
-            pi.AsPostMessage = true;
+            pi = new _PubgInputMessage { AsPostMessage = true };
         }
 
         private void FormView_KeyUp( object sender, KeyEventArgs e )

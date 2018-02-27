@@ -44,7 +44,7 @@ namespace pbpb {
                     Log.Add("Application Exception: " + e.Exception.Message);
                 });
 
-            if (CheckAppIsDup()) Environment.Exit( 0 );
+            if (ApplicationLaunched()) Environment.Exit( 0 );
 
             Application.ApplicationExit += new EventHandler(
                 ( object sender, EventArgs e ) => {

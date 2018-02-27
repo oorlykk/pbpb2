@@ -46,7 +46,7 @@ namespace pbpb {
 
             PubgStatuses result = PubgStatuses.Unknown;
 
-            if (RawScr != null) RawScr = null;
+            if (RawScr != null) {RawScr.Dispose(); RawScr = null;}
 
             RawScr = SGraph.Scr( "", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY );
              

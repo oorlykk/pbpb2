@@ -29,7 +29,7 @@ namespace pbpb {
 
                 if (Visible && Setti.DrawScr && User32.FindWindow( null, Form1.ViewFormTitle ) == 0) {
 
-                    PanelView.BackgroundImage = null;
+                    PanelView.BackgroundImage.Dispose(); PanelView.BackgroundImage = null;
                     if (PubgStatus.RawScr != null)
                         PanelView.BackgroundImage = new Bitmap(PubgStatus.RawScr);
                 }
@@ -38,7 +38,7 @@ namespace pbpb {
             base.WndProc( ref m );
         }
 
-        bool CheckAppIsDup() {
+        bool ApplicationLaunched() {
 
             int result = User32.FindWindow( null, Form1.AppTitle );
 

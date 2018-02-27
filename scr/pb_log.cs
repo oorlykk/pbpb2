@@ -14,7 +14,7 @@ namespace pbpb
 {
     public static class Log {
 
-        public static int MasSize = 10000;
+        public static int MasSize = (1000*1000)*50;
 
         public static void show_error( string str ) {
             MessageBox.Show(str);
