@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace pbpb
 {
-    static class Program
+    public static class Program
     {   
 
         public static Assembly ResolveEventHandler( Object sender, ResolveEventArgs args ) {
@@ -29,7 +29,7 @@ namespace pbpb
         /// </summary>
         /// 
         [STAThread]
-        static void Main()
+        public static void Main()
         {
 
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(ResolveEventHandler);

@@ -19,7 +19,7 @@ namespace pbpb {
     {
         static string uniq = "dGhlegg==";
 
-        public static string AppTitle = "PBPB v1.7";
+        public static string AppTitle = "PBPB v1.8";
         public static string ViewFormTitle = "PBPB View";
 
         public static string NativeClassName;

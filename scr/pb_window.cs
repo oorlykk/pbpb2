@@ -32,8 +32,9 @@ namespace pbpb
 
             KillExecutedSteamTime = Environment.TickCount;        
             ForceTaskKill("steam.exe");
+            Thread.Sleep(5000);
             ForceTaskKill("gameoverlayui.exe");
-            ForceTaskKill("steamwebhelper.exe");
+            //ForceTaskKill("steamwebhelper.exe");
             KillExecuted = false;
         }
         public static bool KillExecuted = false;
