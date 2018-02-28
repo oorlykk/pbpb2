@@ -20,6 +20,8 @@ namespace pbpb
         void PubgStatusProc() {        
             
             int threadwait = 2000;          
+            PubgStatuses ps = PubgStatuses.None;
+            bool pubg_window_visibled = false;
 
             while (!BotStopper.WaitOne(threadwait, false)) {
 
@@ -37,10 +39,11 @@ namespace pbpb
                 if ((PubgInput.GetType() == typeof(PubgInput)) && ( !IsPositiveTimeForInput )) {
 
                     Log.Add( "(PS) No idle time for actions. Wait..." );
-                    continue;
+                    goto EXIT;
                 }
                 
-                if (User32.IsWindowVisible(PubgWindow.Handle) == 0) PubgWindow.Show();
+                pubg_window_visibled = User32.IsWindowVisible(PubgWindow.Handle) != 0;
+                if (!pubg_window_visibled) PubgWindow.Show();
 
                 if (Setti.HiddenMode)
                     Thread.Sleep(500);
@@ -51,33 +54,24 @@ namespace pbpb
                     Log.Add( String.Format( "(PW) Setup {1} => {0}", PubgWindow.PartFullHD, PubgWindow.Handle ) );
                 }
 
-                PubgStatuses ps = PubgStatus.Now( Pcs );              
+                ps = PubgStatus.Now( Pcs );              
 
                 Log.Add( String.Format( "(PS) {0}", ps ) );
 
-                if (AppIsExp) ps = PubgStatuses.Unknown;  //Magic EXP!
-
-                if ( !ps.HasFlags(PubgStatuses.Unknown) && 
-                     !ps.HasFlags(PubgStatuses.Lobby) &&
-                     !ps.HasFlags(PubgStatuses.MatchCanContinue) ) {
-
-                    PubgStatus.SetLastGood();
-                }
-
+                if (AppIsExp) goto EXIT;  //Magic EXP!
+                
                 if (PubgStatuses.Unknown.HasFlags( ps )) {
 
                     Log.Append( " di: " + PubgStatus.LastDistance.ToString() );
 
                     if (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD_FOR_INPUT) {
 
+                        Log.Add( "(PS) Add input (lastgood is long)" ); 
+
                         PubgInput.ClickCenter();
+                        PubgInput.ChangeViewPerson();
 
-                        Thread.Sleep( 100 );  //1500
-
-                        if (RND.Next( 2 ) == 0) PubgInput.MoveMouse( 100, 100 );
-                                           else PubgInput.MoveMouse( -200, -200 );
-
-                        Log.Add( "(PS) Add input (lastgood is long)" );                        
+                        //if (RND.Next( 2 ) == 0) PubgInput.MoveMouse( 100, 100 ); else PubgInput.MoveMouse( -200, -200 );                                         
                     }
                 }
 
@@ -103,26 +97,27 @@ namespace pbpb
 
                 else if (PubgStatuses.Lobby.HasFlags( ps )) {
 
-                    Log.Add( "click Start" );
+                    Log.Append( " di: " + Pcs[PubgControls.btnStart].LastDistance.ToString() );
+
+                    Thread.Sleep(5000);           
+
+                    PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "lobby" );
 
                     PubgInput.EjectClickedTime = int.MaxValue;
 
                     PubgInput.ParachuteClickedTime = int.MaxValue;
 
-                    Log.Append( " di: " + Pcs[PubgControls.btnStart].LastDistance.ToString() );
-
-                    Pcs[PubgControls.btnStart].ClickLeftMouse();               
-
-                    Thread.Sleep(5000);
-
+                    Pcs[PubgControls.btnStart].ClickLeftMouse();
+                    Pcs[PubgControls.btnStart].ClickLeftMouse();
                 }
+
                 else if (PubgStatuses.ExitToLobby.HasFlags( ps )) {
 
                     Log.Append( " di: " + Pcs[PubgControls.btnExit].LastDistance.ToString() );
 
                     Thread.Sleep( 7000 );
 
-                    PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "dead" );
+                    PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "exit" );
 
                     if ((PubgInput.GetType() == typeof(_PubgInputMessage)) && (!IsPositiveTimeForInput)) {
 
@@ -168,6 +163,7 @@ namespace pbpb
                         Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300));
                         Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300));
                         PubgInput.Eject();
+                        PubgInput.Back();
                     } else Log.Add( "skip EJECT press (no lucky)" );
 
                 }
@@ -178,7 +174,7 @@ namespace pbpb
 
                     PubgInput.ParachuteClickedTime = Environment.TickCount;
                     if (RND.Next( 1 ) == 0) {
-                        PubgInput.Parachute(); Thread.Sleep(100);
+                        PubgInput.Parachute();
                         PubgInput.Back();
                     }
                     else Log.Add( "skip Parachute press (no lucky)" );
@@ -196,7 +192,7 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.labWater].LastDistance.ToString() );
 
-                    if (!PubgRound.WaterAssisted) {
+                    if (!PubgRound.WaterAssisted && IsPositiveTimeForInput) {
 
                         Log.Add( "(PS) Water Assist" );
 
@@ -220,11 +216,46 @@ namespace pbpb
                         PubgInput.ParachuteClickedTime = int.MaxValue;
                         PubgInput.Down();
                     }
+
+                    if (Environment.TickCount - PubgRound.StartedTime > Setti.MaxRoundTime) {
+
+                        Log.Add( "Try Exit (MaxRoundTime)" );
+                        PubgInput.KeyPress( Keys.Escape );                
+                    }
                 }
-                
+
+                else if (PubgStatuses.MainManuExit.HasFlags( ps )) {
+
+                    Log.Append( " di: " + Pcs[PubgControls.labMainManu].LastDistance.ToString() );
+
+                    if (Environment.TickCount - PubgRound.StartedTime > Setti.MaxRoundTime) {
+
+                        Log.Add( "Try Exit (MainMenu + MaxRoundTime)" );
+
+                        bool inputswitched = false;
+
+                        if ( PubgInput.GetType() == typeof( _PubgInputMessage ) ) {
+
+                            inputswitched = true;
+
+                            InitInput_event();
+                        }
+
+                        if (IsPositiveTimeForInput) {
+
+                            Pcs[PubgControls.btnMainManuExit].ClickLeftMouse();
+
+                            Pcs[PubgControls.btnConfirmExit].ClickLeftMouse();
+                        }
+
+                        if (inputswitched) InitInput_message();
+                    }
+
+                }
+           
                 EXIT:
 
-                if (Setti.HiddenMode) PubgWindow.Hide();
+                if ( pubg_window_visibled && Setti.HiddenMode ) PubgWindow.Hide();
 
             }
         }

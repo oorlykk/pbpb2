@@ -59,6 +59,10 @@ namespace pbpb {
             //                                        (ulong) PubgControls.labWrongMatchState,
             //                                        311, 246, 462, 264 ) );
 
+            Pcs.Add( PubgControls.labMainManu, new PubgControl( PubgControls.labMainManu.ToString(),
+                                                    (ulong) PubgControls.labMainManu,
+                                                    382, 215, 465, 224 ) );
+
             Pcs.Add( PubgControls.btnSoloSquad, new PubgControl( PubgControls.btnSoloSquad.ToString(),
                                                     (ulong) PubgControls.btnSoloSquad,
                                                     68, 395 ) );
@@ -66,6 +70,10 @@ namespace pbpb {
             Pcs.Add( PubgControls.btnConfirmExit, new PubgControl( PubgControls.btnConfirmExit.ToString(),
                                                     (ulong) PubgControls.btnConfirmExit,
                                                     420, 290 ) );
+
+            Pcs.Add( PubgControls.btnMainManuExit, new PubgControl( PubgControls.btnMainManuExit.ToString(),
+                                                    (ulong) PubgControls.btnMainManuExit,
+                                                    395, 305 ) );
 
 
 
@@ -145,7 +153,7 @@ namespace pbpb {
             else
                  scr = SGraph.Scr("", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY);
 
-            PubgControl pc = Pcs[PubgControls.btnMatchCanContinueCancel];
+            PubgControl pc = Pcs[PubgControls.labMainManu];
             pc.ControlImageFromImage(scr);          
             int dist = pc.CalcDistance(true);
 

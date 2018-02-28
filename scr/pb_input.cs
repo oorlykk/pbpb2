@@ -68,12 +68,10 @@ namespace pbpb
             }
 
             int lp = (int)(((ushort)x) | (uint)(y << 16));
-            int wp = User32.MK_LBUTTON;
+            int wp = 0; //User32.MK_LBUTTON;
 
             User32.PostMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
-            User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
-            User32.PostMessage( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
-            User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+            User32.SendMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
         }
 
         public override void ReleaseKey(Keys key) {
@@ -90,18 +88,17 @@ namespace pbpb
 
         public override void AssistInWater()
         {
-            if (!Form1.IsPositiveTimeForInput) return;
 
             ReleaseKey( Keys.W ); ReleaseKey( Keys.S ); ReleaseKey( Keys.A ); ReleaseKey( Keys.D );
             ReleaseKey( Keys.Z ); ReleaseKey( Keys.C ); ReleaseKey( Keys.F );
 
             Form1.InitInput_event();
 
-            Form1.PubgInput.MoveMouse( 0, -1000 );
+            Form1.PubgInput.MoveMouse( 0, -666 );
 
             Form1.InitInput_message();
 
-            Forward();
+            Back();
         }
 
     }
@@ -125,14 +122,14 @@ namespace pbpb
 
             ReleaseKey(LastKey);
 
-            SetFocus(); Thread.Sleep(100);
+            SetFocus();
 
-            MoveMouse(-55, 0); Thread.Sleep(100);       
+            Thread.Sleep(55);     
 
             if (!release) SKeybd.KeyDown(key);
             else          SKeybd.KeyUp(key);
 
-            Thread.Sleep(300);
+            Thread.Sleep(55);
 
             RestoreFocus();
 
@@ -146,13 +143,13 @@ namespace pbpb
 
             ReleaseKey(LastKey);
 
-            SetFocus(); Thread.Sleep(100);
+            SetFocus();
 
-            MoveMouse(-25, 0); Thread.Sleep(100);
+            Thread.Sleep(55);
 
             SKeybd.KeyPress(key);
 
-            Thread.Sleep(300);
+            Thread.Sleep(55);
 
             RestoreFocus();
 
@@ -163,10 +160,12 @@ namespace pbpb
 
         public virtual void MoveMouse(int x, int y) {
 
-            SetFocus(); Thread.Sleep(100);
+            SetFocus();
+            Thread.Sleep(55);
 
             SKeybd.MouseMove( x, y );
 
+            Thread.Sleep(55);
             RestoreFocus();
         }
 
@@ -175,11 +174,13 @@ namespace pbpb
             x += PubgWindow.PosX;
             y += PubgWindow.PosY;
 
-            SetFocus(); Thread.Sleep(100);
+            SetFocus();
+            Thread.Sleep(55);
 
             SKeybd.LBClickEx(x, y, true, 64, 1600, 64);
             SKeybd.LBClickEx(x+1, y+1, true);
 
+            Thread.Sleep(55);
             RestoreFocus();
         }
 
@@ -243,11 +244,9 @@ namespace pbpb
             ReleaseKey(Keys.W); ReleaseKey(Keys.S); ReleaseKey(Keys.A); ReleaseKey(Keys.D);
             ReleaseKey(Keys.Z); ReleaseKey(Keys.C); ReleaseKey(Keys.F); 
 
-            MoveMouse(0, 1000);
+            MoveMouse(0, -666);
 
-            Thread.Sleep(300);
-
-            Forward();
+            Back();
         }
         public void ClickCenter() => ClickLeftMouse(480, 308);
 

@@ -19,7 +19,7 @@ namespace pbpb {
     {
         static string uniq = "dGhlegg==";
 
-        public static string AppTitle = "PBPB v1.6.1";
+        public static string AppTitle = "PBPB v1.6.5";
         public static string ViewFormTitle = "PBPB View";
 
         public const int PartFullHDPreset = 5;    
@@ -57,7 +57,7 @@ namespace pbpb {
             tray.Icon = Resources.gray;
           
             DateTime thisDate = DateTime.Today;
-            string date_convert1 = Convert.ToString( "12.03.2018" );
+            string date_convert1 = Convert.ToString( "15.03.2018" );
             DateTime pDate = Convert.ToDateTime( date_convert1 );
             int date_cmp_res = thisDate.CompareTo( pDate );
             AppIsExp = (date_cmp_res > 0);
@@ -199,17 +199,7 @@ namespace pbpb {
 
                 MessageBox.Show(s);
             }
-            else if (t == "pview") {
-
-                (new FormView()).Show(); return;
-
-                string filename = Path.GetTempPath() + PubgRound.GetRewardName() + ".bmp";
-
-                PanelView.BackgroundImage.Save(filename);
-
-                Shell32.ShellExecute(Handle, "open", filename, "", "", User32.SW_SHOWNORMAL);
-            }
-
+            else if (t == "pview") {(new FormView()).Show();}
             else if (t == "txlog") {
                 
                 string filename = Path.GetTempPath() + PubgRound.GetRewardName() + ".txt";
@@ -294,11 +284,7 @@ namespace pbpb {
 
     public class PanelDoubleBuffered : Panel
     {
-        public PanelDoubleBuffered()
-            : base()
-        {
-            this.DoubleBuffered = true;
-        }
+        public PanelDoubleBuffered() : base() { DoubleBuffered = true; }
     }
 
 }

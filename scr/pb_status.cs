@@ -24,6 +24,7 @@ namespace pbpb {
         MatchCanContinue = 0x80,
         Water = 0x100,
         //WrongMatchState = 0x200,
+        MainManuExit = 0x200,
     }
 
     public static class PubgStatus {
@@ -91,8 +92,19 @@ namespace pbpb {
 
                     else if (pcname == PubgControls.labWater)
                         result |= PubgStatuses.Water;
+
+                    else if (pcname == PubgControls.labMainManu)
+                        result |= PubgStatuses.MainManuExit;
                 }
 
+            }
+
+            if (!result.HasFlags( PubgStatuses.Unknown ) &&
+                !result.HasFlags( PubgStatuses.Lobby ) &&
+                !result.HasFlags( PubgStatuses.MatchCanContinue ) &&
+                !result.HasFlags( PubgStatuses.MainManuExit )) {
+
+                SetLastGood();
             }
 
             User32.SendMessage((IntPtr)User32.FindWindow(null, Form1.AppTitle), Form1.WM_SCRUPDATE, 0, 0);

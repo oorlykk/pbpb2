@@ -22,13 +22,18 @@ namespace pbpb
         public static int PosX => Setti.PubgWindowAbsoluteX;
         public static int PosY => Setti.PubgWindowAbsoluteY;
 
+        private static void ForceTaskKill(string task) =>
+            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /t /im " + task, "", User32.SW_HIDE);
+
         public static int KillExecutedSteamTime = int.MaxValue;
         public static void KillExecuteSteam() {
 
             Log.Add("(PW) KillExecute Steam!");
 
             KillExecutedSteamTime = Environment.TickCount; 
-            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im steam.exe", "", User32.SW_HIDE);       
+            ForceTaskKill("steam.exe");
+            ForceTaskKill("gameoverlayui.exe");
+            ForceTaskKill("steamwebhelper.exe");
         }
 
         public static int KillExecutedTime = int.MaxValue;
@@ -36,8 +41,9 @@ namespace pbpb
 
             Log.Add("(PW) KillExecute PUBG!");
 
+            KillExecutedTime = Environment.TickCount;
             PubgRound.End();
-            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im TslGame.exe", "", User32.SW_HIDE);         
+            ForceTaskKill("TslGame.exe");         
         }
 
         public static void StartExecute() {
@@ -45,7 +51,7 @@ namespace pbpb
             Log.Add("(PW) StartExecute PUBG!");
 
             PubgRound.End();
-            Shell32.ShellExecute( IntPtr.Zero, "open", "steam://rungameid/578080", "-low", "", User32.SW_SHOWNORMAL );
+            Shell32.ShellExecute( IntPtr.Zero, "open", "steam://rungameid/578080", "low", "", User32.SW_SHOWNORMAL );
         }
 
         public static IntPtr Handle => FindWindow("PLAYERUNKNOWN'S BATTLEGROUNDS ");
@@ -237,12 +243,8 @@ namespace pbpb
 
         } 
 
-        public static void RestoreOrigWindowSize() {
-
-            User32.SetWindowLong(Handle, User32.GWL_STYLE, OrigStyle);
-            User32.SetWindowPos(Handle, (IntPtr) 0, 0, 0, OrigWidth, OrigHeight, User32.SWP_SHOWWINDOW);
-
-        }
+        public static void RestoreOrigWindowStyle() => User32.SetWindowLong(Handle, User32.GWL_STYLE, OrigStyle);
+        public static void RestoreOrigWindowPos() => User32.SetWindowPos(Handle, (IntPtr) 0, 0, 0, OrigWidth, OrigHeight, User32.SWP_FRAMECHANGED | User32.SWP_NOACTIVATE ); 
 
         public static void Hide() => User32.ShowWindow(Handle, User32.SW_HIDE);
         public static void Show() => User32.ShowWindow(Handle, User32.SW_SHOW);

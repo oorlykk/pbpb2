@@ -45,13 +45,13 @@ namespace pbpb
                 if (!Directory.Exists( RewardsFolder ))
                     Directory.CreateDirectory( RewardsFolder );
 
-                string filename = RewardsFolder + GetRewardName() + ".jpg";
+                string filename = RewardsFolder + GetRewardName() + " " + WaterAssisted.ToYesNoString() + ".jpg";
 
                 SGraph.Scr( filename, PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY, true );
 
-                RewardSaved = true;
-
                 Log.Add( "Reward saved " + filename );
+
+                RewardSaved = true;
 
                 return true;
 
@@ -68,21 +68,21 @@ namespace pbpb
 
             if (IsLive) return;
 
-            StartedTime = Environment.TickCount;
-            IsLive = true;
+            IsLive = true; 
+            StartedTime = Environment.TickCount;                   
             RewardSaved = false;
+            WaterAssisted = false;
+            ContinueClickCount = 0;
 
             Log.Add("New Round Set.");
         }
 
-        public static void End(bool savereward = false, string endreason = "") {
-            
-            EndedTime = Environment.TickCount;
-            IsLive = false;
-            WaterAssisted = false;
-            ContinueClickCount = 0;
+        public static void End(bool savereward = false, string endreason = "") {         
 
-            if (savereward) SaveReward();                
+            IsLive = false;
+            EndedTime = Environment.TickCount;
+                     
+            if (savereward) SaveReward();                    
 
             if (endreason != "") {
 

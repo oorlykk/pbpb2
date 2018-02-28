@@ -73,12 +73,15 @@
             this.cbox_PubgInput = new System.Windows.Forms.ComboBox();
             this.chb_view = new System.Windows.Forms.CheckBox();
             this.button8 = new System.Windows.Forms.Button();
+            this.ne_MaxRoundTIme = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             this.PanelView = new pbpb.PanelDoubleBuffered();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
             this.panel_test.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_PosX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ne_PosY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ne_MaxRoundTIme)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStartStopBot
@@ -287,12 +290,17 @@
             // 
             // ne_MaxIdle
             // 
-            this.ne_MaxIdle.Increment = new decimal(new int[] {
-            1000,
+            this.ne_MaxIdle.Location = new System.Drawing.Point(203, 249);
+            this.ne_MaxIdle.Maximum = new decimal(new int[] {
+            999,
             0,
             0,
             0});
-            this.ne_MaxIdle.Location = new System.Drawing.Point(203, 249);
+            this.ne_MaxIdle.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.ne_MaxIdle.Name = "ne_MaxIdle";
             this.ne_MaxIdle.Size = new System.Drawing.Size(74, 22);
             this.ne_MaxIdle.TabIndex = 18;
@@ -324,9 +332,9 @@
             this.panel_test.Controls.Add(this.button2);
             this.panel_test.Controls.Add(this.button1);
             this.panel_test.Controls.Add(this.btnttt);
-            this.panel_test.Location = new System.Drawing.Point(12, 290);
+            this.panel_test.Location = new System.Drawing.Point(12, 305);
             this.panel_test.Name = "panel_test";
-            this.panel_test.Size = new System.Drawing.Size(468, 67);
+            this.panel_test.Size = new System.Drawing.Size(468, 93);
             this.panel_test.TabIndex = 21;
             this.panel_test.Visible = false;
             // 
@@ -548,6 +556,39 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.btnTag_Click);
             // 
+            // ne_MaxRoundTIme
+            // 
+            this.ne_MaxRoundTIme.Location = new System.Drawing.Point(203, 277);
+            this.ne_MaxRoundTIme.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.ne_MaxRoundTIme.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.ne_MaxRoundTIme.Name = "ne_MaxRoundTIme";
+            this.ne_MaxRoundTIme.Size = new System.Drawing.Size(74, 22);
+            this.ne_MaxRoundTIme.TabIndex = 35;
+            this.ne_MaxRoundTIme.Value = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.ne_MaxRoundTIme.Click += new System.EventHandler(this.ReadGui);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 279);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(181, 17);
+            this.label3.TabIndex = 36;
+            this.label3.Tag = "X";
+            this.label3.Text = "Max Round Time (minutes):";
+            // 
             // PanelView
             // 
             this.PanelView.BackgroundImage = global::pbpb.Properties.Resources.banner;
@@ -563,7 +604,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 285);
+            this.ClientSize = new System.Drawing.Size(493, 343);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.ne_MaxRoundTIme);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.PanelView);
             this.Controls.Add(this.chb_view);
@@ -596,6 +639,7 @@
             this.panel_test.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ne_PosX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ne_PosY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ne_MaxRoundTIme)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -648,6 +692,8 @@
         private System.Windows.Forms.CheckBox chb_view;
         public PanelDoubleBuffered PanelView;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.NumericUpDown ne_MaxRoundTIme;
+        private System.Windows.Forms.Label label3;
     }
 }
 

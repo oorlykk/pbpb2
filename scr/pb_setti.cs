@@ -21,6 +21,7 @@ namespace pbpb
         public static bool CanRestartSteam = true;
         public static bool DrawScr = true;
         public static int PubgWindowAbsoluteX = Screen.PrimaryScreen.Bounds.Width + 1;
+        public static int MaxRoundTime = 5*(1000*60);
 
         public static void Save()  {
 
@@ -101,6 +102,7 @@ namespace pbpb
             Setti.IdleAutolaunchTimeout         =      (int)ne_MaxIdle.Value;
             Setti.PubgWindowAbsoluteX           =      (int)ne_PosX.Value;
             Setti.PubgWindowAbsoluteY           =      (int)ne_PosY.Value;
+            Setti.MaxRoundTime                  =      (int)ne_MaxRoundTIme.Value * (1000*60);
         }
 
         public void WriteGui( object sender = null, EventArgs e = null ) {
@@ -115,6 +117,7 @@ namespace pbpb
             ne_MaxIdle.Value                =      Setti.IdleAutolaunchTimeout;
             ne_PosX.Value                   =      Setti.PubgWindowAbsoluteX;
             ne_PosY.Value                   =      Setti.PubgWindowAbsoluteY;
+            ne_MaxRoundTIme.Value           =      Setti.MaxRoundTime / (1000*60);
         }
     }
 }

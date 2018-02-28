@@ -19,8 +19,10 @@ namespace pbpb
         btnMatchCanContinueCancel = 18410856824799264896,
         labWater = 882281628581721955,
         //labWrongMatchState = 9403657236297352463,
+        labMainManu = 9548902814627173524,
         btnSoloSquad = 91,
-        btnConfirmExit = 92,      
+        btnConfirmExit = 92,
+        btnMainManuExit = 93,
     };
 
     public class PubgControlNative {
@@ -48,7 +50,7 @@ namespace pbpb
             R = new Rectangle( x, y, w, h );
 
         }
-        
+
         public long LastClickedTick {get; private set;}
 
         public void ClickLeftMouse()
