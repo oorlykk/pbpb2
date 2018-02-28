@@ -41,7 +41,7 @@ namespace pbpb
 
             Text = Form1.ViewFormTitle;
 
-            pi = new _PubgInputMessage { AsPostMessage = true };
+            pi = new _PubgInputMessage { AsPostMessage = false };
         }
 
         private void FormView_KeyUp( object sender, KeyEventArgs e )

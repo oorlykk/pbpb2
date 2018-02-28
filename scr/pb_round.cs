@@ -73,6 +73,7 @@ namespace pbpb
             RewardSaved = false;
             WaterAssisted = false;
             ContinueClickCount = 0;
+            PubgWindow.KillExecuted = false;
 
             Log.Add("New Round Set.");
         }

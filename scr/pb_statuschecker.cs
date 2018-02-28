@@ -23,14 +23,14 @@ namespace pbpb
 
             while (!BotStopper.WaitOne(threadwait, false)) {
 
+                threadwait = (User32.IsWindowVisible((IntPtr)User32.FindWindow(null, ViewFormTitle)) > 0) ? 
+                    100 : 2000;
+
                 if (!PubgWindow.Exists) {
 
                     Log.Add( "(PS) No way :( Wait..." );
                     continue;
                 }
-
-                threadwait = (User32.IsWindowVisible((IntPtr)User32.FindWindow(null, ViewFormTitle)) > 0) ? 
-                    100 : 2000;
 
                 PubgWindow.HideBE();
 

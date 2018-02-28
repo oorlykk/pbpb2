@@ -29,11 +29,12 @@ namespace pbpb
                     ((Setti.PassiveMode) && (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD * 3))
                    ) {            
 
-                    PubgStatus.SetLastGood();               
-
+                    PubgStatus.SetLastGood(); 
+                    
+                    bool executed = PubgWindow.KillExecuted;
                     PubgWindow.KillExecute();            
 
-                    if (Setti.CanRestartSteam && PubgWindow.KillExecuted) {
+                    if (Setti.CanRestartSteam && executed) {
 
                         Thread.Sleep(2000);
                         PubgWindow.KillExecuteSteam();
