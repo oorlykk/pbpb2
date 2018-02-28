@@ -76,6 +76,7 @@
             this.ne_MaxRoundTIme = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.PanelView = new pbpb.PanelDoubleBuffered();
+            this.lab_CurrentRounTime = new System.Windows.Forms.Label();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
             this.panel_test.SuspendLayout();
@@ -310,7 +311,6 @@
             0,
             0});
             this.ne_MaxIdle.Click += new System.EventHandler(this.ReadGui);
-            this.ne_MaxIdle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ReadGui);
             // 
             // txLog
             // 
@@ -600,11 +600,22 @@
             this.PanelView.Tag = "pview";
             this.PanelView.DoubleClick += new System.EventHandler(this.btnTag_Click);
             // 
+            // lab_CurrentRounTime
+            // 
+            this.lab_CurrentRounTime.AutoSize = true;
+            this.lab_CurrentRounTime.Location = new System.Drawing.Point(296, 171);
+            this.lab_CurrentRounTime.Name = "lab_CurrentRounTime";
+            this.lab_CurrentRounTime.Size = new System.Drawing.Size(42, 17);
+            this.lab_CurrentRounTime.TabIndex = 37;
+            this.lab_CurrentRounTime.Tag = "";
+            this.lab_CurrentRounTime.Text = "None";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 343);
+            this.Controls.Add(this.lab_CurrentRounTime);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ne_MaxRoundTIme);
             this.Controls.Add(this.button8);
@@ -694,6 +705,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.NumericUpDown ne_MaxRoundTIme;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lab_CurrentRounTime;
     }
 }
 

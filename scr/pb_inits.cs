@@ -92,12 +92,16 @@ namespace pbpb {
             } 
             else if (m.Msg == WM_SCRUPDATE) {
 
-                if (Visible && Setti.DrawScr && User32.FindWindow( null, Form1.ViewFormTitle ) == 0) {
+                if (Visible && Setti.DrawScr /*&& User32.FindWindow( null, Form1.ViewFormTitle ) == 0*/) {
 
-                    PanelView.BackgroundImage.Dispose(); PanelView.BackgroundImage = null;
-                    if (PubgStatus.RawScr != null)
-                        PanelView.BackgroundImage = new Bitmap(PubgStatus.RawScr);
+                    PanelView.BackgroundImage.Dispose();
+                    PanelView.BackgroundImage = null;
+                    if (PubgStatus.RawScr != null) 
+                        PanelView.BackgroundImage = new Bitmap(PubgStatus.RawScr);                                    
                 }
+
+                string rtimestr = STime.TickToStr( Environment.TickCount - PubgRound.StartedTime );
+                lab_CurrentRounTime.Text = String.Format( "{0}", rtimestr );
             }
 
             base.WndProc( ref m );

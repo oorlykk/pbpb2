@@ -8,11 +8,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SnLib;
 
 namespace pbpb
 {
-    public partial class FormView : Form
+    public partial class FormPBPBView : Form
     {
+        public static string NativeClassName;
         _PubgInputMessage pi;
 
         protected override void WndProc( ref Message m )
@@ -21,16 +23,19 @@ namespace pbpb
 
                 if (Visible) {
 
-                    BackgroundImage.Dispose(); BackgroundImage = null;
+                    BackgroundImage.Dispose();
+                    BackgroundImage = null;
+
                     if (PubgStatus.RawScr != null)
                         BackgroundImage = new Bitmap(PubgStatus.RawScr);
+
                 }
             }
 
             base.WndProc( ref m );
         }
 
-        public FormView()
+        public FormPBPBView()
         {
             InitializeComponent();
 

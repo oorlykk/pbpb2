@@ -1,6 +1,6 @@
 ﻿namespace pbpb
 {
-    partial class FormView
+    partial class FormPBPBView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         {
             this.SuspendLayout();
             // 
-            // FormView
+            // FormPBPBView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -38,7 +38,7 @@
             this.ClientSize = new System.Drawing.Size(699, 410);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
-            this.Name = "FormView";
+            this.Name = "FormPBPBView";
             this.Text = "PBPB View";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormView_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormView_KeyPress);

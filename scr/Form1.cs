@@ -19,8 +19,10 @@ namespace pbpb {
     {
         static string uniq = "dGhlegg==";
 
-        public static string AppTitle = "PBPB v1.6.5";
+        public static string AppTitle = "PBPB v1.6.6";
         public static string ViewFormTitle = "PBPB View";
+
+        public static string NativeClassName;
 
         public const int PartFullHDPreset = 5;    
 
@@ -199,7 +201,7 @@ namespace pbpb {
 
                 MessageBox.Show(s);
             }
-            else if (t == "pview") {(new FormView()).Show();}
+            else if (t == "pview") {(new FormPBPBView()).Show();}
             else if (t == "txlog") {
                 
                 string filename = Path.GetTempPath() + PubgRound.GetRewardName() + ".txt";
@@ -251,7 +253,8 @@ namespace pbpb {
         }
 
         private void btnttt_Click( object sender, EventArgs e ) {
-            //
+
+           // Log.Add( NativeClassName );
         }
 
         private void cbox_PubgInput_SelectedIndexChanged( object sender, EventArgs e )
