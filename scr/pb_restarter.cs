@@ -9,7 +9,7 @@ namespace pbpb
     partial class Form1
     {
 
-        public const int MAX_NOLASTGOOD = (1000 * 60) * 5;
+        public const int MAX_NOLASTGOOD = (1000 * 60) * 4;
 
         void PubgRestarterProc() {
 
@@ -33,7 +33,7 @@ namespace pbpb
 
                     PubgWindow.KillExecute();            
 
-                    if (Setti.CanRestartSteam) {
+                    if (Setti.CanRestartSteam && PubgWindow.KillExecuted) {
 
                         Thread.Sleep(2000);
                         PubgWindow.KillExecuteSteam();

@@ -94,7 +94,7 @@ namespace pbpb
 
             Form1.InitInput_event();
 
-            Form1.PubgInput.MoveMouse( 0, -666 );
+            Form1.PubgInput.MoveMouse( 1000, 1000 );
 
             Form1.InitInput_message();
 
@@ -112,10 +112,27 @@ namespace pbpb
         public void RaiseInputEvent(Keys key, bool release, bool ispress) =>
             InputEvent?.Invoke( new PubgInputEventArgs( key, release, ispress ) );
 
+        public static bool CanInteract => (!Setti.PassiveMode) || (Setti.PassiveMode && STime.GetUserIdleTime() > 5000);
+
+        public bool IsInputEvent => (this.GetType() == typeof(PubgInput));
+        public bool IsInputMessage => (this.GetType() == typeof(_PubgInputMessage));
+
         public Keys LastKey { get; set; }    
 
-        private void SetFocus() => PubgWindow.SetFocus();         
-        private void RestoreFocus() => PubgWindow.RestoreFocus();  
+        public POINT OldCursorPos = new POINT();
+
+        private void SetFocus() {
+
+            User32.GetCursorPos( out OldCursorPos );
+            PubgWindow.SetFocus();
+        }
+
+        private void RestoreFocus() {
+
+            PubgWindow.RestoreFocus();
+            if (PubgWindow.FocusSettted)
+                User32.SetCursorPos(OldCursorPos.x, OldCursorPos.y);
+        }
 
         public virtual void KeyDownOrUp(Keys key, bool release)
         {       
@@ -244,7 +261,7 @@ namespace pbpb
             ReleaseKey(Keys.W); ReleaseKey(Keys.S); ReleaseKey(Keys.A); ReleaseKey(Keys.D);
             ReleaseKey(Keys.Z); ReleaseKey(Keys.C); ReleaseKey(Keys.F); 
 
-            MoveMouse(0, -666);
+            MoveMouse(1000, 1000);
 
             Back();
         }

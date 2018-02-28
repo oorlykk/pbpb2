@@ -30,17 +30,19 @@ namespace pbpb
 
             Log.Add("(PW) KillExecute Steam!");
 
-            KillExecutedSteamTime = Environment.TickCount; 
+            KillExecutedSteamTime = Environment.TickCount;        
             ForceTaskKill("steam.exe");
             ForceTaskKill("gameoverlayui.exe");
             ForceTaskKill("steamwebhelper.exe");
+            KillExecuted = false;
         }
-
+        public static bool KillExecuted = false;
         public static int KillExecutedTime = int.MaxValue;
         public static void KillExecute() {
 
             Log.Add("(PW) KillExecute PUBG!");
 
+            KillExecuted = true;
             KillExecutedTime = Environment.TickCount;
             PubgRound.End();
             ForceTaskKill("TslGame.exe");         

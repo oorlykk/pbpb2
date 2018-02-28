@@ -525,8 +525,8 @@
             this.cbox_PubgInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbox_PubgInput.FormattingEnabled = true;
             this.cbox_PubgInput.Items.AddRange(new object[] {
-            "event",
-            "message"});
+            "Full",
+            "Half"});
             this.cbox_PubgInput.Location = new System.Drawing.Point(80, 6);
             this.cbox_PubgInput.Name = "cbox_PubgInput";
             this.cbox_PubgInput.Size = new System.Drawing.Size(121, 24);

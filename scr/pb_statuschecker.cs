@@ -15,8 +15,6 @@ namespace pbpb
 
         public const int MAX_NOLASTGOOD_FOR_INPUT = ( 1000 * 60 ) / 2;
 
-        public static bool IsPositiveTimeForInput => (!Setti.PassiveMode) || (Setti.PassiveMode && STime.GetUserIdleTime() > 5000);
-
         void PubgStatusProc() {        
             
             int threadwait = 2000;          
@@ -36,7 +34,7 @@ namespace pbpb
 
                 PubgWindow.HideBE();
 
-                if ((PubgInput.GetType() == typeof(PubgInput)) && ( !IsPositiveTimeForInput )) {
+                if (PubgInput.IsInputEvent && !PubgInput.CanInteract) {
 
                     Log.Add( "(PS) No idle time for actions. Wait..." );
                     goto EXIT;
@@ -99,16 +97,27 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.btnStart].LastDistance.ToString() );
 
-                    Thread.Sleep(5000);           
-
                     PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "lobby" );
 
                     PubgInput.EjectClickedTime = int.MaxValue;
 
                     PubgInput.ParachuteClickedTime = int.MaxValue;
 
+                    Thread.Sleep(3000);                           
+
+                    Log.Add("(PS) click Start");
+
+                    bool inputswitched = false;
+                    if (PubgInput.IsInputMessage && PubgInput.CanInteract) {
+
+                        inputswitched = true;
+
+                        InitInput_event();
+                    }
+
                     Pcs[PubgControls.btnStart].ClickLeftMouse();
-                    Pcs[PubgControls.btnStart].ClickLeftMouse();
+
+                    if (inputswitched) InitInput_message();
                 }
 
                 else if (PubgStatuses.ExitToLobby.HasFlags( ps )) {
@@ -119,7 +128,7 @@ namespace pbpb
 
                     PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "exit" );
 
-                    if ((PubgInput.GetType() == typeof(_PubgInputMessage)) && (!IsPositiveTimeForInput)) {
+                    if (PubgInput.IsInputMessage && !PubgInput.CanInteract) {
 
                         Log.Add("Can't exit (PassiveMode: no idle time)");
 
@@ -192,7 +201,7 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.labWater].LastDistance.ToString() );
 
-                    if (!PubgRound.WaterAssisted && IsPositiveTimeForInput) {
+                    if (!PubgRound.WaterAssisted && PubgInput.CanInteract) {
 
                         Log.Add( "(PS) Water Assist" );
 
@@ -241,7 +250,7 @@ namespace pbpb
                             InitInput_event();
                         }
 
-                        if (IsPositiveTimeForInput) {
+                        if (PubgInput.CanInteract) {
 
                             Pcs[PubgControls.btnMainManuExit].ClickLeftMouse();
 

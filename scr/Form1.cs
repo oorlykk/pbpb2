@@ -19,7 +19,7 @@ namespace pbpb {
     {
         static string uniq = "dGhlegg==";
 
-        public static string AppTitle = "PBPB v1.6.6";
+        public static string AppTitle = "PBPB v1.7";
         public static string ViewFormTitle = "PBPB View";
 
         public static string NativeClassName;
@@ -253,7 +253,7 @@ namespace pbpb {
         }
 
         private void btnttt_Click( object sender, EventArgs e ) {
-
+            PubgInput.IsInputMessage.ShowMessage();
            // Log.Add( NativeClassName );
         }
 
