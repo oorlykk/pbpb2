@@ -135,11 +135,11 @@ namespace pbpb
         }
 
         public virtual void KeyDownOrUp(Keys key, bool release)
-        {       
-
-            ReleaseKey(LastKey);
+        {                  
 
             SetFocus();
+
+            ReleaseKey(LastKey);
 
             Thread.Sleep(55);     
 
@@ -156,11 +156,11 @@ namespace pbpb
         }
 
         public virtual void KeyPress(Keys key)
-        {                             
-
-            ReleaseKey(LastKey);
+        {                                       
 
             SetFocus();
+
+            ReleaseKey(LastKey);
 
             Thread.Sleep(55);
 

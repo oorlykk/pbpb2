@@ -167,7 +167,7 @@ namespace pbpb
                     Log.Append( " di: " + Pcs[PubgControls.labEject].LastDistance.ToString() );
 
                     PubgInput.EjectClickedTime = Environment.TickCount;
-                    if (RND.Next( 1 ) == 0) {
+                    if (RND.Next( 2 ) == 0) {
                         Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300));
                         Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300));
                         Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300)); Thread.Sleep(RND.Next(300));
@@ -222,13 +222,18 @@ namespace pbpb
                           Environment.TickCount - PubgInput.ParachuteClickedTime > cd )) 
                     {
                         PubgInput.EjectClickedTime = int.MaxValue;
+
                         PubgInput.ParachuteClickedTime = int.MaxValue;
-                        PubgInput.Down();
+
+                        if (PubgRound.WaterAssisted == false)
+
+                            PubgInput.Down();
                     }
 
-                    if (Environment.TickCount - PubgRound.StartedTime > Setti.MaxRoundTime) {
+                    if (Environment.TickCount - PubgRound.StartedTime > Setti.MaxRoundTimeRnd) {
 
                         Log.Add( "Try Exit (MaxRoundTime)" );
+
                         PubgInput.KeyPress( Keys.Escape );                
                     }
                 }
