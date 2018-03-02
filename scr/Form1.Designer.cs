@@ -311,6 +311,7 @@
             0,
             0});
             this.ne_MaxIdle.Click += new System.EventHandler(this.ReadGui);
+            this.ne_MaxIdle.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ReadGui);
             // 
             // txLog
             // 
@@ -580,6 +581,7 @@
             0,
             0});
             this.ne_MaxRoundTIme.Click += new System.EventHandler(this.ReadGui);
+            this.ne_MaxRoundTIme.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ReadGui);
             // 
             // label3
             // 

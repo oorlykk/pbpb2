@@ -277,6 +277,10 @@ namespace pbpb {
             ReadGui();
         }
 
+        private void ReadGui( object sender, KeyEventArgs e ) => ReadGui();
+
+        private void ReadGui( object sender, EventArgs e ) => ReadGui();
+
         private void Form1_FormClosing( object sender, FormClosingEventArgs e ) {
 
             if (e.CloseReason == CloseReason.UserClosing) {

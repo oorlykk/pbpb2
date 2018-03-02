@@ -90,9 +90,8 @@ namespace pbpb
 
     partial class Form1
     {
-        private void ReadGui( object sender, KeyEventArgs e ) => ReadGui();
 
-        public void ReadGui( object sender = null, EventArgs e = null) {
+        public void ReadGui() {
             //
             Setti.IsChanged = true;
             //
