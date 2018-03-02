@@ -9,25 +9,107 @@ using snlib = SnLib;
 namespace pbpb
 {
 
-    public class SteamWindow {
+    public class NativeWindow
+    {
+        public NativeWindow(string window_text) {
 
-        public static IntPtr FindWindow(string WindowName) => PubgWindow.FindWindow(WindowName);
+            m_WindowName = window_text;
+        }
 
-        public static int KillExecutedSteamTime = int.MaxValue;
-        public static void KillExecuteSteam() {
+        private string m_WindowName;
+        public string Caption { get => m_WindowName; set => m_WindowName = value; }
+    
+        public void Hide() => User32.ShowWindow(Handle, User32.SW_HIDE);
+        public void Show() => User32.ShowWindow(Handle, User32.SW_SHOW);
+        protected virtual IntPtr Find() => (IntPtr)User32.FindWindow( null, Caption );
 
-            Log.Add("(PW) KillExecute Steam!");
-
-            KillExecutedSteamTime = Environment.TickCount;        
-            ForceTaskKill("steam.exe");
-            Thread.Sleep(5000);
-            ForceTaskKill("gameoverlayui.exe");
-            //ForceTaskKill("steamwebhelper.exe");
-            KillExecuted = false;
+        public IntPtr Handle => Find();
+        public bool Exists => (int)Handle != 0;
+        
+        public virtual void SetClose()
+        {
+            User32.SendMessage( Handle, User32.WM_CLOSE, 0, 0 );
+            User32.SendMessage( Handle, User32.WM_QUIT, 0, 0 );
+            User32.SendMessage( Handle, User32.WM_DESTROY, 0, 0 );
         }
     }
 
-    public static class PubgWindow {
+    public class NativeWindows {
+
+        public static NativeWindow Pubg = new NativeWindow( "PLAYERUNKNOWN'S BATTLEGROUNDS " );
+
+        public static NativeWindow SteamErrorEn = new NativeWindow( "Steam - Error");
+        public static NativeWindow SteamErrorRu = new NativeWindow( "Steam — Ошибка");
+
+
+        public static NativeWindow SteamConnectErrorEn = new NativeWindow( "Connection Error");
+        public static NativeWindow SteamConnectErrorRu = new NativeWindow( "Ошибка подключения");
+
+        public static NativeWindow SteamUpdatEn = new NativeWindow( "Updating PLAYERUNKNOWN'S BATTLEGROUNDS");
+        public static NativeWindow SteamUpdateRu = new NativeWindow( "Обновление PLAYERUNKNOWN'S BATTLEGROUNDS");
+
+        public static NativeWindow SteamUpdateReadyEn = new NativeWindow( "Ready - PLAYERUNKNOWN'S BATTLEGROUNDS");
+        public static NativeWindow SteamUpdateReadyRu = new NativeWindow( "Готово — PLAYERUNKNOWN'S BATTLEGROUNDS");
+
+        public static NativeWindow PubgCrashReporter = new NativeWindow( "BATTLEGROUNDS Crash Reporter");
+
+        public static NativeWindow BattlEyeLauncher = new NativeWindow( "BattlEye Launcher" );
+        
+    }
+
+
+    public class NativeUtils {
+
+        private static void ForceTaskKill(string task) =>
+            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /t /im " + task, "", User32.SW_HIDE);
+
+        public static bool KillExecuted;
+
+        public static int KillExecutePubgTime = int.MaxValue;
+        public static void KillExecutePubg() {
+
+            Log.Add("(PU) KillExecute PUBG!");
+
+            KillExecutePubgTime = Environment.TickCount;
+            KillExecuted = true;          
+            PubgRound.End();
+            ForceTaskKill("TslGame.exe");         
+        }
+
+        public static int KillExecutedSteamTime = int.MaxValue;
+        public static void KillExecuteSteam()
+        {
+
+            Log.Add( "(PU) KillExecute Steam!" );
+
+            KillExecutedSteamTime = Environment.TickCount;
+
+            ForceTaskKill( "steam.exe" );
+            Thread.Sleep( 5000 );
+            ForceTaskKill( "gameoverlayui.exe" ); //ForceTaskKill("steamwebhelper.exe");
+            KillExecuted = false;
+        }
+
+        public static void KillCrash()
+        {
+            Log.Add( "(PU) KillExecute Crash!" );
+
+            ForceTaskKill( "BroCrashReporter.exe" );       
+        }
+
+        public static void StartExecute()
+        {
+
+            Log.Add( "(PU) StartExecute PUBG!" );
+
+            PubgRound.End();
+            Shell32.ShellExecute( IntPtr.Zero, "open", "steam://rungameid/578080", "low", "", User32.SW_SHOWNORMAL );
+        }
+    }
+
+   public static class PubgWindow {
+
+        public static NativeWindow Window = NativeWindows.Pubg;
 
         public static void ShowLastWinError(bool show) {
 
@@ -36,8 +118,6 @@ namespace pbpb
             Win32Exception e = new Win32Exception( Marshal.GetLastWin32Error() );
             throw ( e );
         }
-
-        public static IntPtr FindWindow(string WindowName) => (IntPtr)User32.FindWindow( null, WindowName );
 
         private static int m_partfullhd;
 
@@ -50,77 +130,55 @@ namespace pbpb
         public static int PosX => Setti.PubgWindowAbsoluteX;
         public static int PosY => Setti.PubgWindowAbsoluteY;
 
-        private static void ForceTaskKill(string task) =>
-            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /t /im " + task, "", User32.SW_HIDE);
+        public static bool KillExecuted { get => NativeUtils.KillExecuted; set => NativeUtils.KillExecuted = value; }
+        public static int KillExecutedTime => NativeUtils.KillExecutePubgTime;
+        public static void KillExecute() => NativeUtils.KillExecutePubg();
+        public static int KillExecutedSteamTime => NativeUtils.KillExecutedSteamTime;
 
-        public static bool KillExecuted = false;
-        public static int KillExecutedTime = int.MaxValue;
-        public static void KillExecute() {
+        public static void KillExecuteSteam()
+        {
+            if (SCEExitst) {
 
-            Log.Add("(PW) KillExecute PUBG!");
+                Log.Add("(PW) Steam Connection Error close");
 
-            KillExecuted = true;
-            KillExecutedTime = Environment.TickCount;
-            PubgRound.End();
-            ForceTaskKill("TslGame.exe");         
+                SCEClose();
+            }
+            NativeUtils.KillExecuteSteam();
         }
 
-        public static void StartExecute() {
+        public static void StartExecute() => NativeUtils.StartExecute();
 
-            Log.Add("(PW) StartExecute PUBG!");
-
-            PubgRound.End();
-            Shell32.ShellExecute( IntPtr.Zero, "open", "steam://rungameid/578080", "low", "", User32.SW_SHOWNORMAL );
-        }
-
-        public static IntPtr Handle => FindWindow("PLAYERUNKNOWN'S BATTLEGROUNDS ");
+        public static IntPtr Handle => Window.Handle;
         public static bool Exists => !Handle.Equals(IntPtr.Zero);
-        public static void CloseMsg() {
+        public static void CloseMsg() => Window.SetClose();
 
-            User32.SendMessage(Handle, User32.WM_CLOSE, 0, 0);
-            User32.SendMessage(Handle, User32.WM_QUIT, 0, 0);
-            User32.SendMessage(Handle, User32.WM_DESTROY, 0, 0);
-
-        } 
-
-        public static IntPtr CrashHandle => FindWindow("BATTLEGROUNDS Crash Reporter");
-        public static bool CrashExists => !CrashHandle.Equals(IntPtr.Zero);
+        public static IntPtr CrashHandle => NativeWindows.PubgCrashReporter.Handle;
+        public static bool CrashExists => NativeWindows.PubgCrashReporter.Exists;
         public static void KillCrash()
         {
-            User32.SetForegroundWindow( CrashHandle );
-            Thread.Sleep( 150 );
-
-            snlib.SKeybd.KeyPress( Keys.Tab );
-            Thread.Sleep( 50 );
-            snlib.SKeybd.KeyPress( Keys.Space ); 
-
-            User32.SendMessage( SEHandle, User32.WM_CLOSE, 0, 0 );
-            User32.SendMessage( SEHandle, User32.WM_QUIT, 0, 0 );
-            User32.SendMessage( SEHandle, User32.WM_DESTROY, 0, 0 );
-
-            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /im BroCrashReporter.exe", "", User32.SW_HIDE);
+            NativeWindows.PubgCrashReporter.SetClose();
+            NativeUtils.KillCrash();
         }
 
-        private static IntPtr BEHandle => FindWindow("BattlEye Launcher" );
+        private static IntPtr BEHandle => NativeWindows.BattlEyeLauncher.Handle;
         private static bool BEVisible => User32.IsWindowVisible(BEHandle) > 0;
         public static void HideBE() {
 
             if (!BEVisible) return;
 
-            User32.ShowWindow(BEHandle, User32.SW_HIDE);
+            NativeWindows.BattlEyeLauncher.Hide();
 
-            Log.Add( "(PW) Hide BEye" );
-                    
+            Log.Add( "(PW) Hide BEye" );                   
         }
 
         // Steam Error
         public static IntPtr SEHandle {
             get {
 
-                IntPtr result = FindWindow("Steam - Error");
+                IntPtr result = NativeWindows.SteamErrorEn.Handle;
 
-                if (result.ToInt32() <= 0)
-                    result = FindWindow("Steam — Ошибка");
+                if ((int)result == 0)
+                    result = NativeWindows.SteamErrorRu.Handle;
 
                 return result;
             }
@@ -130,26 +188,23 @@ namespace pbpb
         {
             if (!SEExists) return;
 
-            User32.SetForegroundWindow( SEHandle );
+            if (NativeWindows.SteamErrorEn.Exists) {
 
-            Thread.Sleep( 100 );
+                NativeWindows.SteamErrorEn.SetClose();
+                return;
+            }
 
-            //snlib.SKeybd.KeyPress( Keys.Space );
-
-            User32.SendMessage( SEHandle, User32.WM_CLOSE, 0, 0 );
-            User32.SendMessage( SEHandle, User32.WM_QUIT, 0, 0 );
-            User32.SendMessage( SEHandle, User32.WM_DESTROY, 0, 0 );
-
+            if (NativeWindows.SteamErrorRu.Exists) NativeWindows.SteamErrorRu.SetClose();
         }   
 
         //Steam Update Ready
         public static IntPtr SURHandle {
             get {
 
-                IntPtr result = FindWindow("Ready - PLAYERUNKNOWN'S BATTLEGROUNDS");
+                IntPtr result = NativeWindows.SteamUpdateReadyEn.Handle;
 
-                if (result.ToInt32() <= 0)
-                    result = FindWindow("Готово — PLAYERUNKNOWN'S BATTLEGROUNDS");
+                if ((int)result == 0)
+                    result = NativeWindows.SteamUpdateReadyRu.Handle;
 
                 return result;
             }
@@ -157,28 +212,44 @@ namespace pbpb
         public static bool SURExists => !SURHandle.Equals(IntPtr.Zero);
         public static void CloseSUR() {
 
-            User32.SendMessage( SURHandle, User32.WM_CLOSE, 0, 0 );
+            if (!SURExists) return;
 
-            User32.SendMessage( SURHandle, User32.WM_QUIT, 0, 0 );
+            if (NativeWindows.SteamErrorEn.Exists) {
 
-            User32.SendMessage( SURHandle, User32.WM_DESTROY, 0, 0 );
+                NativeWindows.SteamErrorEn.SetClose();
+                return;
+            }
+
+            if (NativeWindows.SteamErrorRu.Exists) NativeWindows.SteamErrorRu.SetClose();
         }
 
-        //Steam Updating
+         //Steam Updating
         public static IntPtr SUHandle {
             get {
 
-                IntPtr result = FindWindow( "Updating PLAYERUNKNOWN'S BATTLEGROUNDS" );
+                IntPtr result = NativeWindows.SteamUpdatEn.Handle;
 
-                if (result.ToInt32() <= 0)
-                    result = FindWindow( "Обновление PLAYERUNKNOWN'S BATTLEGROUNDS" );
+                if ((int)result == 0)
+                    result = NativeWindows.SteamUpdateRu.Handle;
 
                 return result;
             }
         }
-        public static bool SUExists => !SUHandle.Equals(IntPtr.Zero);     
+        public static bool SUExists => !SUHandle.Equals(IntPtr.Zero);  
 
-        
+        //Steam Connection Error
+        public static bool SCEExitst => NativeWindows.SteamConnectErrorEn.Exists || NativeWindows.SteamConnectErrorRu.Exists;
+        public static void SCEClose() {
+
+            if (NativeWindows.SteamConnectErrorEn.Exists) {
+
+                NativeWindows.SteamConnectErrorEn.SetClose();
+                return;
+            }
+
+            if (NativeWindows.SteamConnectErrorRu.Exists) NativeWindows.SteamConnectErrorRu.SetClose();
+        }   
+     
         public static bool IsFocused => (IntPtr)User32.GetForegroundWindow() == Handle;
 
         public static IntPtr PredFocus;
