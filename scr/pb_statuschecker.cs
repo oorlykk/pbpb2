@@ -90,13 +90,13 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.btnStart].LastDistance.ToString() );
 
-                    PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "lobby" );
+                    PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "" );
 
                     PubgInput.EjectClickedTime = int.MaxValue;
 
                     PubgInput.ParachuteClickedTime = int.MaxValue;
 
-                    Thread.Sleep(3000);                           
+                    Thread.Sleep(7500);                           
 
                     Log.Add("(PS) click Start");
 
@@ -248,12 +248,7 @@ namespace pbpb
                             InitInput_event();
                         }
 
-                        if (PubgInput.CanInteract) {
-
-                            Pcs[PubgControls.btnMainManuExit].ClickLeftMouse();
-
-                            Pcs[PubgControls.btnConfirmExit].ClickLeftMouse();
-                        }
+                        if (PubgInput.CanInteract) Pcs[PubgControls.btnConfirmExit].ClickLeftMouse();
 
                         if (inputswitched) InitInput_message();
                     }

@@ -41,18 +41,12 @@ namespace pbpb
 
             Text = Form1.ViewFormTitle;
 
-            pi = new _PubgInputMessage { AsPostMessage = false };
+            pi = new _PubgInputMessage { AsPostMessage = true };
         }
 
         private void FormView_KeyUp( object sender, KeyEventArgs e )
         {
-            pi.KeyDownOrUp(e.KeyCode, true);
-            
-        }
-
-        private void FormView_KeyPress( object sender, KeyPressEventArgs e )
-        {
-            //
+            pi.KeyDownOrUp(e.KeyCode, true);          
         }
 
         private void FormView_KeyDown( object sender, KeyEventArgs e )
@@ -60,9 +54,9 @@ namespace pbpb
             pi.KeyDownOrUp(e.KeyCode, false);
         }
 
-        private void FormView_MouseClick( object sender, MouseEventArgs e )
+        private void FormPBPBView_MouseClick( object sender, MouseEventArgs e )
         {
-            if (e.Button == MouseButtons.Left) pi.ClickLeftMouse(0, 0);
+            if (e.Button == MouseButtons.Left) pi.ClickLeftMouse(1, 1);
         }
     }
 }

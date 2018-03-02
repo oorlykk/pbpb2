@@ -9,7 +9,7 @@ namespace pbpb
     partial class Form1
     {
 
-        public const int MAX_NOLASTGOOD = (1000 * 60) * 4;
+        public const int MAX_NOLASTGOOD = (1000 * 60) * 5;
 
         void PubgRestarterProc() {
 
@@ -27,18 +27,18 @@ namespace pbpb
                     ((!Setti.PassiveMode) && (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD)) 
                     ||
                     ((Setti.PassiveMode) && (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD * 3))
-                   ) {            
-
-                    PubgStatus.SetLastGood(); 
+                   ) {                   
                     
                     bool executed = PubgWindow.KillExecuted;
                     PubgWindow.KillExecute();            
 
                     if (Setti.CanRestartSteam && executed) {
 
-                        Thread.Sleep(2000);
+                        Thread.Sleep(3000);
                         PubgWindow.KillExecuteSteam();
                     }
+
+                    PubgStatus.SetLastGood();
 
                     goto EXIT;
                 }
@@ -80,6 +80,8 @@ namespace pbpb
                     }
 
                     PubgWindow.StartExecute();
+
+                    Thread.Sleep(30000);
                 }
 
                 EXIT:; 

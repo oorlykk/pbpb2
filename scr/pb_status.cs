@@ -35,9 +35,9 @@ namespace pbpb {
 
         public static PubgStatuses Status { get => m_Status; set => m_Status = value; }
 
-        private static long m_LastGoodTick = Environment.TickCount;
+        private static int m_LastGoodTick = Environment.TickCount;
 
-        public static long LastGoodTick { get => m_LastGoodTick; }
+        public static int LastGoodTick { get => m_LastGoodTick; }
 
         public static void SetLastGood() => m_LastGoodTick = Environment.TickCount; 
 

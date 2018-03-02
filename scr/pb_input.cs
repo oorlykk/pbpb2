@@ -68,10 +68,19 @@ namespace pbpb
             }
 
             int lp = (int)(((ushort)x) | (uint)(y << 16));
-            int wp = 0; //User32.MK_LBUTTON;
+            int wp = User32.MK_LBUTTON;
 
-            User32.PostMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
-            User32.SendMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+            if (!AsPostMessage) {
+                User32.SendMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+                User32.SendMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+            } else {
+                User32.PostMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+                User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+                User32.PostMessage( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
+                User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+            }
+
+
         }
 
         public override void ReleaseKey(Keys key) {

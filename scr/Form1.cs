@@ -17,12 +17,10 @@ namespace pbpb {
 
     public partial class Form1 : Form
     {
-        static string uniq = "dGhlegg==";
+        static string uniq = "dGhleg==";
 
-        public static string AppTitle = "PBPB v1.8.1";
+        public static string AppTitle = "PBPB v1.8.5";
         public static string ViewFormTitle = "PBPB View";
-
-        public static string NativeClassName;
 
         public const int PartFullHDPreset = 5;    
 
@@ -197,7 +195,7 @@ namespace pbpb {
 
                     DateTime build = DateTimeExtensions.GetLinkerTime( Assembly.GetExecutingAssembly() );
 
-                    s = String.Format( " {0} {1} {2} Build time: {3} {4} {5} Owner: {6}",
+                    s = String.Format( " {0} {1} {2} Build time: {3} {4} {5} (c) 2018, {6}",
                         AppTitle, Environment.NewLine, Environment.NewLine,
                         build, Environment.NewLine, Environment.NewLine, owner );
                 }
@@ -257,8 +255,11 @@ namespace pbpb {
         }
 
         private void btnttt_Click( object sender, EventArgs e ) {
-            PubgInput.IsInputMessage.ShowMessage();
-           // Log.Add( NativeClassName );
+            IntPtr h1 =  NativeWindows.SteamConnectErrorEn.Handle;
+            IntPtr h2 =  NativeWindows.SteamConnectErrorRu.Handle;
+            h1.ShowMessage();
+            h2.ShowMessage();
+            NativeUtils.KillExecuteSteam();
         }
 
         private void cbox_PubgInput_SelectedIndexChanged( object sender, EventArgs e )

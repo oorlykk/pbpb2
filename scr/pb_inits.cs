@@ -69,13 +69,7 @@ namespace pbpb {
 
             Pcs.Add( PubgControls.btnConfirmExit, new PubgControl( PubgControls.btnConfirmExit.ToString(),
                                                     (ulong) PubgControls.btnConfirmExit,
-                                                    420, 290 ) );
-
-            Pcs.Add( PubgControls.btnMainManuExit, new PubgControl( PubgControls.btnMainManuExit.ToString(),
-                                                    (ulong) PubgControls.btnMainManuExit,
-                                                    395, 305 ) );
-
-
+                                                    420, 298 ) );
 
         }
 

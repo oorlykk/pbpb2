@@ -63,37 +63,20 @@ namespace pbpb
         private static void ForceTaskKill(string task) =>
             Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /t /im " + task, "", User32.SW_HIDE);
 
-        public static bool KillExecuted;
-
-        public static int KillExecutePubgTime = int.MaxValue;
         public static void KillExecutePubg() {
 
-            Log.Add("(PU) KillExecute PUBG!");
-
-            KillExecutePubgTime = Environment.TickCount;
-            KillExecuted = true;          
-            PubgRound.End();
             ForceTaskKill("TslGame.exe");         
         }
 
-        public static int KillExecutedSteamTime = int.MaxValue;
         public static void KillExecuteSteam()
         {
 
-            Log.Add( "(PU) KillExecute Steam!" );
-
-            KillExecutedSteamTime = Environment.TickCount;
-
             ForceTaskKill( "steam.exe" );
-            Thread.Sleep( 5000 );
             ForceTaskKill( "gameoverlayui.exe" ); //ForceTaskKill("steamwebhelper.exe");
-            KillExecuted = false;
         }
 
         public static void KillCrash()
-        {
-            Log.Add( "(PU) KillExecute Crash!" );
-
+        {    
             ForceTaskKill( "BroCrashReporter.exe" );       
         }
 
@@ -126,14 +109,28 @@ namespace pbpb
         public static int PosX => Setti.PubgWindowAbsoluteX;
         public static int PosY => Setti.PubgWindowAbsoluteY;
 
-        public static bool KillExecuted { get => NativeUtils.KillExecuted; set => NativeUtils.KillExecuted = value; }
-        public static int KillExecutedTime => NativeUtils.KillExecutePubgTime;
-        public static void KillExecute() => NativeUtils.KillExecutePubg();
-        public static int KillExecutedSteamTime => NativeUtils.KillExecutedSteamTime;
+        public static bool KillExecuted;
+        public static int KillExecutedTime;
 
+        public static void KillExecute() {
+
+            Log.Add( "(PW) KillExecute PUBG!" );
+
+            PubgRound.End();
+
+            KillExecutedTime = Environment.TickCount;               
+            NativeUtils.KillExecutePubg();
+            KillExecuted = true;
+        }
+
+        public static int KillExecutedSteamTime;
         public static void KillExecuteSteam()
         {
+            Log.Add( "(PW) KillExecute Steam!" );
+
+            KillExecutedSteamTime = Environment.TickCount;
             NativeUtils.KillExecuteSteam();
+            KillExecuted = false;
         }
 
         public static void StartExecute() {
@@ -153,8 +150,13 @@ namespace pbpb
         public static bool CrashExists => NativeWindows.PubgCrashReporter.Exists;
         public static void KillCrash()
         {
-            if (NativeWindows.PubgCrashReporter.Exists)
-                NativeWindows.PubgCrashReporter.SetClose();
+            Log.Add( "(PU) KillExecute Crash!" );
+
+            if (NativeWindows.PubgCrashReporter.Exists) {
+
+                NativeWindows.PubgCrashReporter.SetClose();          
+            }
+
             NativeUtils.KillCrash();
         }
 
