@@ -51,7 +51,7 @@ namespace pbpb
 
         }
 
-        public long LastClickedTick {get; private set;}
+        public int LastClickedTick {get; private set;}
 
         public void ClickLeftMouse()
         {

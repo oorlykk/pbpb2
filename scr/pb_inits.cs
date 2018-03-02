@@ -49,7 +49,7 @@ namespace pbpb {
 
             Pcs.Add( PubgControls.btnMatchCanContinueCancel, new PubgControl( PubgControls.btnMatchCanContinueCancel.ToString(),
                                                      (ulong) PubgControls.btnMatchCanContinueCancel,
-                                                     485, 300, 535, 320 ) );
+                                                     510, 310 ) );
 
             Pcs.Add( PubgControls.labWater, new PubgControl( PubgControls.labWater.ToString(),
                                                     (ulong) PubgControls.labWater,

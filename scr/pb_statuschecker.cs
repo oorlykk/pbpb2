@@ -47,9 +47,8 @@ namespace pbpb
                     Thread.Sleep(500);
 
                 if (PubgWindow.NeedSetupWindow) {
-
-                    PubgWindow.SetupWindow();
-                    Log.Add( String.Format( "(PW) Setup {1} => {0}", PubgWindow.PartFullHD, PubgWindow.Handle ) );
+                    
+                    Log.Add( String.Format( "(PW) Setup {1} => {0} result: {2}", PubgWindow.PartFullHD, PubgWindow.Handle, PubgWindow.SetupWindow().ToYesNoString() ) );
                 }
 
                 ps = PubgStatus.Now( Pcs );              
@@ -77,20 +76,14 @@ namespace pbpb
 
                     Log.Append( " di: " + Pcs[PubgControls.btnMatchCanContinueContinue].LastDistance.ToString() );
 
-                    if (PubgRound.ContinueClickCount < 2) {
+                    int lc = Pcs[PubgControls.btnMatchCanContinueContinue].LastClickedTick;
 
-                        Log.Add( "(PS) click MatchCanContinue" );
-
-                        PubgRound.ContinueClickCount += 1;
-                        Pcs[PubgControls.btnMatchCanContinueContinue].ClickLeftMouse();
-                    }
-                    else {
-
-                        Log.Add( "(PS) click MatchCanContinueCancel ( > cont index )" );
-
-                        PubgRound.ContinueClickCount = 0;
+                    if (Environment.TickCount - lc < 30000)
                         Pcs[PubgControls.btnMatchCanContinueCancel].ClickLeftMouse();
-                    }
+                    else
+                        Pcs[PubgControls.btnMatchCanContinueContinue].ClickLeftMouse();
+
+                    Thread.Sleep(2000);
                 }
 
                 else if (PubgStatuses.Lobby.HasFlags( ps )) {

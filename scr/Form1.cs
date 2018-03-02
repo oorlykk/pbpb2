@@ -19,7 +19,7 @@ namespace pbpb {
     {
         static string uniq = "dGhlegg==";
 
-        public static string AppTitle = "PBPB v1.8";
+        public static string AppTitle = "PBPB v1.8.1";
         public static string ViewFormTitle = "PBPB View";
 
         public static string NativeClassName;
@@ -189,17 +189,21 @@ namespace pbpb {
 
                 Shell32.ShellExecute(Handle, "open", local, null, null, User32.SW_SHOWNORMAL);
             }
-            else if (t == "about") {          
+            else if (t == "about") {     
+               
+                string s = "";
+                try {
+                    string owner = Encoding.UTF8.GetString( Convert.FromBase64String( uniq ) );
 
-                string owner = Encoding.UTF8.GetString( Convert.FromBase64String( uniq ) );
+                    DateTime build = DateTimeExtensions.GetLinkerTime( Assembly.GetExecutingAssembly() );
 
-                DateTime build = DateTimeExtensions.GetLinkerTime(Assembly.GetExecutingAssembly());
-
-                string s = String.Format(" {0} {1} {2} Build time: {3} {4} {5} Owner: {6}", 
-                    AppTitle, Environment.NewLine, Environment.NewLine,
-                    build, Environment.NewLine, Environment.NewLine, owner);
-
-                MessageBox.Show(s);
+                    s = String.Format( " {0} {1} {2} Build time: {3} {4} {5} Owner: {6}",
+                        AppTitle, Environment.NewLine, Environment.NewLine,
+                        build, Environment.NewLine, Environment.NewLine, owner );
+                }
+                catch { }
+                PubgWindow.ShowLastWinError(true);
+                s.ShowMessage();
             }
             else if (t == "pview") {(new FormPBPBView()).Show();}
             else if (t == "txlog") {

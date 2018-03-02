@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using Win32;
@@ -8,6 +10,14 @@ namespace pbpb
 {
 
     public static class PubgWindow {
+
+        public static void ShowLastWinError(bool show) {
+
+            if (!show) return;
+
+            Win32Exception e = new Win32Exception( Marshal.GetLastWin32Error() );
+            throw ( e );
+        }
 
         private static IntPtr FindWindow(string WindowName) => (IntPtr)User32.FindWindow( null, WindowName );
 
@@ -224,7 +234,7 @@ namespace pbpb
             }
         }
 
-        public static void SetupWindow() {
+        public static bool SetupWindow() {
 
             if (first) {
 
@@ -237,12 +247,17 @@ namespace pbpb
                 OrigHeight = rc.Bottom - rc.Top;
 
             }
-            User32.SetWindowLong(Handle, User32.GWL_STYLE, StyleNone);
+            bool result = User32.SetWindowLong(Handle, User32.GWL_STYLE, StyleNone) > 0;
+            ShowLastWinError(!result);
 
-            int flags = User32.SWP_NOZORDER | User32.SWP_SHOWWINDOW | User32.SWP_NOCOPYBITS |
-                        User32.SWP_FRAMECHANGED;
+            User32.SetWindowPos(Handle, (IntPtr) 0, 0, 0, 0, 0, User32.SWP_NOMOVE | User32.SWP_NOSIZE |           User32.SWP_NOZORDER | User32.SWP_FRAMECHANGED);
 
-            User32.SetWindowPos(Handle, (IntPtr) 0, PosX, PosY, Width, Height, flags);
+            int flags = User32.SWP_SHOWWINDOW | User32.SWP_NOCOPYBITS;
+            result = User32.SetWindowPos(Handle, (IntPtr) 0, PosX, PosY, Width, Height, flags) > 0;
+
+            ShowLastWinError(!result);
+
+            return result;
 
         } 
 

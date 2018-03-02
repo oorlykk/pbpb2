@@ -25,8 +25,6 @@ namespace pbpb
 
         public static bool WaterAssisted;
 
-        public static int ContinueClickCount;
-
         public static string GetRewardName() {
 
             long t = Environment.TickCount - StartedTime;
@@ -72,7 +70,6 @@ namespace pbpb
             StartedTime = Environment.TickCount;                   
             RewardSaved = false;
             WaterAssisted = false;
-            ContinueClickCount = 0;
             PubgWindow.KillExecuted = false;
 
             Log.Add("New Round Set.");
