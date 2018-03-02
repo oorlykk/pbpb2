@@ -9,6 +9,24 @@ using snlib = SnLib;
 namespace pbpb
 {
 
+    public class SteamWindow {
+
+        public static IntPtr FindWindow(string WindowName) => PubgWindow.FindWindow(WindowName);
+
+        public static int KillExecutedSteamTime = int.MaxValue;
+        public static void KillExecuteSteam() {
+
+            Log.Add("(PW) KillExecute Steam!");
+
+            KillExecutedSteamTime = Environment.TickCount;        
+            ForceTaskKill("steam.exe");
+            Thread.Sleep(5000);
+            ForceTaskKill("gameoverlayui.exe");
+            //ForceTaskKill("steamwebhelper.exe");
+            KillExecuted = false;
+        }
+    }
+
     public static class PubgWindow {
 
         public static void ShowLastWinError(bool show) {
@@ -19,7 +37,7 @@ namespace pbpb
             throw ( e );
         }
 
-        private static IntPtr FindWindow(string WindowName) => (IntPtr)User32.FindWindow( null, WindowName );
+        public static IntPtr FindWindow(string WindowName) => (IntPtr)User32.FindWindow( null, WindowName );
 
         private static int m_partfullhd;
 
@@ -35,18 +53,6 @@ namespace pbpb
         private static void ForceTaskKill(string task) =>
             Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /t /im " + task, "", User32.SW_HIDE);
 
-        public static int KillExecutedSteamTime = int.MaxValue;
-        public static void KillExecuteSteam() {
-
-            Log.Add("(PW) KillExecute Steam!");
-
-            KillExecutedSteamTime = Environment.TickCount;        
-            ForceTaskKill("steam.exe");
-            Thread.Sleep(5000);
-            ForceTaskKill("gameoverlayui.exe");
-            //ForceTaskKill("steamwebhelper.exe");
-            KillExecuted = false;
-        }
         public static bool KillExecuted = false;
         public static int KillExecutedTime = int.MaxValue;
         public static void KillExecute() {
