@@ -23,7 +23,18 @@ namespace pbpb
         public static int PubgWindowAbsoluteX = Screen.PrimaryScreen.Bounds.Width + 1;
         public static int MaxRoundTime = 5*(1000*60);
 
-        public static int MaxRoundTimeRnd => MaxRoundTime + Form1.RND.Next(100) + Form1.RND.Next(100) + Form1.RND.Next(100) + Form1.RND.Next(100) + Form1.RND.Next(100) + Form1.RND.Next(100) + Form1.RND.Next(100) + Form1.RND.Next(100) + Form1.RND.Next(100) + Form1.RND.Next(100) + Form1.RND.Next(100);
+        public static int MaxRoundTimeRnd =>  MaxRoundTime +
+                                    Form1.RND.Next( 1000 ) +
+                                    Form1.RND.Next( 1000 ) +
+                                    Form1.RND.Next( 1000 ) +
+                                    Form1.RND.Next( 1000 ) +
+                                    Form1.RND.Next( 1000 ) +
+                                    Form1.RND.Next( 1000 ) +
+                                    Form1.RND.Next( 1000 ) +
+                                    Form1.RND.Next( 1000 ) +
+                                    Form1.RND.Next( 1000 ) +
+                                    Form1.RND.Next( 1000 ) +
+                                    Form1.RND.Next( 1000 );
 
         public static void Save()  {
 

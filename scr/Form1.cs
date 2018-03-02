@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using System.Threading;
@@ -19,7 +20,7 @@ namespace pbpb {
     {
         static string uniq = "dGhleg==";
 
-        public static string AppTitle = "PBPB v1.8.5";
+        public static string AppTitle = "PBPB v1.9";
         public static string ViewFormTitle = "PBPB View";
 
         public const int PartFullHDPreset = 5;    
@@ -65,7 +66,7 @@ namespace pbpb {
             if (Environment.MachineName == "NORM") {
                 AppIsExp = false;
                 panel_test.Visible = true;
-                Height += 50;
+                Height += 25;
             }
 
             Log.LogEvent += new ResolveEventHandler(PubgLogEvent);
@@ -130,6 +131,21 @@ namespace pbpb {
             PubgStatus.SetLastGood();
             PubgInput.EjectClickedTime = int.MaxValue;
             PubgInput.ParachuteClickedTime = int.MaxValue;
+
+            if (PubgStatusChecker != null) {
+
+                Log.Add("Free Task <StatusChecker>");
+
+                PubgStatusChecker.Dispose();
+                PubgStatusChecker = null;
+            }
+            if (PubgRestarter != null) {
+
+                Log.Add("Free Task <StatusProc>");
+
+                PubgRestarter.Dispose();
+                PubgRestarter = null;
+            }
             PubgStatusChecker = Task.Run( () => PubgRestarterProc() );
             PubgRestarter = Task.Run( () => PubgStatusProc() );
 
@@ -254,12 +270,11 @@ namespace pbpb {
             }
         }
 
-        private void btnttt_Click( object sender, EventArgs e ) {
-            IntPtr h1 =  NativeWindows.SteamConnectErrorEn.Handle;
-            IntPtr h2 =  NativeWindows.SteamConnectErrorRu.Handle;
-            h1.ShowMessage();
-            h2.ShowMessage();
-            NativeUtils.KillExecuteSteam();
+
+
+        private void btnttt_Click( object sender, EventArgs e )
+        {
+
         }
 
         private void cbox_PubgInput_SelectedIndexChanged( object sender, EventArgs e )

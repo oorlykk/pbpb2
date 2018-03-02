@@ -618,7 +618,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 343);
+            this.ClientSize = new System.Drawing.Size(493, 326);
             this.Controls.Add(this.lab_CurrentRounTime);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ne_MaxRoundTIme);
@@ -643,6 +643,7 @@
             this.Controls.Add(this.chb_SaveReward);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

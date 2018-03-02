@@ -118,24 +118,30 @@ namespace pbpb {
                 bool IsPres( Keys key ) => ( User32.GetAsyncKeyState( (int) key ) < 0 );         
                 
                 while (IsHandleCreated) {
+                    try {
+                        if (IsPres( Keys.Pause )) {
 
-                    if (IsPres(Keys.Pause)) {
-                        bool launched = !BotStopper.WaitOne( 0, false );
-                        string msg = "Bot " + (launched ? "stopped" : "launched");
-                        if (launched) {
-                            StopBotClick();
-                            PubgWindow.CloseMsg(); PubgWindow.KillExecute(); PubgWindow.HideBE();
-                            Log.Add( msg + " [user key]" );                        
+                            bool launched = !BotStopper.WaitOne( 0, false );
+                            string msg = "Bot " + ( launched ? "stopped" : "launched" );
+                            if (launched) {
+                                StopBotClick();
+                                PubgWindow.CloseMsg(); PubgWindow.KillExecute(); PubgWindow.HideBE();
+                                Log.Add( msg + " [user key]" );
+                            }
+                            else {
+                                StartBotClick();
+                                Log.Add( msg + " [user key]" );
+                            }
+                            tray.BalloonTipText = msg;
+                            tray.ShowBalloonTip( 2000 );
+                            Thread.Sleep( 3000 );
                         }
-                        else {
-                            StartBotClick();
-                            Log.Add( msg + " [user key]" ); 
-                        }
-                        tray.BalloonTipText = msg;
-                        tray.ShowBalloonTip( 2000 );
-                        Thread.Sleep( 3000 );
                     }
-                    Thread.Sleep(10);
+                    catch (Exception e) {
+
+                        Log.Add("HotKeysMon exception..." + e.Message);
+                    }
+                    Thread.Sleep(50);
                 }
                 
             } );
