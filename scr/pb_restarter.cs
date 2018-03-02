@@ -44,21 +44,25 @@ namespace pbpb
                 }
 
 
-                if (PubgWindow.SEExists || PubgWindow.CrashExists || PubgWindow.SURExists) {
+                if (PubgWindow.SEExists || PubgWindow.CrashExists || PubgWindow.SURExists ||
+                    PubgWindow.SCEExitst) {
                     
                     string s = String.Format( 
-                        "(PR) error found ( crash {0}, steam {1}, update {2} )", 
+                        "(PR) error found ( crash {0}, steam {1}, update {2}, conerror {3} )", 
                         PubgWindow.CrashExists.ToYesNoString(), 
                         PubgWindow.SEExists.ToYesNoString(),
-                        PubgWindow.SURExists.ToYesNoString() );
+                        PubgWindow.SURExists.ToYesNoString(), 
+                        PubgWindow.SCEExitst.ToYesNoString());
                     
                     Log.Add( s );
 
-                    if (PubgWindow.SURExists) PubgWindow.CloseSUR();
+                    PubgWindow.CloseSUR();
 
                     PubgWindow.CloseSE();
 
-                    if (PubgWindow.CrashExists) PubgWindow.KillCrash();  
+                    PubgWindow.CloseSCE();
+
+                    PubgWindow.KillCrash();  
                     
                     PubgWindow.KillExecute();
 
@@ -75,11 +79,7 @@ namespace pbpb
                         goto EXIT;
                     }
 
-                    PubgStatus.SetLastGood();
-
                     PubgWindow.StartExecute();
-
-                    Thread.Sleep(30000);
                 }
 
                 EXIT:; 

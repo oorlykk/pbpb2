@@ -99,10 +99,6 @@ namespace pbpb
 
         public static void StartExecute()
         {
-
-            Log.Add( "(PU) StartExecute PUBG!" );
-
-            PubgRound.End();
             Shell32.ShellExecute( IntPtr.Zero, "open", "steam://rungameid/578080", "low", "", User32.SW_SHOWNORMAL );
         }
     }
@@ -137,16 +133,17 @@ namespace pbpb
 
         public static void KillExecuteSteam()
         {
-            if (SCEExitst) {
-
-                Log.Add("(PW) Steam Connection Error close");
-
-                SCEClose();
-            }
             NativeUtils.KillExecuteSteam();
         }
 
-        public static void StartExecute() => NativeUtils.StartExecute();
+        public static void StartExecute() {
+
+            PubgRound.End();
+            
+            Log.Add( "(PW) StartExecute PUBG!" );
+                      
+            NativeUtils.StartExecute();
+        }
 
         public static IntPtr Handle => Window.Handle;
         public static bool Exists => !Handle.Equals(IntPtr.Zero);
@@ -156,7 +153,8 @@ namespace pbpb
         public static bool CrashExists => NativeWindows.PubgCrashReporter.Exists;
         public static void KillCrash()
         {
-            NativeWindows.PubgCrashReporter.SetClose();
+            if (NativeWindows.PubgCrashReporter.Exists)
+                NativeWindows.PubgCrashReporter.SetClose();
             NativeUtils.KillCrash();
         }
 
@@ -239,7 +237,7 @@ namespace pbpb
 
         //Steam Connection Error
         public static bool SCEExitst => NativeWindows.SteamConnectErrorEn.Exists || NativeWindows.SteamConnectErrorRu.Exists;
-        public static void SCEClose() {
+        public static void CloseSCE() {
 
             if (NativeWindows.SteamConnectErrorEn.Exists) {
 
