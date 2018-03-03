@@ -101,16 +101,13 @@ namespace pbpb {
             base.WndProc( ref m );
         }
 
-        bool ApplicationLaunched() {
 
-            int result = User32.FindWindow( null, Form1.AppTitle );
+        bool AppIsLaunched => User32.FindWindow( null, Form1.AppTitle ) > 0;
 
-            if (result > 0) User32.SendMessage( (IntPtr) result, Form1.WM_ACTIVATEAPP, 0, 0 );
+        void AppActivate() => 
+            User32.SendMessage( (IntPtr) User32.FindWindow( null, AppTitle ), WM_ACTIVATEAPP, 0, 0 );
 
-            return ( result > 0 );
-        }
 
-        
         void Init_HotKeysMon() {
 
             Task.Run( () => {

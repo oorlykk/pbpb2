@@ -45,7 +45,11 @@ namespace pbpb {
                     Log.Add("Application Exception: " + e.Exception.Message);
                 });
 
-            if (ApplicationLaunched()) Environment.Exit( 0 );
+            if (AppIsLaunched) {
+
+                AppActivate();
+                Environment.Exit( 0 );
+            }
 
             Application.ApplicationExit += new EventHandler(
                 ( object sender, EventArgs e ) => {
@@ -67,7 +71,7 @@ namespace pbpb {
                 AppIsExp = false;
                 panel_test.Visible = true;
                 Height += 25;
-            }
+            } else Height -= 25;
 
             Log.LogEvent += new ResolveEventHandler(PubgLogEvent);
 
@@ -79,7 +83,9 @@ namespace pbpb {
                       
             Init_HotKeysMon();
 
-            Setti.Load(); WriteGui();      
+            Setti.Load();
+
+            WriteGui();      
         }
 
         static void PubgInputEvent( PubgInputEventArgs e ) {
@@ -274,7 +280,7 @@ namespace pbpb {
 
         private void btnttt_Click( object sender, EventArgs e )
         {
-
+            SDisplay.PowerOff(Handle);
         }
 
         private void cbox_PubgInput_SelectedIndexChanged( object sender, EventArgs e )

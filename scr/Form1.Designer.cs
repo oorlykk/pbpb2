@@ -471,6 +471,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label1.Location = new System.Drawing.Point(272, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(21, 17);
@@ -482,6 +483,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label2.Location = new System.Drawing.Point(379, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(21, 17);
