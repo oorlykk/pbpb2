@@ -19,7 +19,8 @@ namespace pbpb
             
             int threadwait = 2000;          
             PubgStatuses ps = PubgStatuses.None;
-            bool pubg_window_visibled = false;
+            bool pubg_window_visibled = false;        
+            bool lobbyinputswitcher = false;
 
             Log.Add("(MAIN) StatusProc enter!");
 
@@ -106,9 +107,14 @@ namespace pbpb
                         bool inputswitched = false;
                         if (PubgInput.IsInputMessage && PubgInput.CanInteract) {
 
-                            inputswitched = true;
+                            if (lobbyinputswitcher) {
 
-                            InitInput_event();
+                                inputswitched = true;
+
+                                InitInput_event();
+                            }
+
+                            lobbyinputswitcher = !lobbyinputswitcher;
                         }
 
                         Pcs[PubgControls.btnStart].ClickLeftMouse();
