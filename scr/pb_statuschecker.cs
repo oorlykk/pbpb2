@@ -21,6 +21,7 @@ namespace pbpb
             PubgStatuses ps = PubgStatuses.None;
             bool pubg_window_visibled = false;        
             bool lobbyinputswitcher = false;
+            bool unknowassisted = false;
 
             Log.Add("(MAIN) StatusProc enter!");
 
@@ -68,12 +69,22 @@ namespace pbpb
 
                         if (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD_FOR_INPUT) {
 
-                            Log.Add( "(PS) Add input (lastgood is long)" );
+                            if (!unknowassisted) {
 
-                            PubgInput.ClickCenter();
-                            PubgInput.ChangeViewPerson();
+                                Log.Add( "(PS) Add input (lastgood is long)" );
 
-                            //if (RND.Next( 2 ) == 0) PubgInput.MoveMouse( 100, 100 ); else PubgInput.MoveMouse( -200, -200 );                                         
+                                PubgInput.ClickCenter();
+                                PubgInput.ChangeViewPerson();
+
+                                //if (RND.Next( 2 ) == 0) PubgInput.MoveMouse( 100, 100 ); else PubgInput.MoveMouse( -200, -200 ); 
+                                
+                                unknowassisted = true;
+                            }
+                            else {
+
+                                unknowassisted = false;
+                                Thread.Sleep(10000);
+                            }                         
                         }
                     }
 
@@ -126,7 +137,7 @@ namespace pbpb
 
                         if (inputswitched) InitInput_message();
 
-                        Thread.Sleep( 15000 );
+                        Thread.Sleep( 10000 );
                     }
 
                     else if (PubgStatuses.ExitToLobby.HasFlags( ps )) {

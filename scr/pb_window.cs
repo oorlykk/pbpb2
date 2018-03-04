@@ -91,7 +91,7 @@ namespace pbpb
 
         public static NativeWindow Window = NativeWindows.Pubg;
 
-        public static void ShowLastWinError(bool show) {
+        public static void ThrowLastWinError(bool show) {
 
             if (!show) return;
 
@@ -326,14 +326,14 @@ namespace pbpb
 
             }
             bool result = User32.SetWindowLong(Handle, User32.GWL_STYLE, StyleNone) > 0;
-            ShowLastWinError(!result);
+            ThrowLastWinError(!result);
 
             User32.SetWindowPos(Handle, (IntPtr) 0, 0, 0, 0, 0, User32.SWP_NOMOVE | User32.SWP_NOSIZE |           User32.SWP_NOZORDER | User32.SWP_FRAMECHANGED);
 
             int flags = User32.SWP_SHOWWINDOW | User32.SWP_NOCOPYBITS;
             result = User32.SetWindowPos(Handle, (IntPtr) 0, PosX, PosY, Width, Height, flags) > 0;
 
-            ShowLastWinError(!result);
+            ThrowLastWinError(!result);
 
             return result;
 

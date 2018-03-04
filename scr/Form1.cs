@@ -215,15 +215,15 @@ namespace pbpb {
                 try {
                     string owner = Encoding.UTF8.GetString( Convert.FromBase64String( uniq ) );
 
-                    DateTime build = DateTimeExtensions.GetLinkerTime( Assembly.GetExecutingAssembly() );
+                    DateTime build = DateTimeExtensions.GetLinkerTime( Assembly.GetAssembly(GetType()) );
 
                     s = String.Format( " {0} {1} {2} Build time: {3} {4} {5} (c) 2018, {6}",
                         AppTitle, Environment.NewLine, Environment.NewLine,
                         build, Environment.NewLine, Environment.NewLine, owner );
                 }
                 catch { }
-                PubgWindow.ShowLastWinError(true);
                 s.ShowMessage();
+                PubgWindow.ThrowLastWinError(true);
             }
             else if (t == "pview") {(new FormPBPBView()).Show();}
             else if (t == "txlog") {
