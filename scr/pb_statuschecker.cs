@@ -123,7 +123,7 @@ namespace pbpb
 
                             if (!lobbyinputswitcher) {
 
-                                //inputswitched = true;
+                                inputswitched = true;
 
                                 InitInput_event();
                             }
@@ -137,7 +137,7 @@ namespace pbpb
 
                         if (inputswitched) InitInput_message();
 
-                        Thread.Sleep( 10000 );
+                        Thread.Sleep( 15000 );
                     }
 
                     else if (PubgStatuses.ExitToLobby.HasFlags( ps )) {
