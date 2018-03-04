@@ -19,7 +19,7 @@ namespace pbpb {
     public partial class Form1 : Form
     {
         static string uniq = "dGhleg==";
-        public const string AppBuild = "0.3";
+        public const string AppBuild = "0.4";
         public static string AppTitle = "PBPB v1.9";
         public static string ViewFormTitle = "PBPB View";
         public const int PartFullHDPreset = 5;    
@@ -215,7 +215,7 @@ namespace pbpb {
                 try {
                     string owner = Encoding.UTF8.GetString( Convert.FromBase64String( uniq ) );
 
-                    DateTime build = DateTimeExtensions.GetLinkerTime( Assembly.GetCallingAssembly() );
+                    DateTime build = DateTimeExtensions.GetLinkerTime( Assembly.GetAssembly(typeof(Program)) );
 
                     s = String.Format( " {0} {1} {2} Build time: {3} {4} {5} (c) 2018, {6}",
                         AppTitle, Environment.NewLine, Environment.NewLine,

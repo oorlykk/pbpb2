@@ -54,7 +54,9 @@ namespace pbpb
 
                     if (PubgWindow.NeedSetupWindow) {
 
-                        Log.Add( String.Format( "(PW) Setup {1} => {0} result: {2}", PubgWindow.PartFullHD, PubgWindow.Handle, PubgWindow.SetupWindow().ToYesNoString() ) );
+                        bool res = PubgWindow.SetupWindow();
+
+                        Log.Add( String.Format( "(PW) Setup {1} => {0} result: {2}", PubgWindow.PartFullHD, PubgWindow.Handle, res.ToYesNoString() ) );
                     }
 
                     ps = PubgStatus.Now( Pcs );

@@ -9,7 +9,7 @@ namespace pbpb
     partial class Form1
     {
 
-        public const int MAX_NOLASTGOOD = (1000 * 60) * 5;
+        public const int MAX_NOLASTGOOD = (1000 * 60) * 6;
 
         void PubgRestarterProc() {
 
@@ -19,7 +19,7 @@ namespace pbpb
 
                 try {
 
-                    if (Setti.PassiveMode && STime.GetUserIdleTime() < 5000) {
+                    if (!PubgInput.CanInteract) {
 
                         Log.Add( "(PR) No idle time for actions. Wait..." );
 
@@ -99,7 +99,7 @@ namespace pbpb
                     Log.Add( "(PR) exception: " + e.Message );
                 }
 
-            } while (!BotStopper.WaitOne(90000, false));
+            } while (!BotStopper.WaitOne(30000, false));
 
             Log.Add("(MAIN) RestarterProc leave!");
         }
