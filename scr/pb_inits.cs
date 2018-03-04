@@ -121,12 +121,12 @@ namespace pbpb {
                             bool launched = !BotStopper.WaitOne( 0, false );
                             string msg = "Bot " + ( launched ? "stopped" : "launched" );
                             if (launched) {
-                                StopBotClick();
+                                StopBotClick(this);
                                 PubgWindow.CloseMsg(); PubgWindow.KillExecute(); PubgWindow.HideBE();
                                 Log.Add( msg + " [user key]" );
                             }
                             else {
-                                StartBotClick();
+                                StartBotClick(this);
                                 Log.Add( msg + " [user key]" );
                             }
                             tray.BalloonTipText = msg;

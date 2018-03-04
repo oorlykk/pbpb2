@@ -19,7 +19,7 @@ namespace pbpb {
     public partial class Form1 : Form
     {
         static string uniq = "dGhleg==";
-        public const string AppBuild = "0.4";
+        public const string AppBuild = "0.5";
         public static string AppTitle = "PBPB v1.9";
         public static string ViewFormTitle = "PBPB View";
         public const int PartFullHDPreset = 5;    
@@ -123,11 +123,13 @@ namespace pbpb {
         }
 
         private void btnStartStopBot_click( object sender, EventArgs e ) {            
-            if (btnStartStopBot.Text == "on") StartBotClick(); else StopBotClick();
+            if (btnStartStopBot.Text == "on") StartBotClick(sender); else StopBotClick(sender);
         }
 
         private void StartBotClick( object sender = null, EventArgs e = null) {
             
+            Log.Add("StartBot! by " + sender.ToString());
+
             if (btnStartStopBot.Text == "off") {
                 Log.Add("< Act failed > (already started)");
                 return;
@@ -161,6 +163,8 @@ namespace pbpb {
         }
 
         private void StopBotClick( object sender = null, EventArgs e = null ) {
+
+            Log.Add("StopBot! by " + sender.ToString());
 
             BotStopper.Set();
 
@@ -270,9 +274,7 @@ namespace pbpb {
           
             if (STime.GetUserIdleTime() > Setti.IdleAutolaunchTimeout * 1000 * 60) {
 
-                Log.Add("Auto Launch Bot! (user idle)");
-
-                StartBotClick();
+                StartBotClick(sender);
             }
         }
 
@@ -310,7 +312,7 @@ namespace pbpb {
 
                 tray_Click( tray, null );
 
-                StopBotClick();
+                StopBotClick(sender);
             }
         }
     }

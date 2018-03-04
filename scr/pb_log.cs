@@ -24,7 +24,7 @@ namespace pbpb
 
         private static string m_last;
 
-        private static string __initstr => "Init [ " + DateTime.Now.ToString() + " ]";    
+        private static string __initstr => "Init [ " + DateTime.Now.ToString() + " ] build: " + Form1.AppBuild;    
 
         private static StringBuilder m_Log = new StringBuilder();
 
