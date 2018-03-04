@@ -68,16 +68,24 @@ namespace pbpb
             }
 
             int lp = (int)(((ushort)x) | (uint)(y << 16));
-            int wp = User32.MK_LBUTTON;
+            int wp = 0; // User32.MK_LBUTTON;
+
+            Log.Add(String.Format("ClickLeftMouse_msg {0} {1}", x, y));
 
             if (!AsPostMessage) {
                 User32.SendMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+                Thread.Sleep(1);
                 User32.SendMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+                Thread.Sleep(1);
+                User32.SendMessage( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
+                Thread.Sleep(1);
+                User32.SendMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+                Thread.Sleep(1);
             } else {
-                User32.PostMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
-                User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
-                User32.PostMessage( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
-                User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
+                User32.PostMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp ); Thread.Sleep(1);
+                User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp ); Thread.Sleep(1);
+                User32.PostMessage( Handle, User32.WM_LBUTTONDBLCLK, wp, lp ); Thread.Sleep(1);
+                User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp ); Thread.Sleep(1);
             }
 
 
@@ -139,7 +147,7 @@ namespace pbpb
         private void RestoreFocus() {
 
             PubgWindow.RestoreFocus();
-            if (PubgWindow.FocusSettted)
+            //if (PubgWindow.FocusSettted)
                 User32.SetCursorPos(OldCursorPos.x, OldCursorPos.y);
         }
 
@@ -201,13 +209,16 @@ namespace pbpb
             y += PubgWindow.PosY;
 
             SetFocus();
-            Thread.Sleep(55);
+            Thread.Sleep(64);
 
-            SKeybd.LBClickEx(x, y, true, 64, 1600, 64);
-            SKeybd.LBClickEx(x+1, y+1, true);
+            Log.Add(String.Format("ClickLeftMouse_evnt {0} {1}", x, y));
 
-            Thread.Sleep(55);
+            SKeybd.LBClickEx(x, y, false, 0, 1600, 0);
+            SKeybd.LBClickEx(x, y, false);
+
+            Thread.Sleep(64);
             RestoreFocus();
+         
         }
 
         public virtual void ReleaseKey(Keys key) {

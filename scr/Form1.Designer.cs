@@ -77,6 +77,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.PanelView = new pbpb.PanelDoubleBuffered();
             this.lab_CurrentRounTime = new System.Windows.Forms.Label();
+            this.lab_appversioninternal = new System.Windows.Forms.Label();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
             this.panel_test.SuspendLayout();
@@ -616,11 +617,22 @@
             this.lab_CurrentRounTime.Tag = "";
             this.lab_CurrentRounTime.Text = "None";
             // 
+            // lab_appversioninternal
+            // 
+            this.lab_appversioninternal.AutoSize = true;
+            this.lab_appversioninternal.Location = new System.Drawing.Point(353, 279);
+            this.lab_appversioninternal.Name = "lab_appversioninternal";
+            this.lab_appversioninternal.Size = new System.Drawing.Size(99, 17);
+            this.lab_appversioninternal.TabIndex = 38;
+            this.lab_appversioninternal.Tag = "X";
+            this.lab_appversioninternal.Text = "Version Build: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 326);
+            this.Controls.Add(this.lab_appversioninternal);
             this.Controls.Add(this.lab_CurrentRounTime);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ne_MaxRoundTIme);
@@ -713,6 +725,7 @@
         private System.Windows.Forms.NumericUpDown ne_MaxRoundTIme;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lab_CurrentRounTime;
+        private System.Windows.Forms.Label lab_appversioninternal;
     }
 }
 

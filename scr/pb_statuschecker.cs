@@ -101,10 +101,6 @@ namespace pbpb
 
                         Log.Append( " di: " + Pcs[PubgControls.btnStart].LastDistance.ToString() );
 
-                        Log.Add( "(PS) click Start" );
-
-                        Thread.Sleep( 7500 );
-
                         PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "" );
 
                         PubgInput.EjectClickedTime = int.MaxValue;
@@ -114,19 +110,23 @@ namespace pbpb
                         bool inputswitched = false;
                         if (PubgInput.IsInputMessage && PubgInput.CanInteract) {
 
-                            if (lobbyinputswitcher) {
+                            if (!lobbyinputswitcher) {
 
-                                inputswitched = true;
+                                //inputswitched = true;
 
                                 InitInput_event();
                             }
 
-                            lobbyinputswitcher = !lobbyinputswitcher;
+                            //lobbyinputswitcher = !lobbyinputswitcher;
                         }
+
+                        Log.Add( "(PS) click Start" );
 
                         Pcs[PubgControls.btnStart].ClickLeftMouse();
 
                         if (inputswitched) InitInput_message();
+
+                        Thread.Sleep( 15000 );
                     }
 
                     else if (PubgStatuses.ExitToLobby.HasFlags( ps )) {

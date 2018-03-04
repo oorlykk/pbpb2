@@ -19,7 +19,7 @@ namespace pbpb {
     public partial class Form1 : Form
     {
         static string uniq = "dGhleg==";
-        public const string AppInternalVersion = "1.9.1";
+        public const string AppInternalVersion = "1.9.2";
         public static string AppTitle = "PBPB v1.9";
         public static string ViewFormTitle = "PBPB View";
         public const int PartFullHDPreset = 5;    
@@ -59,7 +59,8 @@ namespace pbpb {
             Text = AppTitle;
             Icon = Resources.gray;
             tray.Icon = Resources.gray;
-          
+            lab_appversioninternal.Text += AppInternalVersion.ToString();
+
             DateTime thisDate = DateTime.Today;
             string date_convert1 = Convert.ToString( "15.03.2018" );
             DateTime pDate = Convert.ToDateTime( date_convert1 );
