@@ -19,19 +19,17 @@ namespace pbpb
 
         protected override void WndProc( ref Message m )
         {
-            if (m.Msg == Form1.WM_SCRUPDATE) {
+            if (m.Msg == Form1.WM_SCRUPDATE) { 
+                
+                if (!Visible) goto FINISH;
 
-                if (Visible) {
+                BackgroundImage.Dispose();
+                BackgroundImage = null;
 
-                    BackgroundImage.Dispose();
-                    BackgroundImage = null;
-
-                    if (PubgStatus.RawScr != null)
-                        BackgroundImage = new Bitmap(PubgStatus.RawScr);
-
-                }
+                if (PubgStatus.RawScr != null)
+                    BackgroundImage = new Bitmap( PubgStatus.RawScr );
             }
-
+            FINISH:;
             base.WndProc( ref m );
         }
 
@@ -42,6 +40,9 @@ namespace pbpb
             Text = Form1.ViewFormTitle;
 
             pi = new _PubgInputMessage { AsPostMessage = true };
+
+            Width = PubgWindow.Width;
+            Height = PubgWindow.Height;
         }
 
         private void FormView_KeyUp( object sender, KeyEventArgs e )
@@ -56,7 +57,9 @@ namespace pbpb
 
         private void FormPBPBView_MouseClick( object sender, MouseEventArgs e )
         {
-            if (e.Button == MouseButtons.Left) pi.ClickLeftMouse(1, 1);
+            if (e.Button != MouseButtons.Left) return;
+
+            pi.ClickLeftMouse(e.X, e.Y);
         }
     }
 }

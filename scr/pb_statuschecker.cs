@@ -27,6 +27,7 @@ namespace pbpb
             while (!BotStopper.WaitOne( threadwait, false )) {
 
                 try {
+
                     threadwait = ( User32.IsWindowVisible( (IntPtr) User32.FindWindow( null, ViewFormTitle ) ) > 0 ) ?
                         100 : 2000;
 
@@ -78,14 +79,20 @@ namespace pbpb
 
                     else if (PubgStatuses.MatchCanContinue.HasFlags( ps )) {
 
-                        Log.Append( " di: " + Pcs[PubgControls.btnMatchCanContinueContinue].LastDistance.ToString() );
+                        Log.Append( " di: " + Pcs[PubgControls.btnMatchCanContinue].LastDistance.ToString() );
 
-                        int lc = Pcs[PubgControls.btnMatchCanContinueContinue].LastClickedTick;
+                        int lc = Pcs[PubgControls.btnMatchCanContinue].LastClickedTick;
 
-                        if (Environment.TickCount - lc < 30000)
+                        if (Environment.TickCount - lc < 45000) {
+
+                            Log.Add("click Cancel");
                             Pcs[PubgControls.btnMatchCanContinueCancel].ClickLeftMouse();
-                        else
-                            Pcs[PubgControls.btnMatchCanContinueContinue].ClickLeftMouse();
+                        }
+                        else {
+
+                            Log.Add("click Continue");
+                            Pcs[PubgControls.btnMatchCanContinue].ClickLeftMouse();
+                        }
 
                         Thread.Sleep( 2000 );
                     }
@@ -94,15 +101,15 @@ namespace pbpb
 
                         Log.Append( " di: " + Pcs[PubgControls.btnStart].LastDistance.ToString() );
 
+                        Log.Add( "(PS) click Start" );
+
+                        Thread.Sleep( 7500 );
+
                         PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "" );
 
                         PubgInput.EjectClickedTime = int.MaxValue;
 
                         PubgInput.ParachuteClickedTime = int.MaxValue;
-
-                        Thread.Sleep( 7500 );
-
-                        Log.Add( "(PS) click Start" );
 
                         bool inputswitched = false;
                         if (PubgInput.IsInputMessage && PubgInput.CanInteract) {
@@ -270,7 +277,7 @@ namespace pbpb
                 }
                 catch (Exception e) {
 
-                    Log.Add( "(PS) Exception: " + e.Message );
+                    Log.Add( "(PS) exception: " + e.Message );
                 }
             }
 

@@ -15,7 +15,7 @@ namespace pbpb
         labJoined = 69540876582912,
         labEject = 105924403798016,
         labReleaseParachute = 13671979250605947648,
-        btnMatchCanContinueContinue =  18410856832886014080,
+        btnMatchCanContinue =  18410856832886014080,
         btnMatchCanContinueCancel = 18410856824799264896,
         labWater = 882281628581721955,
         //labWrongMatchState = 9403657236297352463,

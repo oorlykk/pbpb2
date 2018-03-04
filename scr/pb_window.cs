@@ -54,7 +54,8 @@ namespace pbpb
         public static NativeWindow PubgCrashReporter = new NativeWindow( "BATTLEGROUNDS Crash Reporter");
 
         public static NativeWindow BattlEyeLauncher = new NativeWindow( "BattlEye Launcher" );
-        
+
+        public static NativeWindow SteamGameOverlayUICrash = new NativeWindow( "gameoverlayui.exe" );
     }
 
 

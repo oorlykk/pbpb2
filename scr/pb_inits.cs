@@ -43,8 +43,8 @@ namespace pbpb {
                                                     (ulong) PubgControls.labReleaseParachute,
                                                     595, 311, 635, 316 ) );
 
-            Pcs.Add( PubgControls.btnMatchCanContinueContinue, new PubgControl( PubgControls.btnMatchCanContinueContinue.ToString(),
-                                                    (ulong) PubgControls.btnMatchCanContinueContinue,
+            Pcs.Add( PubgControls.btnMatchCanContinue, new PubgControl( PubgControls.btnMatchCanContinue.ToString(),
+                                                    (ulong) PubgControls.btnMatchCanContinue,
                                                     426, 300, 483, 320 ) );
 
             Pcs.Add( PubgControls.btnMatchCanContinueCancel, new PubgControl( PubgControls.btnMatchCanContinueCancel.ToString(),

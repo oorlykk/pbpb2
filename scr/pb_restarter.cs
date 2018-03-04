@@ -16,7 +16,9 @@ namespace pbpb
             Log.Add("(MAIN) RestarterProc enter!");
 
             do {
+
                 try {
+
                     if (Setti.PassiveMode && STime.GetUserIdleTime() < 5000) {
 
                         Log.Add( "(PR) No idle time for actions. Wait..." );
@@ -47,16 +49,19 @@ namespace pbpb
 
 
                     if (PubgWindow.SEExists || PubgWindow.CrashExists || PubgWindow.SURExists ||
-                        PubgWindow.SCEExitst) {
+                        PubgWindow.SCEExitst || NativeWindows.SteamGameOverlayUICrash.Exists) {
 
                         string s = String.Format(
-                            "(PR) error found ( crash {0}, steam {1}, update {2}, conerror {3} )",
+                            "(PR) error found ( crash {0}, steam {1}, update {2}, conerror {3}, overlayerror {4} )",
                             PubgWindow.CrashExists.ToYesNoString(),
                             PubgWindow.SEExists.ToYesNoString(),
                             PubgWindow.SURExists.ToYesNoString(),
-                            PubgWindow.SCEExitst.ToYesNoString() );
+                            PubgWindow.SCEExitst.ToYesNoString(),
+                            NativeWindows.SteamGameOverlayUICrash.Exists.ToYesNoString());
 
                         Log.Add( s );
+
+                        NativeWindows.SteamGameOverlayUICrash.SetClose();
 
                         PubgWindow.CloseSUR();
 
@@ -91,7 +96,7 @@ namespace pbpb
                 }
                 catch (Exception e) {
 
-                    Log.Add( "(PR) Exception: " + e.Message );
+                    Log.Add( "(PR) exception: " + e.Message );
                 }
 
             } while (!BotStopper.WaitOne(90000, false));

@@ -37,7 +37,9 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(699, 410);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "FormPBPBView";
             this.Text = "PBPB View";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormView_KeyDown);

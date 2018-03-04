@@ -87,7 +87,7 @@ namespace pbpb {
                     else if (pcname == PubgControls.labAlive) 
                         result |= PubgStatuses.Alive;
 
-                    else if (pcname == PubgControls.btnMatchCanContinueContinue) 
+                    else if (pcname == PubgControls.btnMatchCanContinue) 
                         result |= PubgStatuses.MatchCanContinue;
 
                     else if (pcname == PubgControls.labWater)

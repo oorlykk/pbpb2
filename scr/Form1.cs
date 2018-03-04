@@ -19,10 +19,9 @@ namespace pbpb {
     public partial class Form1 : Form
     {
         static string uniq = "dGhleg==";
-
+        public const string AppInternalVersion = "1.9.1";
         public static string AppTitle = "PBPB v1.9";
         public static string ViewFormTitle = "PBPB View";
-
         public const int PartFullHDPreset = 5;    
 
         static bool AppIsExp;
@@ -42,7 +41,7 @@ namespace pbpb {
             Application.ThreadException += new ThreadExceptionEventHandler ( 
                 ( object sender, ThreadExceptionEventArgs e  ) => {
 
-                    Log.Add("Application Exception: " + e.Exception.Message);
+                    Log.Add("Application exception: " + e.Exception.Message);
                 });
 
             if (AppIsLaunched) {
@@ -70,8 +69,8 @@ namespace pbpb {
             if (Environment.MachineName == "NORM") {
                 AppIsExp = false;
                 panel_test.Visible = true;
-                Height += 25;
-            } else Height -= 25;
+                Height += 20;
+            } else Height -= 20;
 
             Log.LogEvent += new ResolveEventHandler(PubgLogEvent);
 
@@ -251,7 +250,7 @@ namespace pbpb {
 
             bool stopped = BotStopper.WaitOne(0, false);
 
-            tsmiBotStatus.Text = stopped ? "Bot [ Stopped ]" : "Bot [ Working ]";
+            tsmiBotStatus.Text = stopped ? "Bot [ Stopped ]" : "Bot [ Launched ]";
 
             tsmiStartBot.Visible = stopped; tsmiStopBot.Visible = !stopped;
 
