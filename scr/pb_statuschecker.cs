@@ -46,8 +46,11 @@ namespace pbpb
                         goto EXIT;
                     }
 
-                    pubg_window_visibled = User32.IsWindowVisible( PubgWindow.Handle ) != 0;
-                    if (!pubg_window_visibled) PubgWindow.Show();
+                    pubg_window_visibled = PubgWindow.IsWindowVisible;
+                    if (!pubg_window_visibled) {
+
+                        PubgWindow.Show();
+                    }
 
                     if (Setti.HiddenMode)
                         Thread.Sleep( 500 );
@@ -114,6 +117,8 @@ namespace pbpb
 
                         Log.Append( " di: " + Pcs[PubgControls.btnStart].LastDistance.ToString() );
 
+                        Thread.Sleep( 15000 );
+
                         PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "" );
 
                         PubgInput.EjectClickedTime = int.MaxValue;
@@ -138,8 +143,7 @@ namespace pbpb
                         Pcs[PubgControls.btnStart].ClickLeftMouse();
 
                         if (inputswitched) InitInput_message();
-
-                        Thread.Sleep( 15000 );
+                     
                     }
 
                     else if (PubgStatuses.ExitToLobby.HasFlags( ps )) {

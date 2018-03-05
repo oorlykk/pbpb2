@@ -620,12 +620,12 @@
             // lab_appversioninternal
             // 
             this.lab_appversioninternal.AutoSize = true;
-            this.lab_appversioninternal.Location = new System.Drawing.Point(353, 279);
+            this.lab_appversioninternal.Location = new System.Drawing.Point(405, 279);
             this.lab_appversioninternal.Name = "lab_appversioninternal";
-            this.lab_appversioninternal.Size = new System.Drawing.Size(99, 17);
+            this.lab_appversioninternal.Size = new System.Drawing.Size(47, 17);
             this.lab_appversioninternal.TabIndex = 38;
             this.lab_appversioninternal.Tag = "X";
-            this.lab_appversioninternal.Text = "Version Build: ";
+            this.lab_appversioninternal.Text = "Build: ";
             // 
             // Form1
             // 

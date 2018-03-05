@@ -38,7 +38,7 @@ namespace pbpb
 
                         if (Setti.CanRestartSteam && executed) {
 
-                            Thread.Sleep( 3000 );
+                            Thread.Sleep( 10000 );
                             PubgWindow.KillExecuteSteam();
                         }
 
@@ -49,19 +49,24 @@ namespace pbpb
 
 
                     if (PubgWindow.SEExists || PubgWindow.CrashExists || PubgWindow.SURExists ||
-                        PubgWindow.SCEExitst || NativeWindows.SteamGameOverlayUICrash.Exists) {
+                        PubgWindow.SCEExitst || NativeWindows.SteamGameOverlayUICrash.Exists ||
+                        NativeWindows.SteamClientBootstrapper.Exists ) {
 
                         string s = String.Format(
-                            "(PR) error found ( crash {0}, steam {1}, update {2}, conerror {3}, overlayerror {4} )",
+                            "(PR) error found ( crash {0}, steam {1}, update {2}, conerror {3}, " +
+                            "overlayerror {4}, bootstrappererror {5} )",
                             PubgWindow.CrashExists.ToYesNoString(),
                             PubgWindow.SEExists.ToYesNoString(),
                             PubgWindow.SURExists.ToYesNoString(),
                             PubgWindow.SCEExitst.ToYesNoString(),
-                            NativeWindows.SteamGameOverlayUICrash.Exists.ToYesNoString());
+                            NativeWindows.SteamGameOverlayUICrash.Exists.ToYesNoString(),
+                            NativeWindows.SteamClientBootstrapper.Exists.ToYesNoString());
 
                         Log.Add( s );
 
                         NativeWindows.SteamGameOverlayUICrash.SetClose();
+
+                        NativeWindows.SteamClientBootstrapper.SetClose();
 
                         PubgWindow.CloseSUR();
 
@@ -88,7 +93,7 @@ namespace pbpb
 
                         PubgWindow.StartExecute();
 
-                        Thread.Sleep( 30000 );
+                        Thread.Sleep( 75000 );
                     }
 
                     EXIT:;
@@ -99,7 +104,7 @@ namespace pbpb
                     Log.Add( "(PR) exception: " + e.Message );
                 }
 
-            } while (!BotStopper.WaitOne(30000, false));
+            } while (!BotStopper.WaitOne(45000, false));
 
             Log.Add("(MAIN) RestarterProc leave!");
         }

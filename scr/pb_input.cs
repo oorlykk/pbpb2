@@ -57,8 +57,11 @@ namespace pbpb
             RaiseInputEvent(key, false, true);
         }
 
+        delegate int ApiMessage( IntPtr hwnd, int wMsg, int wParam, int lParam );
         public override void ClickLeftMouse(int x = 0, int y = 0) {
-            
+
+            Log.Add(String.Format("ClickLeftMouse_msg {0} {1}", x, y));
+
             if (x == 0 && y == 0) {
 
                 POINT pos = new POINT();
@@ -68,27 +71,31 @@ namespace pbpb
             }
 
             int lp = (int)(((ushort)x) | (uint)(y << 16));
-            int wp = 0; // User32.MK_LBUTTON;
+            int wp = User32.MK_LBUTTON;
+     
+            ApiMessage caller;
+            if (!AsPostMessage)
 
-            Log.Add(String.Format("ClickLeftMouse_msg {0} {1}", x, y));
+                caller = delegate ( IntPtr hwnd, int wMsg, int wParam, int lParam ) {
+                    return User32.SendMessage( hwnd, wMsg, wParam, lParam );
+                };
+            else
 
-            if (!AsPostMessage) {
-                User32.SendMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp );
-                Thread.Sleep(1);
-                User32.SendMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
-                Thread.Sleep(1);
-                User32.SendMessage( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
-                Thread.Sleep(1);
-                User32.SendMessage( Handle, User32.WM_LBUTTONUP, wp, lp );
-                Thread.Sleep(1);
+                caller = delegate ( IntPtr hwnd, int wMsg, int wParam, int lParam ) {
+                    return User32.PostMessage( hwnd, wMsg, wParam, lParam );
+                };
+
+            if (AsPostMessage) {
+
+                caller( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+                caller( Handle, User32.WM_LBUTTONUP, wp, lp ); 
+                caller( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
+                caller( Handle, User32.WM_LBUTTONUP, wp, lp );
             } else {
-                User32.PostMessage( Handle, User32.WM_LBUTTONDOWN, wp, lp ); Thread.Sleep(1);
-                User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp ); Thread.Sleep(1);
-                User32.PostMessage( Handle, User32.WM_LBUTTONDBLCLK, wp, lp ); Thread.Sleep(1);
-                User32.PostMessage( Handle, User32.WM_LBUTTONUP, wp, lp ); Thread.Sleep(1);
+
+                caller( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+                caller( Handle, User32.WM_LBUTTONUP, wp, lp );
             }
-
-
         }
 
         public override void ReleaseKey(Keys key) {
@@ -213,8 +220,8 @@ namespace pbpb
 
             Log.Add(String.Format("ClickLeftMouse_evnt {0} {1}", x, y));
 
-            SKeybd.LBClickEx(x, y, false, 0, 1600, 0);
-            SKeybd.LBClickEx(x, y, false);
+            SKeybd.LBClickEx(x, y, false, 50, 500, 50);
+            SKeybd.LBClickEx(x, y, false, 100, 64);
 
             Thread.Sleep(64);
             RestoreFocus();

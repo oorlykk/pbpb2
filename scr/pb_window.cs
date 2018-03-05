@@ -34,9 +34,7 @@ namespace pbpb
         }
     }
 
-    public class NativeWindows {
-
-        public static NativeWindow Pubg = new NativeWindow( "PLAYERUNKNOWN'S BATTLEGROUNDS " );
+    public class NativeWindows {    
 
         public static NativeWindow SteamErrorEn = new NativeWindow( "Steam - Error");
         public static NativeWindow SteamErrorRu = new NativeWindow( "Steam — Ошибка");
@@ -56,13 +54,14 @@ namespace pbpb
         public static NativeWindow BattlEyeLauncher = new NativeWindow( "BattlEye Launcher" );
 
         public static NativeWindow SteamGameOverlayUICrash = new NativeWindow( "gameoverlayui.exe" );
+        public static NativeWindow SteamClientBootstrapper = new NativeWindow( "Steam Client Bootstrapper" );
     }
 
 
     public class NativeUtils {
 
         private static void ForceTaskKill(string task) =>
-            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/f /t /im " + task, "", User32.SW_HIDE);
+            Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/F /T /IM " + task, "", User32.SW_HIDE);
 
         public static void KillExecutePubg() {
 
@@ -73,7 +72,9 @@ namespace pbpb
         {
 
             ForceTaskKill( "steam.exe" );
-            ForceTaskKill( "gameoverlayui.exe" ); //ForceTaskKill("steamwebhelper.exe");
+            Thread.Sleep(5000);
+            ForceTaskKill( "gameoverlayui.exe" );
+            ForceTaskKill("steamwebhelper.exe");
         }
 
         public static void KillCrash()
@@ -83,13 +84,13 @@ namespace pbpb
 
         public static void StartExecute()
         {
-            Shell32.ShellExecute( IntPtr.Zero, "open", "steam://rungameid/578080", "low", "", User32.SW_SHOWNORMAL );
+            Shell32.ShellExecute( IntPtr.Zero, "open", "steam://rungameid/578080", "", "", User32.SW_SHOWNORMAL );
         }
     }
 
    public static class PubgWindow {
 
-        public static NativeWindow Window = NativeWindows.Pubg;
+        public static NativeWindow Window = new NativeWindow( "PLAYERUNKNOWN'S BATTLEGROUNDS " );
 
         public static void ThrowLastWinError(bool show) {
 
@@ -119,7 +120,9 @@ namespace pbpb
 
             PubgRound.End();
 
-            KillExecutedTime = Environment.TickCount;               
+            KillExecutedTime = Environment.TickCount;
+            PubgWindow.Window.SetClose();
+            Thread.Sleep(5000);
             NativeUtils.KillExecutePubg();
             KillExecuted = true;
         }
@@ -151,14 +154,16 @@ namespace pbpb
         public static bool CrashExists => NativeWindows.PubgCrashReporter.Exists;
         public static void KillCrash()
         {
-            Log.Add( "(PU) KillExecute Crash!" );
 
             if (NativeWindows.PubgCrashReporter.Exists) {
 
-                NativeWindows.PubgCrashReporter.SetClose();          
+                Log.Add( "(PU) KillExecute Crash!" );
+
+                NativeWindows.PubgCrashReporter.SetClose();
+             
             }
 
-            NativeUtils.KillCrash();
+            NativeUtils.KillCrash();           
         }
 
         private static IntPtr BEHandle => NativeWindows.BattlEyeLauncher.Handle;
@@ -344,5 +349,9 @@ namespace pbpb
 
         public static void Hide() => User32.ShowWindow(Handle, User32.SW_HIDE);
         public static void Show() => User32.ShowWindow(Handle, User32.SW_SHOW);
+
+        public static bool IsWindowVisible => User32.IsWindowVisible( Handle ) != 0;
+        
+
     }
 }

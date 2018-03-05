@@ -19,7 +19,7 @@ namespace pbpb {
     public partial class Form1 : Form
     {
         static string uniq = "dGhleg==";
-        public const string AppBuild = "0.5";
+        public const string AppBuild = "11";
         public static string AppTitle = "PBPB v1.9";
         public static string ViewFormTitle = "PBPB View";
         public const int PartFullHDPreset = 5;    
@@ -62,7 +62,7 @@ namespace pbpb {
             lab_appversioninternal.Text += AppBuild;
 
             DateTime thisDate = DateTime.Today;
-            string date_convert1 = Convert.ToString( "15.03.2018" );
+            string date_convert1 = Convert.ToString( "20.03.2018" );
             DateTime pDate = Convert.ToDateTime( date_convert1 );
             int date_cmp_res = thisDate.CompareTo( pDate );
             AppIsExp = (date_cmp_res > 0);
@@ -128,6 +128,8 @@ namespace pbpb {
 
         private void StartBotClick( object sender = null, EventArgs e = null) {
             
+            Thread.Sleep(300);
+
             Log.Add("StartBot! by " + sender.ToString());
 
             if (btnStartStopBot.Text == "off") {
@@ -144,14 +146,14 @@ namespace pbpb {
 
                 Log.Add("Free Task <StatusChecker>");
 
-                PubgStatusChecker.Dispose();
+                //PubgStatusChecker.Dispose();
                 PubgStatusChecker = null;
             }
             if (PubgRestarter != null) {
 
                 Log.Add("Free Task <StatusProc>");
 
-                PubgRestarter.Dispose();
+                //PubgRestarter.Dispose();
                 PubgRestarter = null;
             }
             PubgStatusChecker = Task.Run( () => PubgRestarterProc() );
