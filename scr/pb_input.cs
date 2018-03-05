@@ -71,7 +71,7 @@ namespace pbpb
             }
 
             int lp = (int)(((ushort)x) | (uint)(y << 16));
-            int wp = User32.MK_LBUTTON;
+            int wp = User32.MK_MBUTTON; //User32.MK_LBUTTON;
      
             ApiMessage caller;
             if (!AsPostMessage)
@@ -105,8 +105,8 @@ namespace pbpb
 
         public override void MoveMouse( int x, int y ) {
 
-            //int lp = (int) ( ( (ushort) x ) | (uint) ( y << 16 ) );
-            //User32.SendMessage( Handle, User32.WM_MOUSEMOVE, 0, lp );
+            int lp = (int) ( ( (ushort) x ) | (uint) ( y << 16 ) );
+            User32.SendMessage( Handle, User32.WM_MOUSEMOVE, 0, lp );
             ChangeViewPerson();
         }
 
@@ -220,8 +220,9 @@ namespace pbpb
 
             Log.Add(String.Format("ClickLeftMouse_evnt {0} {1}", x, y));
 
-            SKeybd.LBClickEx(x, y, false, 50, 500, 50);
-            SKeybd.LBClickEx(x, y, false, 100, 64);
+            SKeybd.LBClickEx(x, y, true, 50, 500, 10);
+            SKeybd.MouseMove(x, y); Thread.Sleep(10);
+            SKeybd.LBClickEx(x, y, true, 100, 64, 100);
 
             Thread.Sleep(64);
             RestoreFocus();
