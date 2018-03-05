@@ -31,15 +31,11 @@ namespace pbpb {
 
         public static int LastDistance { get; private set; }
 
-        private static PubgStatuses m_Status;
+        public static PubgStatuses Status { get; private set; }
 
-        public static PubgStatuses Status { get => m_Status; set => m_Status = value; }
+        public static int LastGoodTime { get; private set; }
 
-        private static int m_LastGoodTick = Environment.TickCount;
-
-        public static int LastGoodTick { get => m_LastGoodTick; }
-
-        public static void SetLastGood() => m_LastGoodTick = Environment.TickCount; 
+        public static void SetLastGood() => LastGoodTime = Environment.TickCount; 
 
         public static Bitmap RawScr;
 
@@ -47,11 +43,7 @@ namespace pbpb {
 
             PubgStatuses result = PubgStatuses.Unknown;
 
-            if (RawScr != null) {
-
-                RawScr.Dispose();
-                RawScr = null;
-            }
+            if (RawScr != null) { RawScr.Dispose(); RawScr = null; }
 
             RawScr = SGraph.Scr( "", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY );
              
@@ -118,9 +110,7 @@ namespace pbpb {
 
             EXIT:
 
-            m_Status = result;
-
-            return result; 
+            return Status = result; 
 
         }
 

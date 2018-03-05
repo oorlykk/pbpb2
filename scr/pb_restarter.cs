@@ -28,9 +28,9 @@ namespace pbpb
 
 
                     if (
-                        ( ( !Setti.PassiveMode ) && ( Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD ) )
+                        ( ( !Setti.PassiveMode ) && ( Environment.TickCount - PubgStatus.LastGoodTime > MAX_NOLASTGOOD ) )
                         ||
-                        ( ( Setti.PassiveMode ) && ( Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD * 3 ) )
+                        ( ( Setti.PassiveMode ) && ( Environment.TickCount - PubgStatus.LastGoodTime > MAX_NOLASTGOOD * 3 ) )
                        ) {
 
                         bool executed = PubgWindow.KillExecuted;

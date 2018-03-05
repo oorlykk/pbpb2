@@ -72,7 +72,7 @@ namespace pbpb
 
                         Log.Append( " di: " + PubgStatus.LastDistance.ToString() );
 
-                        if (Environment.TickCount - PubgStatus.LastGoodTick > MAX_NOLASTGOOD_FOR_INPUT) {
+                        if (Environment.TickCount - PubgStatus.LastGoodTime > MAX_NOLASTGOOD_FOR_INPUT) {
 
                             if (!unknowassisted) {
 
