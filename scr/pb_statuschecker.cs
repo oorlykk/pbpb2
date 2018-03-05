@@ -117,7 +117,7 @@ namespace pbpb
 
                         Log.Append( " di: " + Pcs[PubgControls.btnStart].LastDistance.ToString() );
 
-                        Thread.Sleep( 15000 );
+                        Thread.Sleep( 5000 );
 
                         PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "" );
 
@@ -163,7 +163,7 @@ namespace pbpb
 
                         bool inputswitched = false;
 
-                        if (PubgInput.GetType() == typeof( _PubgInputMessage )) {
+                        if (PubgInput.IsInputMessage) {
 
                             PubgInput.KeyPress( Keys.Escape );
 

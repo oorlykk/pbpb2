@@ -47,7 +47,11 @@ namespace pbpb {
 
             PubgStatuses result = PubgStatuses.Unknown;
 
-            if (RawScr != null) {RawScr.Dispose(); RawScr = null;}
+            if (RawScr != null) {
+
+                RawScr.Dispose();
+                RawScr = null;
+            }
 
             RawScr = SGraph.Scr( "", PubgWindow.Width, PubgWindow.Height, PubgWindow.PosX, PubgWindow.PosY );
              
@@ -107,9 +111,9 @@ namespace pbpb {
                 SetLastGood();
             }
 
-            User32.SendMessage((IntPtr)User32.FindWindow(null, Form1.AppTitle), Form1.WM_SCRUPDATE, 0, 0);
-            User32.SendMessage((IntPtr)User32.FindWindow(null, Form1.ViewFormTitle), Form1.WM_SCRUPDATE, 0, 0);            
-
+            User32.PostMessage((IntPtr)User32.FindWindow(null, Form1.AppTitle), Form1.WM_SCRUPDATE, 0, 0);
+            User32.PostMessage((IntPtr)User32.FindWindow(null, Form1.ViewFormTitle), Form1.WM_SCRUPDATE, 0, 0);
+            
             Application.DoEvents();          
 
             EXIT:
