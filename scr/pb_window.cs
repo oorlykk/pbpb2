@@ -163,10 +163,10 @@ namespace pbpb
 
                 Log.Add( "(PU) KillExecute Crash!" );
 
-                NativeWindows.PubgCrashReporter.SetClose();
+                NativeWindows.PubgCrashReporter.SetClose();   
                 
                 NativeUtils.KillExecutePubgCrash();
-            }          
+            }                    
         }
 
         private static IntPtr BEHandle => NativeWindows.BattlEyeLauncher.Handle;

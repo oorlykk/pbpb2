@@ -81,13 +81,15 @@ namespace pbpb
 
                         PubgWindow.CloseSCE();                  
 
-                        PubgWindow.KillExecute();
-
                         PubgWindow.KillCrash();
 
-                        NativeWindows.SteamGameOverlayUICrash.SetClose();
+                        //PubgWindow.KillExecute();
 
-                        NativeWindows.SteamClientBootstrapper.SetClose();
+                        if (NativeWindows.SteamGameOverlayUICrash.Exists)
+                            NativeWindows.SteamGameOverlayUICrash.SetClose();
+
+                        if (NativeWindows.SteamClientBootstrapper.Exists)
+                            NativeWindows.SteamClientBootstrapper.SetClose();
 
                     }
 
