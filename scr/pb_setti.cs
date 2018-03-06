@@ -13,16 +13,16 @@ namespace pbpb
         //
         public static bool IsChanged;
         //
-        public static bool HiddenMode = true;
-        public static bool PassiveMode = true;
+        public static bool HiddenMode = false;
+        public static bool PassiveMode = false;
         public static bool SaveReward = true;
         public static bool IdleAutolaunch = true;
         public static int IdleAutolaunchTimeout = 5;
-        public static int PubgWindowAbsoluteY = 0;
+        public static int PubgWindowAbsoluteY = 200;
         public static bool CanRestartSteam = true;
         public static bool CanRestartPC = false;
-        public static bool DrawScr = true;
-        public static int PubgWindowAbsoluteX = Screen.PrimaryScreen.Bounds.Width + 1;
+        public static bool DrawScr = false;
+        public static int PubgWindowAbsoluteX = 200;
         public static int MaxRoundTime = 5*(1000*60);
 
         public static int MaxRoundTimeRnd =>  MaxRoundTime +

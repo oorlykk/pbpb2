@@ -21,8 +21,7 @@ namespace pbpb {
     public partial class Form1 : Form
     {
         static string uniq = "dGhleg==";
-
-        public static System.Version AppVersion = Assembly.GetExecutingAssembly().GetName().Version;
+       public static System.Version AppVersion = Assembly.GetExecutingAssembly().GetName().Version;
         public static DateTime CompileTime {
             get {
                 DateTime compileTime = new DateTime(2000, 1, 1).AddDays( AppVersion.Build ).AddSeconds( AppVersion.Revision * 2 );
@@ -69,7 +68,6 @@ namespace pbpb {
             Text = AppTitle;
             Icon = Resources.gray;
             tray.Icon = Resources.gray;
-            lab_appversioninternal.Text += AppRevision;
 
             DateTime thisDate = DateTime.Today;
             string date_convert1 = Convert.ToString( "20.03.2018" );
@@ -78,7 +76,7 @@ namespace pbpb {
             AppIsExp = (date_cmp_res > 0);
             panel_test.Visible = false;
             if (Environment.MachineName == "NORM") {
-                AppIsExp = false;
+                //AppIsExp = false;
                 panel_test.Visible = true;
                 Height += 20;
             } else Height -= 20;
@@ -232,12 +230,10 @@ namespace pbpb {
                 string s = "";
                 try {
                     string owner = Encoding.UTF8.GetString( Convert.FromBase64String( uniq ) );
-
-                    DateTime build = CompileTime; //DateTimeExtensions.GetLinkerTime( Assembly.GetAssembly(typeof(Program)) );
-
-                    s = String.Format( " {0} {1} {2} Build time: {3} {4} {5} (c) 2018, {6}",
+                   
+                    s = String.Format( " {0} {1} {2} Build: {7} Time: {3} {4} {5} (c) 2018, {6}",
                         AppTitle, Environment.NewLine, Environment.NewLine,
-                        build, Environment.NewLine, Environment.NewLine, owner );
+                        CompileTime, Environment.NewLine, Environment.NewLine, owner, AppRevision );
                 }
                 catch { }
                 s.ShowMessage();

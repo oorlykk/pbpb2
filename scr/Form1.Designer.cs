@@ -76,8 +76,8 @@
             this.ne_MaxRoundTIme = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.lab_CurrentRounTime = new System.Windows.Forms.Label();
-            this.lab_appversioninternal = new System.Windows.Forms.Label();
             this.chb_AllowRestartPC = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.PanelView = new pbpb.PanelDoubleBuffered();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
@@ -286,15 +286,15 @@
             this.chb_AutoStartOnIdle.AutoSize = true;
             this.chb_AutoStartOnIdle.Location = new System.Drawing.Point(12, 250);
             this.chb_AutoStartOnIdle.Name = "chb_AutoStartOnIdle";
-            this.chb_AutoStartOnIdle.Size = new System.Drawing.Size(189, 21);
+            this.chb_AutoStartOnIdle.Size = new System.Drawing.Size(194, 21);
             this.chb_AutoStartOnIdle.TabIndex = 17;
-            this.chb_AutoStartOnIdle.Text = "Autolauch if Idle (minuts):";
+            this.chb_AutoStartOnIdle.Text = "Idle Autolaunch (minutes):";
             this.chb_AutoStartOnIdle.UseVisualStyleBackColor = true;
             this.chb_AutoStartOnIdle.Click += new System.EventHandler(this.ReadGui);
             // 
             // ne_MaxIdle
             // 
-            this.ne_MaxIdle.Location = new System.Drawing.Point(203, 249);
+            this.ne_MaxIdle.Location = new System.Drawing.Point(207, 249);
             this.ne_MaxIdle.Maximum = new decimal(new int[] {
             999,
             0,
@@ -336,7 +336,7 @@
             this.panel_test.Controls.Add(this.button2);
             this.panel_test.Controls.Add(this.button1);
             this.panel_test.Controls.Add(this.btnttt);
-            this.panel_test.Location = new System.Drawing.Point(12, 338);
+            this.panel_test.Location = new System.Drawing.Point(12, 344);
             this.panel_test.Name = "panel_test";
             this.panel_test.Size = new System.Drawing.Size(468, 93);
             this.panel_test.TabIndex = 21;
@@ -414,7 +414,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(394, 209);
+            this.button4.Location = new System.Drawing.Point(394, 233);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(86, 25);
             this.button4.TabIndex = 23;
@@ -509,11 +509,11 @@
             // chb_HiddenMode
             // 
             this.chb_HiddenMode.AutoSize = true;
-            this.chb_HiddenMode.Location = new System.Drawing.Point(207, 9);
+            this.chb_HiddenMode.Location = new System.Drawing.Point(325, 317);
             this.chb_HiddenMode.Name = "chb_HiddenMode";
-            this.chb_HiddenMode.Size = new System.Drawing.Size(59, 21);
+            this.chb_HiddenMode.Size = new System.Drawing.Size(155, 21);
             this.chb_HiddenMode.TabIndex = 29;
-            this.chb_HiddenMode.Text = "Hide";
+            this.chb_HiddenMode.Text = "Hide PUBG Window";
             this.chb_HiddenMode.UseVisualStyleBackColor = true;
             this.chb_HiddenMode.Click += new System.EventHandler(this.ReadGui);
             // 
@@ -535,27 +535,28 @@
             this.cbox_PubgInput.Items.AddRange(new object[] {
             "Full",
             "Half"});
-            this.cbox_PubgInput.Location = new System.Drawing.Point(80, 6);
+            this.cbox_PubgInput.Location = new System.Drawing.Point(160, 6);
             this.cbox_PubgInput.Name = "cbox_PubgInput";
-            this.cbox_PubgInput.Size = new System.Drawing.Size(121, 24);
+            this.cbox_PubgInput.Size = new System.Drawing.Size(89, 24);
             this.cbox_PubgInput.TabIndex = 31;
             this.cbox_PubgInput.SelectedIndexChanged += new System.EventHandler(this.cbox_PubgInput_SelectedIndexChanged);
             // 
             // chb_view
             // 
+            this.chb_view.Appearance = System.Windows.Forms.Appearance.Button;
             this.chb_view.AutoSize = true;
-            this.chb_view.Location = new System.Drawing.Point(207, 170);
+            this.chb_view.Location = new System.Drawing.Point(199, 164);
             this.chb_view.Name = "chb_view";
-            this.chb_view.Size = new System.Drawing.Size(59, 21);
+            this.chb_view.Size = new System.Drawing.Size(100, 27);
             this.chb_view.TabIndex = 32;
             this.chb_view.Tag = "view";
-            this.chb_view.Text = "View";
+            this.chb_view.Text = "Watch Game";
             this.chb_view.UseVisualStyleBackColor = true;
             this.chb_view.Click += new System.EventHandler(this.ReadGui);
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(394, 247);
+            this.button8.Location = new System.Drawing.Point(394, 202);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(86, 25);
             this.button8.TabIndex = 34;
@@ -566,7 +567,7 @@
             // 
             // ne_MaxRoundTIme
             // 
-            this.ne_MaxRoundTIme.Location = new System.Drawing.Point(203, 277);
+            this.ne_MaxRoundTIme.Location = new System.Drawing.Point(160, 316);
             this.ne_MaxRoundTIme.Maximum = new decimal(new int[] {
             999,
             0,
@@ -591,46 +592,46 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 279);
+            this.label3.Location = new System.Drawing.Point(9, 318);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(181, 17);
+            this.label3.Size = new System.Drawing.Size(146, 17);
             this.label3.TabIndex = 36;
             this.label3.Tag = "X";
-            this.label3.Text = "Max Round Time (minutes):";
+            this.label3.Text = "Max Round (minutes):";
             // 
             // lab_CurrentRounTime
             // 
             this.lab_CurrentRounTime.AutoSize = true;
-            this.lab_CurrentRounTime.Location = new System.Drawing.Point(296, 171);
+            this.lab_CurrentRounTime.Location = new System.Drawing.Point(305, 170);
             this.lab_CurrentRounTime.Name = "lab_CurrentRounTime";
             this.lab_CurrentRounTime.Size = new System.Drawing.Size(42, 17);
             this.lab_CurrentRounTime.TabIndex = 37;
             this.lab_CurrentRounTime.Tag = "";
             this.lab_CurrentRounTime.Text = "None";
             // 
-            // lab_appversioninternal
-            // 
-            this.lab_appversioninternal.AutoSize = true;
-            this.lab_appversioninternal.Location = new System.Drawing.Point(405, 279);
-            this.lab_appversioninternal.Name = "lab_appversioninternal";
-            this.lab_appversioninternal.Size = new System.Drawing.Size(47, 17);
-            this.lab_appversioninternal.TabIndex = 38;
-            this.lab_appversioninternal.Tag = "X";
-            this.lab_appversioninternal.Text = "Build: ";
-            // 
             // chb_AllowRestartPC
             // 
             this.chb_AllowRestartPC.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chb_AllowRestartPC.AutoSize = true;
-            this.chb_AllowRestartPC.Location = new System.Drawing.Point(12, 305);
+            this.chb_AllowRestartPC.Location = new System.Drawing.Point(12, 277);
             this.chb_AllowRestartPC.Name = "chb_AllowRestartPC";
-            this.chb_AllowRestartPC.Size = new System.Drawing.Size(205, 27);
+            this.chb_AllowRestartPC.Size = new System.Drawing.Size(468, 27);
             this.chb_AllowRestartPC.TabIndex = 40;
             this.chb_AllowRestartPC.Tag = "allowrestartpc";
             this.chb_AllowRestartPC.Text = "Allow autostart and restart PC";
+            this.chb_AllowRestartPC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chb_AllowRestartPC.UseVisualStyleBackColor = true;
             this.chb_AllowRestartPC.CheckedChanged += new System.EventHandler(this.chb_canrestartpc_CheckedChanged);
             this.chb_AllowRestartPC.Click += new System.EventHandler(this.chb_canrestartpc_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(72, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(82, 17);
+            this.label4.TabIndex = 41;
+            this.label4.Tag = "";
+            this.label4.Text = "Input mode:";
             // 
             // PanelView
             // 
@@ -647,9 +648,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 363);
+            this.ClientSize = new System.Drawing.Size(493, 373);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.chb_AllowRestartPC);
-            this.Controls.Add(this.lab_appversioninternal);
             this.Controls.Add(this.lab_CurrentRounTime);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.ne_MaxRoundTIme);
@@ -742,8 +743,8 @@
         private System.Windows.Forms.NumericUpDown ne_MaxRoundTIme;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lab_CurrentRounTime;
-        private System.Windows.Forms.Label lab_appversioninternal;
         private System.Windows.Forms.CheckBox chb_AllowRestartPC;
+        private System.Windows.Forms.Label label4;
     }
 }
 
