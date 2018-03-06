@@ -99,7 +99,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(394, 171);
+            this.button5.Location = new System.Drawing.Point(394, 167);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(86, 25);
             this.button5.TabIndex = 10;
@@ -284,6 +284,7 @@
             // chb_AutoStartOnIdle
             // 
             this.chb_AutoStartOnIdle.AutoSize = true;
+            this.chb_AutoStartOnIdle.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chb_AutoStartOnIdle.Location = new System.Drawing.Point(12, 250);
             this.chb_AutoStartOnIdle.Name = "chb_AutoStartOnIdle";
             this.chb_AutoStartOnIdle.Size = new System.Drawing.Size(194, 21);
@@ -294,7 +295,7 @@
             // 
             // ne_MaxIdle
             // 
-            this.ne_MaxIdle.Location = new System.Drawing.Point(207, 249);
+            this.ne_MaxIdle.Location = new System.Drawing.Point(212, 249);
             this.ne_MaxIdle.Maximum = new decimal(new int[] {
             999,
             0,
@@ -414,7 +415,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(394, 233);
+            this.button4.Location = new System.Drawing.Point(394, 237);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(86, 25);
             this.button4.TabIndex = 23;
@@ -509,7 +510,8 @@
             // chb_HiddenMode
             // 
             this.chb_HiddenMode.AutoSize = true;
-            this.chb_HiddenMode.Location = new System.Drawing.Point(325, 317);
+            this.chb_HiddenMode.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chb_HiddenMode.Location = new System.Drawing.Point(325, 316);
             this.chb_HiddenMode.Name = "chb_HiddenMode";
             this.chb_HiddenMode.Size = new System.Drawing.Size(155, 21);
             this.chb_HiddenMode.TabIndex = 29;
@@ -545,7 +547,7 @@
             // 
             this.chb_view.Appearance = System.Windows.Forms.Appearance.Button;
             this.chb_view.AutoSize = true;
-            this.chb_view.Location = new System.Drawing.Point(199, 164);
+            this.chb_view.Location = new System.Drawing.Point(193, 166);
             this.chb_view.Name = "chb_view";
             this.chb_view.Size = new System.Drawing.Size(100, 27);
             this.chb_view.TabIndex = 32;
@@ -567,7 +569,7 @@
             // 
             // ne_MaxRoundTIme
             // 
-            this.ne_MaxRoundTIme.Location = new System.Drawing.Point(160, 316);
+            this.ne_MaxRoundTIme.Location = new System.Drawing.Point(212, 315);
             this.ne_MaxRoundTIme.Maximum = new decimal(new int[] {
             999,
             0,
@@ -592,7 +594,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 318);
+            this.label3.Location = new System.Drawing.Point(60, 317);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(146, 17);
             this.label3.TabIndex = 36;
@@ -602,7 +604,7 @@
             // lab_CurrentRounTime
             // 
             this.lab_CurrentRounTime.AutoSize = true;
-            this.lab_CurrentRounTime.Location = new System.Drawing.Point(305, 170);
+            this.lab_CurrentRounTime.Location = new System.Drawing.Point(299, 171);
             this.lab_CurrentRounTime.Name = "lab_CurrentRounTime";
             this.lab_CurrentRounTime.Size = new System.Drawing.Size(42, 17);
             this.lab_CurrentRounTime.TabIndex = 37;
