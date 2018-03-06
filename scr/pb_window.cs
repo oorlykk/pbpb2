@@ -63,23 +63,24 @@ namespace pbpb
         private static void ForceTaskKill(string task) =>
             Shell32.ShellExecute(IntPtr.Zero, "open", "taskkill.exe", "/F /T /IM " + task, "", User32.SW_HIDE);
 
+        public static void KillExecutePubgCrash() {
+
+            ForceTaskKill( "BroCrashReporter.exe" );
+        }
+
         public static void KillExecutePubg() {
 
-            ForceTaskKill("TslGame.exe");         
+            ForceTaskKill( "TslGame.exe" );
+            ForceTaskKill( "BroCrashReporter.exe" );
         }
 
-        public static void KillExecuteSteam()
-        {
+        public static void KillExecuteSteam() {
 
             ForceTaskKill( "steam.exe" );
-            Thread.Sleep(5000);
             ForceTaskKill( "gameoverlayui.exe" );
             ForceTaskKill("steamwebhelper.exe");
-        }
-
-        public static void KillCrash()
-        {    
-            ForceTaskKill( "BroCrashReporter.exe" );       
+            ForceTaskKill( "steamservice.exe" );
+            ForceTaskKill( "steamerrorreporter.exe" );
         }
 
         public static void StartExecute()
@@ -117,12 +118,9 @@ namespace pbpb
         public static void KillExecute() {
 
             Log.Add( "(PW) KillExecute PUBG!" );
-
             PubgRound.End();
-
             KillExecutedTime = Environment.TickCount;
             PubgWindow.Window.SetClose();
-            Thread.Sleep(5000);
             NativeUtils.KillExecutePubg();
             KillExecuted = true;
         }
@@ -131,7 +129,6 @@ namespace pbpb
         public static void KillExecuteSteam()
         {
             Log.Add( "(PW) KillExecute Steam!" );
-
             KillExecutedSteamTime = Environment.TickCount;
             NativeUtils.KillExecuteSteam();
             KillExecuted = false;
@@ -160,10 +157,9 @@ namespace pbpb
                 Log.Add( "(PU) KillExecute Crash!" );
 
                 NativeWindows.PubgCrashReporter.SetClose();
-             
-            }
-
-            NativeUtils.KillCrash();           
+                
+                NativeUtils.KillExecutePubgCrash();
+            }          
         }
 
         private static IntPtr BEHandle => NativeWindows.BattlEyeLauncher.Handle;

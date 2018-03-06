@@ -150,7 +150,7 @@ namespace pbpb
 
                         Log.Append( " di: " + Pcs[PubgControls.btnExit].LastDistance.ToString() );
 
-                        Thread.Sleep( 7000 );
+                        Thread.Sleep( 6000 );
 
                         PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "exit" );
 

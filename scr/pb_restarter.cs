@@ -64,19 +64,19 @@ namespace pbpb
 
                         Log.Add( s );
 
-                        NativeWindows.SteamGameOverlayUICrash.SetClose();
-
-                        NativeWindows.SteamClientBootstrapper.SetClose();
-
                         PubgWindow.CloseSUR();
 
                         PubgWindow.CloseSE();
 
-                        PubgWindow.CloseSCE();
+                        PubgWindow.CloseSCE();                  
+
+                        PubgWindow.KillExecute();
 
                         PubgWindow.KillCrash();
 
-                        PubgWindow.KillExecute();
+                        NativeWindows.SteamGameOverlayUICrash.SetClose();
+
+                        NativeWindows.SteamClientBootstrapper.SetClose();
 
                         goto EXIT;
                     }
