@@ -94,8 +94,11 @@ namespace pbpb {
                         PanelView.BackgroundImage = new Bitmap(PubgStatus.RawScr);                                    
                 }
 
-                string rtimestr = STime.TickToStr( Environment.TickCount - PubgRound.StartedTime );
-                lab_CurrentRounTime.Text = String.Format( "{0}", rtimestr );
+                if (PubgRound.IsLive) {
+
+                    string rtimestr = STime.TickToStr( Environment.TickCount - PubgRound.StartedTime );
+                    lab_CurrentRounTime.Text = String.Format( "{0}", rtimestr );
+                }
             }
 
             base.WndProc( ref m );
