@@ -21,8 +21,16 @@ namespace pbpb {
     public partial class Form1 : Form
     {
         static string uniq = "dGhleg==";
-        public const string AppBuild = "4";
-        public static string AppTitle = "PBPB v1.9.1";
+
+        public static System.Version AppVersion = Assembly.GetExecutingAssembly().GetName().Version;
+        public static DateTime CompileTime {
+            get {
+                DateTime compileTime = new DateTime(2000, 1, 1).AddDays( AppVersion.Build ).AddSeconds( AppVersion.Revision * 2 );
+                return compileTime;
+            }
+        }
+        public static string AppRevision = AppVersion.Revision.ToString();
+        public static string AppTitle = String.Format("PBPB {0}.{1}", AppVersion.Major, AppVersion.Minor);
         public static string ViewFormTitle = "PBPB View";
         public const int PartFullHDPreset = 5;    
 
@@ -61,7 +69,7 @@ namespace pbpb {
             Text = AppTitle;
             Icon = Resources.gray;
             tray.Icon = Resources.gray;
-            lab_appversioninternal.Text += AppBuild;
+            lab_appversioninternal.Text += AppRevision;
 
             DateTime thisDate = DateTime.Today;
             string date_convert1 = Convert.ToString( "20.03.2018" );
@@ -225,7 +233,7 @@ namespace pbpb {
                 try {
                     string owner = Encoding.UTF8.GetString( Convert.FromBase64String( uniq ) );
 
-                    DateTime build = DateTimeExtensions.GetLinkerTime( Assembly.GetAssembly(typeof(Program)) );
+                    DateTime build = CompileTime; //DateTimeExtensions.GetLinkerTime( Assembly.GetAssembly(typeof(Program)) );
 
                     s = String.Format( " {0} {1} {2} Build time: {3} {4} {5} (c) 2018, {6}",
                         AppTitle, Environment.NewLine, Environment.NewLine,
