@@ -21,7 +21,7 @@ namespace pbpb {
     public partial class Form1 : Form
     {
         static string uniq = "dGhleg==";
-        public const string AppBuild = "2";
+        public const string AppBuild = "3";
         public static string AppTitle = "PBPB v1.9.1";
         public static string ViewFormTitle = "PBPB View";
         public const int PartFullHDPreset = 5;    
@@ -88,6 +88,8 @@ namespace pbpb {
             Setti.Load();
 
             WriteGui();      
+
+            InitAppToolTips();
         }
 
         static void PubgInputEvent( PubgInputEventArgs e ) {

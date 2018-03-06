@@ -23,9 +23,22 @@ namespace pbpb
 
                         Log.Add( "(PR) No idle time for actions. Wait..." );
 
-                        goto EXIT;
+                        continue;
                     }
 
+                    if (!PubgWindow.Exists) {
+
+                        if (PubgWindow.SUExists) {
+
+                            Log.Add( "(PR) wait steam updating..." );
+
+                            continue;
+                        }
+
+                        PubgWindow.StartExecute();
+
+                        Thread.Sleep( 90000 );
+                    }
 
                     if (
                         ( ( !Setti.PassiveMode ) && ( Environment.TickCount - PubgStatus.LastGoodTime > MAX_NOLASTGOOD ) )
@@ -43,8 +56,6 @@ namespace pbpb
                         }
 
                         PubgStatus.SetLastGood();
-
-                        goto EXIT;
                     }
 
 
@@ -78,33 +89,15 @@ namespace pbpb
 
                         NativeWindows.SteamClientBootstrapper.SetClose();
 
-                        goto EXIT;
                     }
 
-
-                    if (!PubgWindow.Exists) {
-
-                        if (PubgWindow.SUExists) {
-
-                            Log.Add( "(PR) wait steam updating..." );
-
-                            goto EXIT;
-                        }
-
-                        PubgWindow.StartExecute();
-
-                        Thread.Sleep( 75000 );
-                    }
-
-                    EXIT:;
-                    //nope
                 }
                 catch (Exception e) {
 
                     Log.Add( "(PR) exception: " + e.Message );
                 }
 
-            } while (!BotStopper.WaitOne(45000, false));
+            } while (!BotStopper.WaitOne(30000, false));
 
             Log.Add("(MAIN) RestarterProc leave!");
         }

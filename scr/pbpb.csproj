@@ -118,6 +118,7 @@
     <Compile Include="pb_setti.cs" />
     <Compile Include="pb_status.cs" />
     <Compile Include="pb_statuschecker.cs" />
+    <Compile Include="pb_tooltips.cs" />
     <Compile Include="pb_window.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -159,7 +159,7 @@ namespace pbpb
             Setti.SaveReward                    =      chb_SaveReward.Checked;
             Setti.IdleAutolaunch                =      chb_AutoStartOnIdle.Checked;
             Setti.CanRestartSteam               =      chb_CanKillSteam.Checked;
-            Setti.CanRestartPC                  =      chb_canrestartpc.Checked;          
+            Setti.CanRestartPC                  =      chb_AllowRestartPC.Checked;          
             Setti.DrawScr                       =      chb_view.Checked;
             Setti.IdleAutolaunchTimeout         =      (int)ne_MaxIdle.Value;
             Setti.PubgWindowAbsoluteX           =      (int)ne_PosX.Value;
@@ -174,7 +174,7 @@ namespace pbpb
             chb_SaveReward.Checked          =      Setti.SaveReward;
             chb_AutoStartOnIdle.Checked     =      Setti.IdleAutolaunch;
             chb_CanKillSteam.Checked        =      Setti.CanRestartSteam;
-            chb_canrestartpc.Checked        =      Setti.CanRestartPC && Setti.AppHasAutostart();
+            chb_AllowRestartPC.Checked        =      Setti.CanRestartPC && Setti.AppHasAutostart();
             chb_view.Checked                =      Setti.DrawScr;
 
             ne_MaxIdle.Value                =      Setti.IdleAutolaunchTimeout;

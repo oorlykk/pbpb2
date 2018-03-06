@@ -77,7 +77,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lab_CurrentRounTime = new System.Windows.Forms.Label();
             this.lab_appversioninternal = new System.Windows.Forms.Label();
-            this.chb_canrestartpc = new System.Windows.Forms.CheckBox();
+            this.chb_AllowRestartPC = new System.Windows.Forms.CheckBox();
             this.PanelView = new pbpb.PanelDoubleBuffered();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
@@ -618,19 +618,19 @@
             this.lab_appversioninternal.Tag = "X";
             this.lab_appversioninternal.Text = "Build: ";
             // 
-            // chb_canrestartpc
+            // chb_AllowRestartPC
             // 
-            this.chb_canrestartpc.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chb_canrestartpc.AutoSize = true;
-            this.chb_canrestartpc.Location = new System.Drawing.Point(12, 305);
-            this.chb_canrestartpc.Name = "chb_canrestartpc";
-            this.chb_canrestartpc.Size = new System.Drawing.Size(205, 27);
-            this.chb_canrestartpc.TabIndex = 40;
-            this.chb_canrestartpc.Tag = "allowrestartpc";
-            this.chb_canrestartpc.Text = "Allow autostart and restart PC";
-            this.chb_canrestartpc.UseVisualStyleBackColor = true;
-            this.chb_canrestartpc.CheckedChanged += new System.EventHandler(this.chb_canrestartpc_CheckedChanged);
-            this.chb_canrestartpc.Click += new System.EventHandler(this.chb_canrestartpc_Click);
+            this.chb_AllowRestartPC.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chb_AllowRestartPC.AutoSize = true;
+            this.chb_AllowRestartPC.Location = new System.Drawing.Point(12, 305);
+            this.chb_AllowRestartPC.Name = "chb_AllowRestartPC";
+            this.chb_AllowRestartPC.Size = new System.Drawing.Size(205, 27);
+            this.chb_AllowRestartPC.TabIndex = 40;
+            this.chb_AllowRestartPC.Tag = "allowrestartpc";
+            this.chb_AllowRestartPC.Text = "Allow autostart and restart PC";
+            this.chb_AllowRestartPC.UseVisualStyleBackColor = true;
+            this.chb_AllowRestartPC.CheckedChanged += new System.EventHandler(this.chb_canrestartpc_CheckedChanged);
+            this.chb_AllowRestartPC.Click += new System.EventHandler(this.chb_canrestartpc_Click);
             // 
             // PanelView
             // 
@@ -648,7 +648,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 363);
-            this.Controls.Add(this.chb_canrestartpc);
+            this.Controls.Add(this.chb_AllowRestartPC);
             this.Controls.Add(this.lab_appversioninternal);
             this.Controls.Add(this.lab_CurrentRounTime);
             this.Controls.Add(this.label3);
@@ -743,7 +743,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lab_CurrentRounTime;
         private System.Windows.Forms.Label lab_appversioninternal;
-        private System.Windows.Forms.CheckBox chb_canrestartpc;
+        private System.Windows.Forms.CheckBox chb_AllowRestartPC;
     }
 }
 
