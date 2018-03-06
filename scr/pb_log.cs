@@ -62,6 +62,12 @@ namespace pbpb
             file.Close();
         }
 
+        public static string Save() {
+
+            string filename = Path.GetTempPath() + PubgRound.GetRewardName() + ".txt";
+            Save(filename);
+            return filename;
+        }
     }
 
 }

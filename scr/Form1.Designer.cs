@@ -75,9 +75,10 @@
             this.button8 = new System.Windows.Forms.Button();
             this.ne_MaxRoundTIme = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.PanelView = new pbpb.PanelDoubleBuffered();
             this.lab_CurrentRounTime = new System.Windows.Forms.Label();
             this.lab_appversioninternal = new System.Windows.Forms.Label();
+            this.chb_canrestartpc = new System.Windows.Forms.CheckBox();
+            this.PanelView = new pbpb.PanelDoubleBuffered();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
             this.panel_test.SuspendLayout();
@@ -277,6 +278,7 @@
             // tmrIdleCheck
             // 
             this.tmrIdleCheck.Enabled = true;
+            this.tmrIdleCheck.Interval = 1000;
             this.tmrIdleCheck.Tick += new System.EventHandler(this.tmrIdleCheck_Tick);
             // 
             // chb_AutoStartOnIdle
@@ -334,7 +336,7 @@
             this.panel_test.Controls.Add(this.button2);
             this.panel_test.Controls.Add(this.button1);
             this.panel_test.Controls.Add(this.btnttt);
-            this.panel_test.Location = new System.Drawing.Point(12, 305);
+            this.panel_test.Location = new System.Drawing.Point(12, 338);
             this.panel_test.Name = "panel_test";
             this.panel_test.Size = new System.Drawing.Size(468, 93);
             this.panel_test.TabIndex = 21;
@@ -596,17 +598,6 @@
             this.label3.Tag = "X";
             this.label3.Text = "Max Round Time (minutes):";
             // 
-            // PanelView
-            // 
-            this.PanelView.BackgroundImage = global::pbpb.Properties.Resources.banner;
-            this.PanelView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.PanelView.Location = new System.Drawing.Point(12, 36);
-            this.PanelView.Name = "PanelView";
-            this.PanelView.Size = new System.Drawing.Size(472, 127);
-            this.PanelView.TabIndex = 33;
-            this.PanelView.Tag = "pview";
-            this.PanelView.DoubleClick += new System.EventHandler(this.btnTag_Click);
-            // 
             // lab_CurrentRounTime
             // 
             this.lab_CurrentRounTime.AutoSize = true;
@@ -627,11 +618,37 @@
             this.lab_appversioninternal.Tag = "X";
             this.lab_appversioninternal.Text = "Build: ";
             // 
+            // chb_canrestartpc
+            // 
+            this.chb_canrestartpc.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chb_canrestartpc.AutoSize = true;
+            this.chb_canrestartpc.Location = new System.Drawing.Point(12, 305);
+            this.chb_canrestartpc.Name = "chb_canrestartpc";
+            this.chb_canrestartpc.Size = new System.Drawing.Size(205, 27);
+            this.chb_canrestartpc.TabIndex = 40;
+            this.chb_canrestartpc.Tag = "allowrestartpc";
+            this.chb_canrestartpc.Text = "Allow autostart and restart PC";
+            this.chb_canrestartpc.UseVisualStyleBackColor = true;
+            this.chb_canrestartpc.CheckedChanged += new System.EventHandler(this.chb_canrestartpc_CheckedChanged);
+            this.chb_canrestartpc.Click += new System.EventHandler(this.chb_canrestartpc_Click);
+            // 
+            // PanelView
+            // 
+            this.PanelView.BackgroundImage = global::pbpb.Properties.Resources.banner;
+            this.PanelView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PanelView.Location = new System.Drawing.Point(12, 36);
+            this.PanelView.Name = "PanelView";
+            this.PanelView.Size = new System.Drawing.Size(472, 127);
+            this.PanelView.TabIndex = 33;
+            this.PanelView.Tag = "pview";
+            this.PanelView.DoubleClick += new System.EventHandler(this.btnTag_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 326);
+            this.ClientSize = new System.Drawing.Size(493, 363);
+            this.Controls.Add(this.chb_canrestartpc);
             this.Controls.Add(this.lab_appversioninternal);
             this.Controls.Add(this.lab_CurrentRounTime);
             this.Controls.Add(this.label3);
@@ -726,6 +743,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lab_CurrentRounTime;
         private System.Windows.Forms.Label lab_appversioninternal;
+        private System.Windows.Forms.CheckBox chb_canrestartpc;
     }
 }
 

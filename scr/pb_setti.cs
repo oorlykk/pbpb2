@@ -9,6 +9,7 @@ namespace pbpb
 {
 
     public sealed class Setti {
+        private const string appname = "PBPB";
         //
         public static bool IsChanged;
         //
@@ -19,6 +20,7 @@ namespace pbpb
         public static int IdleAutolaunchTimeout = 5;
         public static int PubgWindowAbsoluteY = 0;
         public static bool CanRestartSteam = true;
+        public static bool CanRestartPC = false;
         public static bool DrawScr = true;
         public static int PubgWindowAbsoluteX = Screen.PrimaryScreen.Bounds.Width + 1;
         public static int MaxRoundTime = 5*(1000*60);
@@ -48,7 +50,7 @@ namespace pbpb
 
             fo.Serialize(ms, o);
 
-            var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey( "PBPB" );
+            var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey( appname );
 
             key.SetValue( Form1.AppTitle, ms.ToArray() );
 
@@ -65,7 +67,7 @@ namespace pbpb
 
             try {
 
-                var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey( "PBPB" );
+                var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey( appname );
 
                 byte[] data = (byte[]) key.GetValue( Form1.AppTitle );
 
@@ -97,6 +99,52 @@ namespace pbpb
             return result;
 
         }
+
+        public static bool SetAppAutostart( bool delete = false )
+        {
+            string appapth = Application.ExecutablePath;
+
+            try {
+
+                var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey( "Software\\Microsoft\\Windows\\CurrentVersion\\Run\\" );
+
+                if (!delete)
+                    key.SetValue( appname, appapth );
+                else
+                    key.DeleteValue( appname );
+
+                key.Close();
+            } catch {
+
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool AppHasAutostart()
+        {
+            
+            string appapth = Application.ExecutablePath;
+            string value;
+
+            try {
+
+                var key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey( "Software\\Microsoft\\Windows\\CurrentVersion\\Run\\" );
+
+                value = (string) key.GetValue( appname );
+
+                key.Close();
+
+                if (value == null) return false;
+            } catch {
+
+                return false;
+            }
+            
+            return (appapth.ToLower() == value.ToLower());
+        }
+
     }
 
     partial class Form1
@@ -111,6 +159,7 @@ namespace pbpb
             Setti.SaveReward                    =      chb_SaveReward.Checked;
             Setti.IdleAutolaunch                =      chb_AutoStartOnIdle.Checked;
             Setti.CanRestartSteam               =      chb_CanKillSteam.Checked;
+            Setti.CanRestartPC                  =      chb_canrestartpc.Checked;          
             Setti.DrawScr                       =      chb_view.Checked;
             Setti.IdleAutolaunchTimeout         =      (int)ne_MaxIdle.Value;
             Setti.PubgWindowAbsoluteX           =      (int)ne_PosX.Value;
@@ -125,6 +174,7 @@ namespace pbpb
             chb_SaveReward.Checked          =      Setti.SaveReward;
             chb_AutoStartOnIdle.Checked     =      Setti.IdleAutolaunch;
             chb_CanKillSteam.Checked        =      Setti.CanRestartSteam;
+            chb_canrestartpc.Checked        =      Setti.CanRestartPC && Setti.AppHasAutostart();
             chb_view.Checked                =      Setti.DrawScr;
 
             ne_MaxIdle.Value                =      Setti.IdleAutolaunchTimeout;

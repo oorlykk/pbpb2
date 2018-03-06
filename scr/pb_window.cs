@@ -87,6 +87,13 @@ namespace pbpb
         {
             Shell32.ShellExecute( IntPtr.Zero, "open", "steam://rungameid/578080", "", "", User32.SW_SHOWNORMAL );
         }
+
+        public static void ShutdownExecute()
+        {
+            Log.Add("Shutdown PC Execute!");
+            Log.Save();
+            Shell32.ShellExecute( IntPtr.Zero, "open", Environment.SystemDirectory + "\\shutdown.exe", "/s /f /t 5", "", 0 );
+        }
     }
 
    public static class PubgWindow {

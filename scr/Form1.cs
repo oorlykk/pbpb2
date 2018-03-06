@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
@@ -19,8 +21,8 @@ namespace pbpb {
     public partial class Form1 : Form
     {
         static string uniq = "dGhleg==";
-        public const string AppBuild = "12";
-        public static string AppTitle = "PBPB v1.9";
+        public const string AppBuild = "1";
+        public static string AppTitle = "PBPB v1.9.1";
         public static string ViewFormTitle = "PBPB View";
         public const int PartFullHDPreset = 5;    
 
@@ -32,7 +34,7 @@ namespace pbpb {
         private static ManualResetEvent BotStopper = new ManualResetEvent(true);
              
         public static Task PubgStatusChecker, PubgRestarter = null;
-        
+        public static int LastVisibledPubgProcessTime = int.MaxValue;
 
         public Form1()
         {
@@ -232,14 +234,8 @@ namespace pbpb {
                 PubgWindow.ThrowLastWinError(true);
             }
             else if (t == "pview") {(new FormPBPBView()).Show();}
-            else if (t == "txlog") {
-                
-                string filename = Path.GetTempPath() + PubgRound.GetRewardName() + ".txt";
-
-                Log.Save( filename );
-
-                Shell32.ShellExecute( Handle, "open", filename, "", "", User32.SW_SHOWNORMAL );
-            }
+            else if (t == "txlog") Shell32.ShellExecute( Handle, "open", Log.Save(), "", "", User32.SW_SHOWNORMAL );
+            
         }
 
         private void tray_Click( object sender, MouseEventArgs e ) {
@@ -271,6 +267,17 @@ namespace pbpb {
 
         private void tmrIdleCheck_Tick( object sender, EventArgs e )
         {
+
+            if (Process.GetProcessesByName( "TslGame" ).Any()) {
+
+                LastVisibledPubgProcessTime = Environment.TickCount;
+            }
+
+            if (Environment.TickCount - LastVisibledPubgProcessTime > 30*(1000*60)) {
+
+                if (Setti.CanRestartPC) NativeUtils.ShutdownExecute();
+
+            }
 
             if (!Setti.IdleAutolaunch || !BotStopper.WaitOne(0, false)) return;
           
@@ -305,6 +312,18 @@ namespace pbpb {
         private void ReadGui( object sender, KeyEventArgs e ) => ReadGui();
 
         private void ReadGui( object sender, EventArgs e ) => ReadGui();
+
+        private void chb_canrestartpc_CheckedChanged( object sender, EventArgs e )
+        {
+
+        }
+
+        private void chb_canrestartpc_Click( object sender, EventArgs e )
+        {
+            bool ch = ( (CheckBox) sender ).Checked;
+            Setti.SetAppAutostart( !ch );
+            ReadGui();
+        }
 
         private void Form1_FormClosing( object sender, FormClosingEventArgs e ) {
 
