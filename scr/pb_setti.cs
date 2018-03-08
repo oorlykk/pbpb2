@@ -109,7 +109,7 @@ namespace pbpb
                 var key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey( "Software\\Microsoft\\Windows\\CurrentVersion\\Run\\" );
 
                 if (!delete)
-                    key.SetValue( appname, appapth );
+                    key.SetValue( appname, appapth + " -minimized" );
                 else
                     key.DeleteValue( appname );
 
@@ -137,6 +137,11 @@ namespace pbpb
                 key.Close();
 
                 if (value == null) return false;
+
+                if (value.LastIndexOf( @" -" ) > 0)
+                    value = value.Remove(value.LastIndexOf( " -" ), 
+                                         value.Length - value.LastIndexOf( " -" ) );
+
             } catch {
 
                 return false;

@@ -683,6 +683,7 @@
             this.Text = "PBPB //by SN";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.trayms.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).EndInit();
             this.panel_test.ResumeLayout(false);

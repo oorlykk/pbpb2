@@ -46,7 +46,7 @@ namespace pbpb {
         public Form1()
         {
             InitializeComponent();       
-          
+
             Application.ThreadException += new ThreadExceptionEventHandler ( 
                 ( object sender, ThreadExceptionEventArgs e  ) => {
 
@@ -96,10 +96,13 @@ namespace pbpb {
             WriteGui();      
 
             InitAppToolTips();
+
+            WindowState = ( Environment.GetCommandLineArgs().Length > 1 && Environment.GetCommandLineArgs()[1] == "-minimized" ) ? FormWindowState.Minimized : FormWindowState.Normal;
+
         }
 
         static void PubgInputEvent( PubgInputEventArgs e ) {
-
+            
             string act;
 
             if (e.IsPress) act = "press";
@@ -188,7 +191,7 @@ namespace pbpb {
         }
 
         private void btnTag_Click( object sender, EventArgs e ) {
-
+            
             string t;
 
             if (sender.GetType() == typeof( Button ))
@@ -329,6 +332,11 @@ namespace pbpb {
             bool ch = ( (CheckBox) sender ).Checked;
             Setti.SetAppAutostart( !ch );
             ReadGui();
+        }
+
+        private void Form1_Load( object sender, EventArgs e )
+        {
+
         }
 
         private void Form1_FormClosing( object sender, FormClosingEventArgs e ) {
