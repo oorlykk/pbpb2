@@ -510,12 +510,11 @@
             // chb_HiddenMode
             // 
             this.chb_HiddenMode.AutoSize = true;
-            this.chb_HiddenMode.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chb_HiddenMode.Location = new System.Drawing.Point(325, 316);
+            this.chb_HiddenMode.Location = new System.Drawing.Point(299, 170);
             this.chb_HiddenMode.Name = "chb_HiddenMode";
-            this.chb_HiddenMode.Size = new System.Drawing.Size(155, 21);
+            this.chb_HiddenMode.Size = new System.Drawing.Size(59, 21);
             this.chb_HiddenMode.TabIndex = 29;
-            this.chb_HiddenMode.Text = "Hide PUBG Window";
+            this.chb_HiddenMode.Text = "Hide";
             this.chb_HiddenMode.UseVisualStyleBackColor = true;
             this.chb_HiddenMode.Click += new System.EventHandler(this.ReadGui);
             // 
@@ -604,7 +603,7 @@
             // lab_CurrentRounTime
             // 
             this.lab_CurrentRounTime.AutoSize = true;
-            this.lab_CurrentRounTime.Location = new System.Drawing.Point(299, 171);
+            this.lab_CurrentRounTime.Location = new System.Drawing.Point(296, 317);
             this.lab_CurrentRounTime.Name = "lab_CurrentRounTime";
             this.lab_CurrentRounTime.Size = new System.Drawing.Size(42, 17);
             this.lab_CurrentRounTime.TabIndex = 37;

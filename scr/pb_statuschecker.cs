@@ -150,9 +150,13 @@ namespace pbpb
 
                         Log.Append( " di: " + Pcs[PubgControls.btnExit].LastDistance.ToString() );
 
-                        Thread.Sleep( 6000 );
+                        bool needsavereward = !PubgRound.RewardSaved && Setti.SaveReward;
 
-                        PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "exit" );
+                        if (needsavereward) {
+
+                            Thread.Sleep( 6000 );
+                            PubgRound.End( needsavereward, "ExitToLobby" );
+                        }
 
                         if (PubgInput.IsInputMessage && !PubgInput.CanInteract) {
 
