@@ -47,13 +47,10 @@ namespace pbpb
                        ) {
 
                         bool executed = PubgWindow.KillExecuted;
-                        PubgWindow.KillExecute();
-
-                        if (Setti.CanRestartSteam && executed) {
-
-                            Thread.Sleep( 10000 );
-                            PubgWindow.KillExecuteSteam();
-                        }
+                        PubgWindow.KillExecute();                       
+                        if (Setti.CanRestartSteam && executed)   
+                            PubgWindow.KillExecuteSteam();                    
+                        Thread.Sleep( 15000 );
 
                         PubgStatus.SetLastGood();
                     }

@@ -121,9 +121,8 @@ namespace pbpb {
                     try {
                         if (IsPres( Keys.Pause )) {
 
-                            bool launched = !BotStopper.WaitOne( 0, false );
-                            string msg = "Bot " + ( launched ? "stopped" : "launched" );
-                            if (launched) {
+                            string msg = "Bot " + ( !BotIsStopped ? "stopped" : "launched" );
+                            if (!BotIsStopped) {
                                 StopBotClick(this);
                                 PubgWindow.CloseMsg(); PubgWindow.KillExecute(); PubgWindow.HideBE();
                                 Log.Add( msg + " [user key]" );

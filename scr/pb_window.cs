@@ -11,21 +11,19 @@ namespace pbpb
 
     public class NativeWindow
     {
+        public string Caption { get; private set; }
+
         public NativeWindow(string window_text) {
 
-            m_WindowName = window_text;
+            Caption = window_text;
         }
-
-        private string m_WindowName;
-        public string Caption { get => m_WindowName; set => m_WindowName = value; }
-    
-        public void Hide() => User32.ShowWindow(Handle, User32.SW_HIDE);
-        public void Show() => User32.ShowWindow(Handle, User32.SW_SHOW);
         protected virtual IntPtr Find() => (IntPtr)User32.FindWindow( null, Caption );
-
         public IntPtr Handle => Find();
         public bool Exists => (int)Handle != 0;
-        
+        public void Hide() => User32.ShowWindow(Handle, User32.SW_HIDE);
+        public void Show() => User32.ShowWindow(Handle, User32.SW_SHOW);
+
+               
         public virtual void SetClose()
         {
             User32.SendMessage( Handle, User32.WM_CLOSE, 0, 0 );
@@ -202,8 +200,7 @@ namespace pbpb
                 NativeWindows.SteamErrorEn.SetClose();
                 return;
             }
-
-            if (NativeWindows.SteamErrorRu.Exists) NativeWindows.SteamErrorRu.SetClose();
+            NativeWindows.SteamErrorRu.SetClose();
         }   
 
         //Steam Update Ready
@@ -223,13 +220,12 @@ namespace pbpb
 
             if (!SURExists) return;
 
-            if (NativeWindows.SteamErrorEn.Exists) {
+            if (NativeWindows.SteamUpdateReadyEn.Exists) {
 
-                NativeWindows.SteamErrorEn.SetClose();
+                NativeWindows.SteamUpdateReadyEn.SetClose();
                 return;
             }
-
-            if (NativeWindows.SteamErrorRu.Exists) NativeWindows.SteamErrorRu.SetClose();
+            NativeWindows.SteamUpdateReadyRu.SetClose();
         }
 
          //Steam Updating
@@ -255,8 +251,9 @@ namespace pbpb
                 NativeWindows.SteamConnectErrorEn.SetClose();
                 return;
             }
-
-            if (NativeWindows.SteamConnectErrorRu.Exists) NativeWindows.SteamConnectErrorRu.SetClose();
+            if (NativeWindows.SteamConnectErrorRu.Exists)
+                NativeWindows.SteamConnectErrorRu.SetClose();
+            
         }   
      
         public static bool IsFocused => (IntPtr)User32.GetForegroundWindow() == Handle;

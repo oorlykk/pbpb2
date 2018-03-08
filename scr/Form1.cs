@@ -21,7 +21,7 @@ namespace pbpb {
     public partial class Form1 : Form
     {
         static string uniq = "dGhleg==";
-       public static System.Version AppVersion = Assembly.GetExecutingAssembly().GetName().Version;
+        public static System.Version AppVersion = Assembly.GetExecutingAssembly().GetName().Version;
         public static DateTime CompileTime {
             get {
                 DateTime compileTime = new DateTime(2000, 1, 1).AddDays( AppVersion.Build ).AddSeconds( AppVersion.Revision * 2 );
@@ -37,9 +37,11 @@ namespace pbpb {
         static string DTstr => DateTime.Now.ToString().Replace(":", " ");
         static string filename_now => SPath.Desctop + DTstr + ".bmp";
         static string full_scr_filename = SPath.Desctop + "scr.bmp";
-        public static Random RND = new Random();      
+        public static Random RND = new Random();   
+        
         private static ManualResetEvent BotStopper = new ManualResetEvent(true);
-             
+        public static bool BotIsStopped => BotStopper.WaitOne(0, false);
+
         public static Task PubgStatusChecker, PubgRestarter = null;
         public static int LastVisibledPubgProcessTime = int.MaxValue;
 
@@ -157,16 +159,16 @@ namespace pbpb {
 
             if (PubgStatusChecker != null) {
 
-                Log.Add("Free Task <StatusChecker>");
+                Log.Add( "Free Task <StatusChecker>" );
 
-                //PubgStatusChecker.Dispose();
+                PubgStatusChecker.Dispose();
                 PubgStatusChecker = null;
             }
             if (PubgRestarter != null) {
 
-                Log.Add("Free Task <StatusProc>");
+                Log.Add( "Free Task <StatusProc>" );
 
-                //PubgRestarter.Dispose();
+                PubgRestarter.Dispose();
                 PubgRestarter = null;
             }
             PubgStatusChecker = Task.Run( () => PubgRestarterProc() );
@@ -260,11 +262,9 @@ namespace pbpb {
 
         private void trayms_Opening( object sender, System.ComponentModel.CancelEventArgs e ) {
 
-            bool stopped = BotStopper.WaitOne(0, false);
+            tsmiBotStatus.Text = BotIsStopped ? "Bot [ Stopped ]" : "Bot [ Launched ]";
 
-            tsmiBotStatus.Text = stopped ? "Bot [ Stopped ]" : "Bot [ Launched ]";
-
-            tsmiStartBot.Visible = stopped; tsmiStopBot.Visible = !stopped;
+            tsmiStartBot.Visible = BotIsStopped; tsmiStopBot.Visible = !BotIsStopped;
 
             tsmiAutolauchifidle.Checked = Setti.IdleAutolaunch;
         }
@@ -288,7 +288,7 @@ namespace pbpb {
 
             }
 
-            if (!Setti.IdleAutolaunch || !BotStopper.WaitOne(0, false)) return;
+            if (!Setti.IdleAutolaunch || !BotIsStopped) return;
           
             if (STime.GetUserIdleTime() > Setti.IdleAutolaunchTimeout * 1000 * 60) {
 
@@ -300,7 +300,7 @@ namespace pbpb {
 
         private void btnttt_Click( object sender, EventArgs e )
         {
-            SDisplay.PowerOff(Handle);
+            BotIsStopped.ToYesNoString().ShowMessage();
         }
 
         private void cbox_PubgInput_SelectedIndexChanged( object sender, EventArgs e )
