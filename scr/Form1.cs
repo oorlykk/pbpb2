@@ -300,7 +300,10 @@ namespace pbpb {
 
         private void btnttt_Click( object sender, EventArgs e )
         {
-            BotIsStopped.ToYesNoString().ShowMessage();
+            Thread.Sleep(2000);
+            POINT p = new POINT();
+            User32.GetCursorPos(out p);
+            PubgInput.MoveMouse(p.x, p.y);
         }
 
         private void cbox_PubgInput_SelectedIndexChanged( object sender, EventArgs e )

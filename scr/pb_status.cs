@@ -62,7 +62,7 @@ namespace pbpb {
 
                 if (LastDistance < 5) {
 
-                    if (PubgStatuses.Unknown.HasFlag(result))
+                    if (PubgStatuses.Unknown.HasFlags(result))
                         result ^= PubgStatuses.Unknown;
 
                     if (pcname == PubgControls.btnStart) 

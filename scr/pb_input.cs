@@ -71,7 +71,7 @@ namespace pbpb
             }
 
             int lp = (int)(((ushort)x) | (uint)(y << 16));
-            int wp = User32.MK_MBUTTON; //User32.MK_LBUTTON;
+            int wp = 0;
      
             ApiMessage caller;
             if (!AsPostMessage)
@@ -86,15 +86,25 @@ namespace pbpb
                 };
 
             if (AsPostMessage) {
-
+                MoveMouse(x, y);
                 caller( Handle, User32.WM_LBUTTONDOWN, wp, lp );
                 caller( Handle, User32.WM_LBUTTONUP, wp, lp ); 
                 caller( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
                 caller( Handle, User32.WM_LBUTTONUP, wp, lp );
             } else {
-
+                MoveMouse(0, 0);
+                caller( Handle, User32.WM_LBUTTONDOWN, 0, 0 );
+                caller( Handle, User32.WM_LBUTTONUP, 0, 0 );
                 caller( Handle, User32.WM_LBUTTONDOWN, wp, lp );
                 caller( Handle, User32.WM_LBUTTONUP, wp, lp );
+
+                caller( Handle, User32.WM_MBUTTONDOWN, 0, 0 );
+                caller( Handle, User32.WM_MBUTTONUP, 0, 0 );
+                caller( Handle, User32.WM_MBUTTONDOWN, wp, lp );
+                caller( Handle, User32.WM_MBUTTONUP, wp, lp );
+
+                caller( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
+                caller( Handle, User32.WM_MBUTTONDBLCLK, wp, lp );
             }
         }
 
@@ -106,8 +116,8 @@ namespace pbpb
         public override void MoveMouse( int x, int y ) {
 
             int lp = (int) ( ( (ushort) x ) | (uint) ( y << 16 ) );
-            User32.SendMessage( Handle, User32.WM_MOUSEMOVE, 0, lp );
-            ChangeViewPerson();
+            User32.SendMessage( Handle, User32.WM_SYSCOMMAND, User32.SC_MOUSEMOVE, lp);
+            User32.SendMessage( Handle, User32.WM_SYSCOMMAND, User32.SC_MOUSEMENU, lp);
         }
 
         public override void AssistInWater()
@@ -163,14 +173,12 @@ namespace pbpb
 
             SetFocus();
 
+            Thread.Sleep(55); 
+
             ReleaseKey(LastKey);
-
-            Thread.Sleep(55);     
-
+               
             if (!release) SKeybd.KeyDown(key);
             else          SKeybd.KeyUp(key);
-
-            Thread.Sleep(55);
 
             RestoreFocus();
 
@@ -182,15 +190,15 @@ namespace pbpb
         public virtual void KeyPress(Keys key)
         {                                       
 
-            SetFocus();
+            SetFocus();       
+
+            Thread.Sleep(50);
 
             ReleaseKey(LastKey);
 
-            Thread.Sleep(55);
+            Thread.Sleep(50);
 
             SKeybd.KeyPress(key);
-
-            Thread.Sleep(55);
 
             RestoreFocus();
 
@@ -202,11 +210,11 @@ namespace pbpb
         public virtual void MoveMouse(int x, int y) {
 
             SetFocus();
-            Thread.Sleep(55);
+
+            Thread.Sleep(50);
 
             SKeybd.MouseMove( x, y );
 
-            Thread.Sleep(55);
             RestoreFocus();
         }
 
