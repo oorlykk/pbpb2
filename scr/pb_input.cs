@@ -160,7 +160,30 @@ namespace pbpb
             User32.GetCursorPos( out OldCursorPos );
             PubgWindow.SetFocus();
         }
+        //
+        private IntPtr LastForegoundWindow;
+        private void SaveCurrentForegroundWindow() {
 
+            LastForegoundWindow = (IntPtr)User32.GetForegroundWindow();
+        } 
+
+        private void RestoreSavedForegroundWindow() {
+
+            User32.SetForegroundWindow(LastForegoundWindow);
+        } 
+
+
+        private POINT LastCursorPos;
+        private void SaveCurrentCursorPos() {
+
+            User32.GetCursorPos( out LastCursorPos );
+        }
+
+        private void RestoreSavedCursorPos() {
+
+            User32.SetCursorPos(LastCursorPos.x, LastCursorPos.y);
+        } 
+        //
         private void RestoreFocus() {
 
             PubgWindow.RestoreFocus();
@@ -223,17 +246,18 @@ namespace pbpb
             x += PubgWindow.PosX;
             y += PubgWindow.PosY;
 
-            //SetFocus();
-            Thread.Sleep(50);
-
             Log.Add(String.Format("ClickLeftMouse_evnt {0} {1}", x, y));
 
-            SKeybd.LBClickEx(x, y, true, 50, 500, 10);
-            SKeybd.MouseMove(x+1, y+1); Thread.Sleep(10);
-            SKeybd.LBClickEx(x, y, true, 100, 64, 100);
+            SaveCurrentCursorPos();
+            SaveCurrentForegroundWindow();
 
-            //RestoreFocus();
-         
+            SKeybd.LBClickEx(x, y, false, 900, 300, 10);
+            Thread.Sleep(10);
+            SKeybd.LBClickEx(x, y, false, 10, 64, 10);
+
+            RestoreSavedForegroundWindow();
+            RestoreSavedCursorPos();
+        
         }
 
         public virtual void ReleaseKey(Keys key) {
