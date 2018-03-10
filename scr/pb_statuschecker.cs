@@ -198,29 +198,18 @@ namespace pbpb
 
                         Log.Append( " di: " + Pcs[PubgControls.labEject].LastDistance.ToString() );
 
-                        PubgInput.EjectClickedTime = Environment.TickCount;
-                        if (RND.Next( 2 ) == 0) {
-                            Thread.Sleep( RND.Next( 300 ) ); Thread.Sleep( RND.Next( 300 ) ); Thread.Sleep( RND.Next( 300 ) );
-                            Thread.Sleep( RND.Next( 300 ) ); Thread.Sleep( RND.Next( 300 ) ); Thread.Sleep( RND.Next( 300 ) );
-                            Thread.Sleep( RND.Next( 300 ) ); Thread.Sleep( RND.Next( 300 ) ); Thread.Sleep( RND.Next( 300 ) );
-                            PubgInput.Eject();
-                            PubgInput.Back();
-                        }
-                        else Log.Add( "skip EJECT press (no lucky)" );
+                        Thread.Sleep(RND.Next(6, 15) * 1000);
 
+                        PubgInput.Eject();
+                        PubgInput.Back();
                     }
 
                     else if (PubgStatuses.Parachute.HasFlags( ps )) {
 
                         Log.Append( " di: " + Pcs[PubgControls.labReleaseParachute].LastDistance.ToString() );
 
-                        PubgInput.ParachuteClickedTime = Environment.TickCount;
-                        if (RND.Next( 1 ) == 0) {
-                            PubgInput.Parachute();
-                            PubgInput.Back();
-                        }
-                        else Log.Add( "skip Parachute press (no lucky)" );
-
+                        PubgInput.Parachute();
+                        PubgInput.Back();
                     }
 
                     else if (PubgStatuses.Prepare.HasFlags( ps )) {

@@ -283,17 +283,16 @@ namespace pbpb {
                 LastVisibledPubgProcessTime = Environment.TickCount;
             }
 
-            if (Environment.TickCount - LastVisibledPubgProcessTime > 30*(1000*60)) {
+            if (Setti.CanRestartPC && !BotIsStopped) {
 
-                if (Setti.CanRestartPC && !BotIsStopped) NativeUtils.ShutdownExecute();
-
+                if ( Environment.TickCount - LastVisibledPubgProcessTime > 30*(1000*60))
+                    NativeUtils.ShutdownExecute();
             }
 
-            if (!Setti.IdleAutolaunch || !BotIsStopped) return;
-          
-            if (STime.GetUserIdleTime() > Setti.IdleAutolaunchTimeout * 1000 * 60) {
+            if (Setti.IdleAutolaunch && BotIsStopped) {
 
-                StartBotClick(sender);
+                if (STime.GetUserIdleTime() > Setti.IdleAutolaunchTimeout * 1000 * 60)
+                    StartBotClick( sender );
             }
         }
 
