@@ -285,7 +285,7 @@ namespace pbpb {
 
             if (Environment.TickCount - LastVisibledPubgProcessTime > 30*(1000*60)) {
 
-                if (Setti.CanRestartPC) NativeUtils.ShutdownExecute();
+                if (Setti.CanRestartPC && !BotIsStopped) NativeUtils.ShutdownExecute();
 
             }
 
