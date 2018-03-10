@@ -53,11 +53,10 @@ namespace pbpb
 
         public int LastClickedTick {get; private set;}
 
-        public void ClickLeftMouse()
-        {
+        public void ClickLeftMouse() {
 
-            LastClickedTick = Environment.TickCount;
-            Form1.PubgInput.ClickLeftMouse(X + ( Width / 2 ), Y + ( Height / 2 ));
+            if ( Form1.PubgInput.ClickLeftMouse( X + ( Width / 2 ), Y + ( Height / 2 ) ) )
+                LastClickedTick = Environment.TickCount;
         }
 
     }

@@ -58,7 +58,7 @@ namespace pbpb
         }
 
         delegate int ApiMessage( IntPtr hwnd, int wMsg, int wParam, int lParam );
-        public override void ClickLeftMouse(int x = 0, int y = 0) {
+        public override bool ClickLeftMouse(int x = 0, int y = 0) {
 
             Log.Add(String.Format("ClickLeftMouse_msg {0} {1}", x, y));
 
@@ -85,27 +85,21 @@ namespace pbpb
                     return User32.PostMessage( hwnd, wMsg, wParam, lParam );
                 };
 
-            if (AsPostMessage) {
-                MoveMouse(x, y);
-                caller( Handle, User32.WM_LBUTTONDOWN, wp, lp );
-                caller( Handle, User32.WM_LBUTTONUP, wp, lp ); 
-                caller( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
-                caller( Handle, User32.WM_LBUTTONUP, wp, lp );
-            } else {
-                MoveMouse(0, 0);
-                caller( Handle, User32.WM_LBUTTONDOWN, 0, 0 );
-                caller( Handle, User32.WM_LBUTTONUP, 0, 0 );
-                caller( Handle, User32.WM_LBUTTONDOWN, wp, lp );
-                caller( Handle, User32.WM_LBUTTONUP, wp, lp );
+            MoveMouse( x, y );
+            caller( Handle, User32.WM_LBUTTONDOWN, 0, 0 );
+            caller( Handle, User32.WM_LBUTTONUP, 0, 0 );
+            caller( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+            caller( Handle, User32.WM_LBUTTONUP, wp, lp );
 
-                caller( Handle, User32.WM_MBUTTONDOWN, 0, 0 );
-                caller( Handle, User32.WM_MBUTTONUP, 0, 0 );
-                caller( Handle, User32.WM_MBUTTONDOWN, wp, lp );
-                caller( Handle, User32.WM_MBUTTONUP, wp, lp );
+            caller( Handle, User32.WM_MBUTTONDOWN, 0, 0 );
+            caller( Handle, User32.WM_MBUTTONUP, 0, 0 );
+            caller( Handle, User32.WM_MBUTTONDOWN, wp, lp );
+            caller( Handle, User32.WM_MBUTTONUP, wp, lp );
 
-                caller( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
-                caller( Handle, User32.WM_MBUTTONDBLCLK, wp, lp );
-            }
+            caller( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
+            caller( Handle, User32.WM_MBUTTONDBLCLK, wp, lp );
+            
+            return true;
         }
 
         public override void ReleaseKey(Keys key) {
@@ -117,7 +111,7 @@ namespace pbpb
 
             int lp = (int) ( ( (ushort) x ) | (uint) ( y << 16 ) );
             User32.SendMessage( Handle, User32.WM_SYSCOMMAND, User32.SC_MOUSEMOVE, lp);
-            User32.SendMessage( Handle, User32.WM_SYSCOMMAND, User32.SC_MOUSEMENU, lp);
+            //User32.SendMessage( Handle, User32.WM_SYSCOMMAND, User32.SC_MOUSEMENU, lp);
         }
 
         public override void AssistInWater()
@@ -241,23 +235,48 @@ namespace pbpb
             RestoreFocus();
         }
 
-        public virtual void ClickLeftMouse(int x, int y) {
-            
+        private void native_mouseclick( int cd ) {
+
+            User32.mouse_event( User32.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0 );
+            Thread.Sleep(cd);
+            User32.mouse_event( User32.MOUSEEVENTF_LEFTUP, 0, 0, 0, 0 );
+        }
+
+        private bool contolled_native_mouseclick( int x, int y, int cd )
+        {
+
+            native_mouseclick(cd);
+            User32.GetCursorPos( out POINT p );
+            return (p.x == x && p.y == y);
+        }
+
+        private void nativesetcursor(int x, int y) => User32.SetCursorPos(x, y);
+
+        public virtual bool ClickLeftMouse(int x, int y) {
+
             x += PubgWindow.PosX;
             y += PubgWindow.PosY;
 
             Log.Add(String.Format("ClickLeftMouse_evnt {0} {1}", x, y));
 
             SaveCurrentCursorPos();
-            SaveCurrentForegroundWindow();
 
-            SKeybd.LBClickEx(x, y, false, 900, 300, 10);
-            Thread.Sleep(10);
-            SKeybd.LBClickEx(x, y, false, 10, 64, 10);
+            PubgWindow.SetFocus();
+            Thread.Sleep(100);
 
-            RestoreSavedForegroundWindow();
+            nativesetcursor(x, y);
+            Thread.Sleep(100);
+
+            contolled_native_mouseclick(x, y, 1600);
+
+            Thread.Sleep( User32.GetDoubleClickTime() );
+
+            bool result = contolled_native_mouseclick(x, y, 64);
+
+            PubgWindow.RestoreFocus();
             RestoreSavedCursorPos();
-        
+
+            return result;     
         }
 
         public virtual void ReleaseKey(Keys key) {

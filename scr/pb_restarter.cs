@@ -57,8 +57,8 @@ namespace pbpb
 
 
                     if (PubgWindow.SEExists || PubgWindow.CrashExists || PubgWindow.SURExists ||
-                        PubgWindow.SCEExitst || NativeWindows.SteamGameOverlayUICrash.Exists ||
-                        NativeWindows.SteamClientBootstrapper.Exists ) {
+                        PubgWindow.SCEExitst || NativeWindows.SteamGameOverlayUICrash.Exist ||
+                        NativeWindows.SteamClientBootstrapper.Exist ) {
 
                         string s = String.Format(
                             "(PR) error found ( crash {0}, steam {1}, update {2}, conerror {3}, " +
@@ -67,8 +67,8 @@ namespace pbpb
                             PubgWindow.SEExists.ToYesNoString(),
                             PubgWindow.SURExists.ToYesNoString(),
                             PubgWindow.SCEExitst.ToYesNoString(),
-                            NativeWindows.SteamGameOverlayUICrash.Exists.ToYesNoString(),
-                            NativeWindows.SteamClientBootstrapper.Exists.ToYesNoString());
+                            NativeWindows.SteamGameOverlayUICrash.Exist.ToYesNoString(),
+                            NativeWindows.SteamClientBootstrapper.Exist.ToYesNoString());
 
                         Log.Add( s );
 
@@ -82,10 +82,10 @@ namespace pbpb
 
                         //PubgWindow.KillExecute();
 
-                        if (NativeWindows.SteamGameOverlayUICrash.Exists)
+                        if (NativeWindows.SteamGameOverlayUICrash.Exist)
                             NativeWindows.SteamGameOverlayUICrash.SetClose();
 
-                        if (NativeWindows.SteamClientBootstrapper.Exists)
+                        if (NativeWindows.SteamClientBootstrapper.Exist)
                             NativeWindows.SteamClientBootstrapper.SetClose();
 
                     }

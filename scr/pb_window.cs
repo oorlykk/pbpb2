@@ -19,10 +19,10 @@ namespace pbpb
         }
         protected virtual IntPtr Find() => (IntPtr)User32.FindWindow( null, Caption );
         public IntPtr Handle => Find();
-        public bool Exists => (int)Handle != 0;
+        public bool Exist => (int)Handle != 0;
         public void Hide() => User32.ShowWindow(Handle, User32.SW_HIDE);
         public void Show() => User32.ShowWindow(Handle, User32.SW_SHOW);
-
+        public void SetForegorund() => User32.SetForegroundWindow(Handle);
                
         public virtual void SetClose()
         {
@@ -153,11 +153,11 @@ namespace pbpb
         public static void CloseMsg() => Window.SetClose();
 
         public static IntPtr CrashHandle => NativeWindows.PubgCrashReporter.Handle;
-        public static bool CrashExists => NativeWindows.PubgCrashReporter.Exists;
+        public static bool CrashExists => NativeWindows.PubgCrashReporter.Exist;
         public static void KillCrash()
         {
 
-            if (NativeWindows.PubgCrashReporter.Exists) {
+            if (NativeWindows.PubgCrashReporter.Exist) {
 
                 Log.Add( "(PU) KillExecute Crash!" );
 
@@ -195,7 +195,7 @@ namespace pbpb
         {
             if (!SEExists) return;
 
-            if (NativeWindows.SteamErrorEn.Exists) {
+            if (NativeWindows.SteamErrorEn.Exist) {
 
                 NativeWindows.SteamErrorEn.SetClose();
                 return;
@@ -220,7 +220,7 @@ namespace pbpb
 
             if (!SURExists) return;
 
-            if (NativeWindows.SteamUpdateReadyEn.Exists) {
+            if (NativeWindows.SteamUpdateReadyEn.Exist) {
 
                 NativeWindows.SteamUpdateReadyEn.SetClose();
                 return;
@@ -243,15 +243,15 @@ namespace pbpb
         public static bool SUExists => !SUHandle.Equals(IntPtr.Zero);  
 
         //Steam Connection Error
-        public static bool SCEExitst => NativeWindows.SteamConnectErrorEn.Exists || NativeWindows.SteamConnectErrorRu.Exists;
+        public static bool SCEExitst => NativeWindows.SteamConnectErrorEn.Exist || NativeWindows.SteamConnectErrorRu.Exist;
         public static void CloseSCE() {
 
-            if (NativeWindows.SteamConnectErrorEn.Exists) {
+            if (NativeWindows.SteamConnectErrorEn.Exist) {
 
                 NativeWindows.SteamConnectErrorEn.SetClose();
                 return;
             }
-            if (NativeWindows.SteamConnectErrorRu.Exists)
+            if (NativeWindows.SteamConnectErrorRu.Exist)
                 NativeWindows.SteamConnectErrorRu.SetClose();
             
         }   
@@ -268,7 +268,7 @@ namespace pbpb
 
             PredFocus = (IntPtr)User32.GetForegroundWindow();
 
-            User32.SetForegroundWindow( Handle );
+            Window.SetForegorund();
 
             FocusSettted = true;
 

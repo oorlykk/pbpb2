@@ -117,7 +117,7 @@ namespace pbpb
 
                         Log.Append( " di: " + Pcs[PubgControls.btnStart].LastDistance.ToString() );
 
-                        Thread.Sleep( 5000 );
+                        //Thread.Sleep( 7000 );
 
                         PubgRound.End( !PubgRound.RewardSaved && Setti.SaveReward, "" );
 
@@ -125,25 +125,26 @@ namespace pbpb
 
                         PubgInput.ParachuteClickedTime = int.MaxValue;
 
-                        bool inputswitched = false;
-                        if (PubgInput.IsInputMessage && PubgInput.CanInteract) {
+                        if (Environment.TickCount - Pcs[PubgControls.btnStart].LastClickedTick > 30000) {
 
-                            if (!lobbyinputswitcher) {
+                            bool inputswitched = false;
+                            if (PubgInput.IsInputMessage && PubgInput.CanInteract) {
 
-                                inputswitched = true;
+                                if (!lobbyinputswitcher) {
 
-                                InitInput_event();
+                                    inputswitched = true;
+                                    InitInput_event();
+                                }
+
+                                //lobbyinputswitcher = !lobbyinputswitcher;
                             }
 
-                            //lobbyinputswitcher = !lobbyinputswitcher;
+                            Log.Add( "(PS) click Start" );
+
+                            Pcs[PubgControls.btnStart].ClickLeftMouse();
+
+                            if (inputswitched) InitInput_message();
                         }
-
-                        Log.Add( "(PS) click Start" );
-
-                        Pcs[PubgControls.btnStart].ClickLeftMouse();
-
-                        if (inputswitched) InitInput_message();
-                     
                     }
 
                     else if (PubgStatuses.ExitToLobby.HasFlags( ps )) {
@@ -249,16 +250,18 @@ namespace pbpb
 
                         PubgRound.Set();
 
-                        int cd = ( 1000 * 60 * 2 ) + 45000;
+                        int cd = 3*(1000*60) + 30000;
                         if (( Environment.TickCount - PubgInput.EjectClickedTime > cd ||
                               Environment.TickCount - PubgInput.ParachuteClickedTime > cd )) {
-                            PubgInput.EjectClickedTime = int.MaxValue;
 
+                            PubgInput.EjectClickedTime = int.MaxValue;
                             PubgInput.ParachuteClickedTime = int.MaxValue;
 
-                            if (PubgRound.WaterAssisted == false)
+                            if (PubgRound.WaterAssisted == false) {
 
                                 PubgInput.Down();
+                                PubgInput.Back();
+                            }
                         }
 
                         if (Environment.TickCount - PubgRound.StartedTime > Setti.MaxRoundTimeRnd) {

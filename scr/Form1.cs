@@ -81,6 +81,7 @@ namespace pbpb {
                 //AppIsExp = false;
                 panel_test.Visible = true;
                 Height += 20;
+                ne_MaxRoundTIme.Minimum = 0;
             } else Height -= 20;
 
             Log.LogEvent += new ResolveEventHandler(PubgLogEvent);
