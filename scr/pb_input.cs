@@ -223,17 +223,16 @@ namespace pbpb
             x += PubgWindow.PosX;
             y += PubgWindow.PosY;
 
-            SetFocus();
-            Thread.Sleep(64);
+            //SetFocus();
+            Thread.Sleep(50);
 
             Log.Add(String.Format("ClickLeftMouse_evnt {0} {1}", x, y));
 
             SKeybd.LBClickEx(x, y, true, 50, 500, 10);
-            SKeybd.MouseMove(x, y); Thread.Sleep(10);
+            SKeybd.MouseMove(x+1, y+1); Thread.Sleep(10);
             SKeybd.LBClickEx(x, y, true, 100, 64, 100);
 
-            Thread.Sleep(64);
-            RestoreFocus();
+            //RestoreFocus();
          
         }
 
