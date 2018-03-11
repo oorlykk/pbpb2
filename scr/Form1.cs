@@ -157,6 +157,7 @@ namespace pbpb {
             PubgStatus.SetLastGood();
             PubgInput.EjectClickedTime = int.MaxValue;
             PubgInput.ParachuteClickedTime = int.MaxValue;
+            SetLastVisibledPubgProcessTime();
 
             if (PubgStatusChecker != null) {
 
@@ -306,13 +307,14 @@ namespace pbpb {
             Shell32.ShellExecute(IntPtr.Zero, "open", PubgRound.RewardsFolder, "", "", User32.SW_SHOWNORMAL);
         }
 
+        private void SetLastVisibledPubgProcessTime() => LastVisibledPubgProcessTime = Environment.TickCount;
+
         private void tmrIdleCheck_Tick( object sender, EventArgs e )
         {
 
-            if (Process.GetProcessesByName( "TslGame" ).Any()) {
-
-                LastVisibledPubgProcessTime = Environment.TickCount;
-            }
+            if (Process.GetProcessesByName( "TslGame" ).Any())
+                SetLastVisibledPubgProcessTime();
+            
 
             if (Setti.CanRestartPC && !BotIsStopped) {
 

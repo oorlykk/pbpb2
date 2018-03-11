@@ -419,12 +419,12 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(394, 237);
+            this.button4.Location = new System.Drawing.Point(199, 197);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(86, 25);
             this.button4.TabIndex = 23;
             this.button4.Tag = "about";
-            this.button4.Text = "?";
+            this.button4.Text = "About";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.btnTag_Click);
             // 
@@ -561,7 +561,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(394, 202);
+            this.button8.Location = new System.Drawing.Point(394, 350);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(86, 25);
             this.button8.TabIndex = 34;
