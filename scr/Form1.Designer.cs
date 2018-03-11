@@ -79,12 +79,15 @@
             this.chb_AllowRestartPC = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.PanelView = new pbpb.PanelDoubleBuffered();
+            this.ne_shutdownpcafter = new System.Windows.Forms.NumericUpDown();
+            this.chb_shutdownpcafter = new System.Windows.Forms.CheckBox();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
             this.panel_test.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_PosX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ne_PosY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxRoundTIme)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ne_shutdownpcafter)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStartStopBot
@@ -337,9 +340,9 @@
             this.panel_test.Controls.Add(this.button2);
             this.panel_test.Controls.Add(this.button1);
             this.panel_test.Controls.Add(this.btnttt);
-            this.panel_test.Location = new System.Drawing.Point(12, 344);
+            this.panel_test.Location = new System.Drawing.Point(12, 382);
             this.panel_test.Name = "panel_test";
-            this.panel_test.Size = new System.Drawing.Size(468, 93);
+            this.panel_test.Size = new System.Drawing.Size(468, 81);
             this.panel_test.TabIndex = 21;
             this.panel_test.Visible = false;
             // 
@@ -645,11 +648,48 @@
             this.PanelView.Tag = "pview";
             this.PanelView.DoubleClick += new System.EventHandler(this.btnTag_Click);
             // 
+            // ne_shutdownpcafter
+            // 
+            this.ne_shutdownpcafter.Location = new System.Drawing.Point(212, 352);
+            this.ne_shutdownpcafter.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.ne_shutdownpcafter.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ne_shutdownpcafter.Name = "ne_shutdownpcafter";
+            this.ne_shutdownpcafter.Size = new System.Drawing.Size(74, 22);
+            this.ne_shutdownpcafter.TabIndex = 42;
+            this.ne_shutdownpcafter.Value = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            // 
+            // chb_shutdownpcafter
+            // 
+            this.chb_shutdownpcafter.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chb_shutdownpcafter.Location = new System.Drawing.Point(12, 349);
+            this.chb_shutdownpcafter.Name = "chb_shutdownpcafter";
+            this.chb_shutdownpcafter.Size = new System.Drawing.Size(194, 27);
+            this.chb_shutdownpcafter.TabIndex = 43;
+            this.chb_shutdownpcafter.Tag = "shutdownpc";
+            this.chb_shutdownpcafter.Text = "Shutdown PC after (minutes)";
+            this.chb_shutdownpcafter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chb_shutdownpcafter.UseVisualStyleBackColor = true;
+            this.chb_shutdownpcafter.CheckedChanged += new System.EventHandler(this.btnTag_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(493, 373);
+            this.ClientSize = new System.Drawing.Size(493, 406);
+            this.Controls.Add(this.chb_shutdownpcafter);
+            this.Controls.Add(this.ne_shutdownpcafter);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.chb_AllowRestartPC);
             this.Controls.Add(this.lab_CurrentRounTime);
@@ -690,6 +730,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ne_PosX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ne_PosY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxRoundTIme)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ne_shutdownpcafter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -747,6 +788,8 @@
         private System.Windows.Forms.Label lab_CurrentRounTime;
         private System.Windows.Forms.CheckBox chb_AllowRestartPC;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown ne_shutdownpcafter;
+        private System.Windows.Forms.CheckBox chb_shutdownpcafter;
     }
 }
 

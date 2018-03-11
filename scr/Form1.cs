@@ -42,7 +42,7 @@ namespace pbpb {
         private static ManualResetEvent BotStopper = new ManualResetEvent(true);
         public static bool BotIsStopped => BotStopper.WaitOne(0, false);
 
-        public static Task PubgStatusChecker, PubgRestarter = null;
+        public static Task PubgStatusChecker, PubgRestarter, ShutdownPC = null;
         public static int LastVisibledPubgProcessTime = int.MaxValue;
 
         public Form1()
@@ -206,6 +206,9 @@ namespace pbpb {
             else if (sender.GetType() == typeof( TextBox ))
                 t = ( (TextBox) sender ).Tag.ToString();
 
+            else if (sender.GetType() == typeof( CheckBox ))
+                t = ( (CheckBox) sender ).Tag.ToString();
+
             else 
                 t = ( (ToolStripItem) sender ).Tag.ToString();
 
@@ -247,7 +250,36 @@ namespace pbpb {
             }
             else if (t == "pview") {(new FormPBPBView()).Show();}
             else if (t == "txlog") Shell32.ShellExecute( Handle, "open", Log.Save(), "", "", User32.SW_SHOWNORMAL );
-            
+            else if (t == "shutdownpc") {
+
+                if ( ((CheckBox)sender).Checked ) {
+
+                    ShutdownPC =  Task.Run( () => {
+
+                        int started = Environment.TickCount;
+                        int wait = (int)ne_shutdownpcafter.Value * (1000 * 60);
+                        while (true) {
+
+                            Thread.Sleep(1000);
+                            if (Environment.TickCount - started > wait) {
+
+                                Shell32.ShellExecute( IntPtr.Zero, "open", 
+                                    Environment.SystemDirectory + "\\shutdown.exe", "/s /f /t 30", "", 0 );
+                                Thread.Sleep(10);
+                                Shell32.ShellExecute( IntPtr.Zero, "open", 
+                                    Environment.SystemDirectory + "\\shutdown.exe", "/s /f /t 30", "", 0 );
+                                Thread.Sleep(10);
+                                Shell32.ShellExecute( IntPtr.Zero, "open", 
+                                    Environment.SystemDirectory + "\\shutdown.exe", "/s /f /t 30", "", 0 );
+                            }
+                        }
+                    } );
+
+                } else {
+
+                    ShutdownPC.Dispose(); ShutdownPC = null;
+                }
+            }
         }
 
         private void tray_Click( object sender, MouseEventArgs e ) {
