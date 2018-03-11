@@ -77,7 +77,7 @@ namespace pbpb {
             int date_cmp_res = thisDate.CompareTo( pDate );
             AppIsExp = (date_cmp_res > 0);
             panel_test.Visible = false;
-            if (Environment.MachineName == "NORM") {
+            if (Environment.MachineName == "1NORM") {
                 //AppIsExp = false;
                 panel_test.Visible = true;
                 Height += 20;

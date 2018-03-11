@@ -13,7 +13,8 @@ namespace pbpb
         public const string PubgWindowPosX = "Позиционирование основного окна PUBG относительно левого края экрана";
         public const string PubgWindowPosY = "Позиционирование основного окна PUBG относительно верхнего края экрана";
         public const string InputMethod = "Симуляция пользовательского ввода (Full - усиленный)";
-   
+        public const string ShutdowPC = "Активирует таймер выключения PC";
+        public const string ShutdowPCvalue = "Время до отключения PC (в минутах)";
 	}
 
     partial class Form1
@@ -25,6 +26,9 @@ namespace pbpb
             new ToolTip().SetToolTip( chb_AllowRestartPC, Hints.AllowRestartPC );
             new ToolTip().SetToolTip( ne_PosX, Hints.PubgWindowPosX );
             new ToolTip().SetToolTip( ne_PosY, Hints.PubgWindowPosY );
+            new ToolTip().SetToolTip( chb_shutdownpcafter, Hints.ShutdowPC );
+            new ToolTip().SetToolTip( ne_shutdownpcafter, Hints.ShutdowPCvalue );
+            new ToolTip().SetToolTip( lab_shutdownpcafter, Hints.ShutdowPCvalue );
         }
     }
 }
