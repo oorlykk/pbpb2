@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using Win32;
-using snlib = SnLib;
+using SnLib;
 
 namespace pbpb
 {
@@ -95,6 +95,11 @@ namespace pbpb
     }
 
    public static class PubgWindow {
+
+        //public static int BorderSize_Left => SWindow.GetAdjustWindowBorderSizes(Handle).Left;
+        //public static int BorderSize_Top => SWindow.GetAdjustWindowBorderSizes(Handle).Top;
+        //public static int BorderSize_Right => SWindow.GetAdjustWindowBorderSizes(Handle).Right;
+        //public static int BorderSize_Bot => SWindow.GetAdjustWindowBorderSizes(Handle).Bottom;
 
         public static NativeWindow Window = new NativeWindow( "PLAYERUNKNOWN'S BATTLEGROUNDS " );
 

@@ -77,7 +77,7 @@ namespace pbpb {
             int date_cmp_res = thisDate.CompareTo( pDate );
             AppIsExp = (date_cmp_res > 0);
             panel_test.Visible = false;
-            if (Environment.MachineName == "1NORM") {
+            if (Environment.MachineName == "NORM") {
                 //AppIsExp = false;
                 panel_test.Visible = true;
                 Height += 20;
@@ -333,10 +333,11 @@ namespace pbpb {
 
         private void btnttt_Click( object sender, EventArgs e )
         {
-            Thread.Sleep(2000);
-            POINT p = new POINT();
-            User32.GetCursorPos(out p);
-            PubgInput.MoveMouse(p.x, p.y);
+            RECT r = SWindow.GetAdjustWindowBorderSizes(Handle);
+            r.Left.ShowMessage();
+            r.Right.ShowMessage();
+            r.Bottom.ShowMessage();
+            r.Top.ShowMessage();
         }
 
         private void cbox_PubgInput_SelectedIndexChanged( object sender, EventArgs e )
