@@ -254,30 +254,29 @@ namespace pbpb {
 
                 if ( ((CheckBox)sender).Checked ) {
 
-                    ShutdownPC =  Task.Run( () => {
+                    Task.Run( () => {
 
                         int started = Environment.TickCount;
                         int wait = (int)ne_shutdownpcafter.Value * (1000 * 60);
-                        while (true) {
+                        while (((CheckBox)sender).Checked) {
 
                             Thread.Sleep(1000);
-                            if (Environment.TickCount - started > wait) {
+                            int current = Environment.TickCount - started;
+                            lab_shutdownpcafter.Text = STime.TickToStr(wait - current);
+                            if (current > wait) {
 
                                 Shell32.ShellExecute( IntPtr.Zero, "open", 
                                     Environment.SystemDirectory + "\\shutdown.exe", "/s /f /t 30", "", 0 );
-                                Thread.Sleep(10);
+                                Thread.Sleep(100);
                                 Shell32.ShellExecute( IntPtr.Zero, "open", 
                                     Environment.SystemDirectory + "\\shutdown.exe", "/s /f /t 30", "", 0 );
-                                Thread.Sleep(10);
+                                Thread.Sleep(100);
                                 Shell32.ShellExecute( IntPtr.Zero, "open", 
                                     Environment.SystemDirectory + "\\shutdown.exe", "/s /f /t 30", "", 0 );
                             }
                         }
+                        lab_shutdownpcafter.Text = "";
                     } );
-
-                } else {
-
-                    ShutdownPC.Dispose(); ShutdownPC = null;
                 }
             }
         }

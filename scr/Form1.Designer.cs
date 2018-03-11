@@ -81,6 +81,7 @@
             this.PanelView = new pbpb.PanelDoubleBuffered();
             this.ne_shutdownpcafter = new System.Windows.Forms.NumericUpDown();
             this.chb_shutdownpcafter = new System.Windows.Forms.CheckBox();
+            this.lab_shutdownpcafter = new System.Windows.Forms.Label();
             this.trayms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ne_MaxIdle)).BeginInit();
             this.panel_test.SuspendLayout();
@@ -683,11 +684,22 @@
             this.chb_shutdownpcafter.UseVisualStyleBackColor = true;
             this.chb_shutdownpcafter.CheckedChanged += new System.EventHandler(this.btnTag_Click);
             // 
+            // lab_shutdownpcafter
+            // 
+            this.lab_shutdownpcafter.AutoSize = true;
+            this.lab_shutdownpcafter.Location = new System.Drawing.Point(296, 354);
+            this.lab_shutdownpcafter.Name = "lab_shutdownpcafter";
+            this.lab_shutdownpcafter.Size = new System.Drawing.Size(42, 17);
+            this.lab_shutdownpcafter.TabIndex = 44;
+            this.lab_shutdownpcafter.Tag = "";
+            this.lab_shutdownpcafter.Text = "None";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(493, 406);
+            this.Controls.Add(this.lab_shutdownpcafter);
             this.Controls.Add(this.chb_shutdownpcafter);
             this.Controls.Add(this.ne_shutdownpcafter);
             this.Controls.Add(this.label4);
@@ -790,6 +802,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown ne_shutdownpcafter;
         private System.Windows.Forms.CheckBox chb_shutdownpcafter;
+        private System.Windows.Forms.Label lab_shutdownpcafter;
     }
 }
 
