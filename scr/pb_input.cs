@@ -71,7 +71,7 @@ namespace pbpb
             }
 
             int lp = (int)(((ushort)x) | (uint)(y << 16));
-            int wp = 0;
+            int wp = User32.MK_LBUTTON;
      
             ApiMessage caller;
             if (!AsPostMessage)
@@ -85,19 +85,17 @@ namespace pbpb
                     return User32.PostMessage( hwnd, wMsg, wParam, lParam );
                 };
 
-            MoveMouse( x, y );
-            caller( Handle, User32.WM_LBUTTONDOWN, 0, 0 );
-            caller( Handle, User32.WM_LBUTTONUP, 0, 0 );
-            caller( Handle, User32.WM_LBUTTONDOWN, wp, lp );
-            caller( Handle, User32.WM_LBUTTONUP, wp, lp );
+            if (AsPostMessage) {
 
-            caller( Handle, User32.WM_MBUTTONDOWN, 0, 0 );
-            caller( Handle, User32.WM_MBUTTONUP, 0, 0 );
-            caller( Handle, User32.WM_MBUTTONDOWN, wp, lp );
-            caller( Handle, User32.WM_MBUTTONUP, wp, lp );
+                caller( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+                caller( Handle, User32.WM_LBUTTONUP, wp, lp ); 
+                caller( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
+                caller( Handle, User32.WM_LBUTTONUP, wp, lp );
+            } else {
 
-            caller( Handle, User32.WM_LBUTTONDBLCLK, wp, lp );
-            caller( Handle, User32.WM_MBUTTONDBLCLK, wp, lp );
+                caller( Handle, User32.WM_LBUTTONDOWN, wp, lp );
+                caller( Handle, User32.WM_LBUTTONUP, wp, lp );
+            }
             
             return true;
         }
